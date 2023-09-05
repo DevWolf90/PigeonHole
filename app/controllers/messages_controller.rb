@@ -6,11 +6,8 @@ class MessagesController < ApplicationController
 
   def create
     @message = Message.new(message_params)
-    if @message.save
-      redirect_to root_path, notice: 'A message was created'
-    else
-      render :new, status: :unprocessable_entity
-    end
+    @message.save
+    redirect_to root_path, notice: 'A message was created'
   end
 
   private
