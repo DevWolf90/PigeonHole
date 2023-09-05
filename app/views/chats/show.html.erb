@@ -1,10 +1,12 @@
 <%= turbo_stream_from @chat %>
 
 <div class="container chat">
-  <h1>#<%= @chat.id %></h1>
+ <%# need to fix next line so it says who we're chatting with  %>
+  <h1>You're chatting with<%=  %></h1>
 
   <div id="messages">
     <% @chat.messages.each do |message| %>
+      <%= message.sender.email %>
       <%= render 'messages/message', message: message %>
     <% end %>
   </div>
@@ -19,4 +21,4 @@
   %>
   <%= f.submit "Send", class: "btn btn-primary mb-3" %>
 <% end %>
-</div> 
+</div>
