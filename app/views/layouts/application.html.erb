@@ -11,7 +11,9 @@
   </head>
 
   <body>
-  <%= turbo_stream_from "user_#{current_user.id}" %>
+    <% if user_signed_in? %>
+      <%= turbo_stream_from "user_#{current_user.id}" %>
+    <% end %>
     <%= render "shared/navbar" %>
     <%= render "shared/flashes" %>
 
