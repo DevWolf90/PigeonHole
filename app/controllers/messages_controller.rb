@@ -5,9 +5,15 @@ class MessagesController < ApplicationController
   end
 
   def create
+    @chat = Chat.find(params[:chat_id])
     @message = Message.new(message_params)
-    @message.save
-    redirect_to root_path, notice: 'A message was created'
+    @message.chat = @chat
+    @message.user_id = current_user.id
+    if @message.save
+      redirect_to chat_path(@chat), notice: 'Message sent'
+    else
+      render "chats/show", status: :unprocessable_entity
+    end
   end
 
   private
