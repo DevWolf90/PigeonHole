@@ -2,16 +2,16 @@ class PigeonsController < ApplicationController
   def index
     @pigeons = Pigeon.all
     @alltags = Gutentag::Tag.names_for_scope(Pigeon)
-    # @q = Pigeon.ransack(params[:q])
-    # @tags = @q.result.includes(:pigeons).tag_name(params[:tag_names])
+    @q = Pigeon.ransack(params[:q])
+
+    if params[:iq] && params[:q][:tag_name_cont].present?
+      @q.tag_names_cont(params[:q][:tag_names_cont])
+    end
+    @pigeons = @q.result(distinct:true)
   end
 
   def show
     @pigeon = Pigeon.find(params[:id])
   end
 
-  # def add_to_favourites
-  #   @pigeon = Pigeon.find(params[:id])
-  #   @pigeon.update(favourite: true)
-  # end
 end
