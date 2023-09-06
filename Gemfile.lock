@@ -157,6 +157,7 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    json (2.6.3)
     jwt (2.7.1)
     loofah (2.21.3)
       crass (~> 1.0.2)
@@ -190,6 +191,10 @@ GEM
       racc (~> 1.4)
     nokogiri (1.15.4-x86_64-linux)
       racc (~> 1.4)
+    open-uri (0.3.0)
+      stringio
+      time
+      uri
     orm_adapter (0.5.0)
     os (1.1.4)
     pg (1.5.4)
@@ -282,6 +287,8 @@ GEM
     stringio (3.0.8)
     thor (1.2.2)
     tilt (2.2.0)
+    time (0.2.2)
+      date
     timeout (0.4.0)
     trailblazer-option (0.1.2)
     turbo-rails (1.4.0)
@@ -291,6 +298,7 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     uber (0.1.0)
+    uri (0.12.2)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.0)
@@ -329,6 +337,8 @@ DEPENDENCIES
   gutentag (~> 2.6)
   importmap-rails
   jbuilder
+  json (~> 2.6, >= 2.6.3)
+  open-uri
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.7, >= 7.0.7.2)
