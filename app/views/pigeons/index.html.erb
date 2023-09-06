@@ -7,8 +7,8 @@
 
   <% @pigeons.each do |pigeon| %>
     <p>--------------------</p>
-    <%= pigeon.title %>
-    <p>sent by <%= pigeon.message.sender.nickname %> on <%= pigeon.date() %></p>
+    <%= link_to pigeon.title, pigeon_path(pigeon) %>
+    <p>sent by <%= pigeon.message.sender.nickname %> on <%= pigeon.date.strftime("%a, %-d %B %Y") %> at <%= pigeon.date.strftime("%H:%M") %></p>
       <% @tags = pigeon.tag_names %>
       <ul>
         <% @tags.each do |tag| %>
@@ -21,9 +21,9 @@
         <p>Status: unread</p>
       <% end %>
       <% if pigeon.favourite? %>
-        <p>Added to favourites</p>
+        <p><i class="fa-solid fa-heart"></i></p>
       <% else %>
-        <p>Add to favourites</p>
+        <p> <i class="fa-regular fa-heart"></i> </p>
       <% end %>
     <p>Media type:
       <% if pigeon.media_type == "video" %>
@@ -35,8 +35,5 @@
       <% elsif pigeon.media_type == "podcast" || "audio" || "song" || "playlist"%>
       <i class="fa-solid fa-headphones"></i></p>
       <% end %>
-    <p>This pigeon is <%= pigeon.length %> words long</p>
-    <p>Summary (powered by AI)</p>
-    <%= pigeon.summary %>
   <% end %>
 </div>

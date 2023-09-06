@@ -54,7 +54,7 @@ pig2.save
 pig3 = Pigeon.new(summary: "something something", message: message3, length: 5000,
               link_to_content: "https://www.epedagogia.com.br/materialbibliotecaonine/797The-Count-of-Monte-Cristo.pdf",
               media_type: "book", date: Date.today, title: "The count of montecristo",
-              description: "description")
+              description: "description", favourite: true)
 pig3.tag_names << "Classic"
 pig3.tag_names << "Novel"
 pig3.save

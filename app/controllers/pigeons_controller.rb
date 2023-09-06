@@ -9,4 +9,9 @@ class PigeonsController < ApplicationController
   def show
     @pigeon = Pigeon.find(params[:id])
   end
+
+  # def add_to_favourites
+  #   @pigeon = Pigeon.find(params[:id])
+  #   @pigeon.update(favourite: true)
+  # end
 end
