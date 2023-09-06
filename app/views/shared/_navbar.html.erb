@@ -8,9 +8,9 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <button class="btn fs-4" type="button">
-      <i class="fa-solid fa-magnifying-glass"></i>
-      <div class="searchbar">
+    <button class="btn fs-4" type="button" data-controller="display" ">
+      <i class="fa-solid fa-magnifying-glass" data-action="click->display#show"></i>
+      <div class="searchbar d-none"  data-display-target="searchbar">
         <%= form_with url: pigeons_path, method: :get, data: { turbo_frame: :results }, class: "d-flex" do %>
           <%= text_field_tag :query,
                 params[:query],
