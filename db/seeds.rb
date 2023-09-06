@@ -68,7 +68,7 @@ pig4.save
 pig5 = Pigeon.new(summary: "something something", message: message5, length: 73,
               link_to_content: "https://www.youtube.com/watch?v=TMHqNoIpqbM",
               media_type: "movie", date: Date.today, title: "Weekenders(2021)",
-              description: "description")
+              description: "description", read: true)
 pig5.tag_names << "Funny"
 pig5.tag_names << "Comedy"
 pig5.save
