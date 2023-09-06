@@ -1,17 +1,48 @@
-<div class="container">
-  <h1>PIGEONHOLE</h1>
-  <%# <p>Be more present, wherever you are</p> %>
-  <div class="categories-container">
-    <ul class="categories">
+<div class="container-fluid">
 
+  <h2 class="mt-3">My Categories</h2>
+    <div class="scrolling-wrapper mb-5">
+      <ul class="categories d-flex align-items-center">
+        <li class="category-card">Category 1</li>
+        <li class="category-card">Category 2</li>
+        <li class="category-card">Category 3</li>
+        <li class="category-card">Category 4</li>
+        <li class="category-card">Category 5</li>
+        <li class="category-card">Category 6</li>
+        <li class="category-card">Category 7</li>
+        <li class="category-card">Category 8</li>
+        <li class="category-card">Category 9</li>
+        <li class="category-card">Category 10</li>
+      </ul>
+    </div>
 
-
-
-
-    </ul>
-  </div>
-    <div class="pigeon-cards">
-
-
+  <h2>Unread Pigeons</h2>
+    <div class="scrolling-wrapper">
+      <ul class="latest-pigeons d-flex align-items-center p-0">
+        <% @pigeons.each do |pigeon| %>
+          <%= link_to pigeon_path(pigeon) do%>
+            <li class="pigeon-card"><%= pigeon.title %></li>
+          <% end %>
+        <% end %>
+          <li class="pigeon-card">pigeon 2</li>
+          <li class="pigeon-card">pigeon 3</li>
+          <li class="pigeon-card">pigeon 4</li>
+          <li class="pigeon-card">pigeon 5</li>
+          <li class="pigeon-card">pigeon 6</li>
+          <li class="pigeon-card">pigeon 7</li>
+          <li class="pigeon-card">pigeon 8</li>
+          <li class="pigeon-card">pigeon 9</li>
+          <li class="pigeon-card">pigeon 10</li>
+          <li class="pigeon-card">pigeon 11</li>
+          <li class="pigeon-card">pigeon 12</li>
+          <li class="pigeon-card">pigeon 13</li>
+          <li class="pigeon-card">pigeon 14</li>
+          <li class="pigeon-card">pigeon 15</li>
+          <li class="pigeon-card">pigeon 16</li>
+          <li class="pigeon-card">pigeon 17</li>
+          <li class="pigeon-card">pigeon 18</li>
+          <li class="pigeon-card">pigeon 19</li>
+          <li class="pigeon-card">pigeon 20</li>
+      </ul>
     </div>
 </div>

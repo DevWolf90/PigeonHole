@@ -1,0 +1,7 @@
+.scrolling-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  white-space: normal;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+}
