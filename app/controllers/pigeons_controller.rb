@@ -4,6 +4,10 @@ class PigeonsController < ApplicationController
     @alltags = Gutentag::Tag.names_for_scope(Pigeon)
     # @q = Pigeon.ransack(params[:q])
     # @tags = @q.result.includes(:pigeons).tag_name(params[:tag_names])
+    if params[:query].present?
+      sql_subquery = "title ILIKE :query OR description ILIKE :query"
+      @pigeons = @pigeons.where(sql_subquery, query: "%#{params[:query]}%")
+    end
   end
 
   def show
