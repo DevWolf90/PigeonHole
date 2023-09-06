@@ -1,0 +1,29 @@
+.category-card {
+  list-style: none;
+  background-color: grey;
+  background-size: cover;
+  background-position: center;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  border-radius: 5px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  width: 250px;
+  margin: 30px 10px 10px 10px;
+  scroll-snap-align: start;
+  text-align: center;
+  &:hover {
+    height: 100px;
+    width: 280px;
+    transition: 0.5s;
+  }
+  }
+
+  a {
+    text-decoration:none;
+  }
