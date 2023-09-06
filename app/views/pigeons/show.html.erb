@@ -1,8 +1,11 @@
-<h1>Pigeon <%= @pigeon.id %></h1>
-<h2>Pigeon Details</h2>
-  <%= @pigeon.description %>
-  <%= @pigeon.title %>
-  <%= @pigeon.date %>
-  <%= @pigeon.media_type %>
-  <%= @pigeon.summary %>
-  <%= @pigeon.link_to_content %>
+<div class="container">
+  <% @pigeon.id %>
+  <h2 class="mt-4">Pigeon Details</h2>
+    <p class="mt-4">Title: <%= @pigeon.title %></p>
+    <p>Description: <%= @pigeon.description %></p>
+    <p>Date: <%= @pigeon.date %></p>
+    <p>Media type: <%= @pigeon.media_type %></p>
+    <p>Summary: <%= @pigeon.summary %></p>
+    <p>Length: <%= @pigeon.length %></p>
+    <%= link_to "Link", @pigeon.link_to_content, target: "_blank" %>
+</div>
