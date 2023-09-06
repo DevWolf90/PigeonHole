@@ -1,9 +1,12 @@
 
 <div class="container">
   <h1>All your pigeons here</h1>
+
   <% @alltags.each do |tag| %>
-  <button class="btn btn-dark"><%= tag %></button>
+  <%= link_to tag, pigeons_path(q: { tags_name_cont_any: [tag]}), class: "btn btn-dark", style: "text-decoration:none" %>
   <% end %>
+
+
 
   <div class="row justify-content-center">
     <div class="col-sm-8 my-3">
