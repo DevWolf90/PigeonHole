@@ -1,1 +1,55 @@
-<h1>All pigeons here</h1>
+
+<div class="container">
+  <h1>All your pigeons here</h1>
+  <% @alltags.each do |tag| %>
+  <button class="btn btn-dark"><%= tag %></button>
+  <% end %>
+
+  <div class="row justify-content-center">
+    <div class="col-sm-8 my-3">
+      <%= form_with url: pigeons_path, method: :get, data: { turbo_frame: :results }, class: "d-flex" do %>
+        <%= text_field_tag :query,
+              params[:query],
+              class: "form-control",
+              placeholder: "Type a keyword", oninput: "this.form.requestSubmit()"
+          %>
+        <%= submit_tag "Search", name: "", class: "btn btn-dark" %>
+      <% end %>
+    </div>
+  </div>
+    <%= turbo_frame_tag :results do %>
+      <% @pigeons.each do |pigeon| %>
+        <p>--------------------</p>
+        <%= link_to pigeon.title, pigeon_path(pigeon) %>
+        <p>sent by <%= pigeon.message.sender.nickname %> on <%= pigeon.date.strftime("%a, %-d %B %Y") %> at <%= pigeon.date.strftime("%H:%M") %></p>
+          <% @tags = pigeon.tag_names %>
+          <ul>
+            <% @tags.each do |tag| %>
+              <li><%= tag %></li>
+            <% end %>
+          </ul>
+          <% if pigeon.read? %>
+            <p>Status: read</p>
+          <% else %>
+            <p>Status: unread</p>
+          <% end %>
+          <% if pigeon.favourite? %>
+            <p><i class="fa-solid fa-heart"></i></p>
+          <% else %>
+            <p> <i class="fa-regular fa-heart"></i> </p>
+          <% end %>
+        <p>Media type:
+          <% if pigeon.media_type == "video" %>
+            <i class="fa-brands fa-youtube"></i></p>
+          <% elsif pigeon.media_type == "article" %>
+            <i class="fa-regular fa-newspaper"></i></p>
+          <% elsif pigeon.media_type == "book" %>
+            <i class="fa-solid fa-book"></i></p>
+          <% elsif pigeon.media_type == "podcast" || "audio" || "song" || "playlist"%>
+          <i class="fa-solid fa-headphones"></i></p>
+          <% end %>
+      <% end %>
+    <% end %>
+
+
+</div>
