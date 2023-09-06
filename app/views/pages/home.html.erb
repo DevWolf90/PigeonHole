@@ -19,12 +19,19 @@
   <h2>Unread Pigeons</h2>
     <div class="scrolling-wrapper">
       <ul class="latest-pigeons d-flex align-items-center p-0">
-        <% @pigeons.each do |pigeon| %>
-          <%= link_to pigeon_path(pigeon) do%>
-            <li class="pigeon-card"><%= pigeon.title %></li>
+        <% pigeons_read = @pigeons.all? { |pigeon| pigeon.read} %>
+        <% if pigeons_read %>
+          <p><strong>You are up to date! 🎉</strong></p>
+        <% else %>
+          <% @pigeons.each do |pigeon| %>
+            <% unless pigeon.read %>
+              <%= link_to pigeon_path(pigeon) do%>
+                <li class="pigeon-card"><%= pigeon.title %></li>
+              <% end %>
+            <% end %>
           <% end %>
         <% end %>
-          <li class="pigeon-card">pigeon 2</li>
+          <%# <li class="pigeon-card">pigeon 2</li>
           <li class="pigeon-card">pigeon 3</li>
           <li class="pigeon-card">pigeon 4</li>
           <li class="pigeon-card">pigeon 5</li>
@@ -42,7 +49,7 @@
           <li class="pigeon-card">pigeon 17</li>
           <li class="pigeon-card">pigeon 18</li>
           <li class="pigeon-card">pigeon 19</li>
-          <li class="pigeon-card">pigeon 20</li>
+          <li class="pigeon-card">pigeon 20</li> %>
       </ul>
     </div>
 </div>
