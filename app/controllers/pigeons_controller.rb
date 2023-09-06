@@ -2,6 +2,7 @@ class PigeonsController < ApplicationController
   def index
     @pigeons = Pigeon.all
     @alltags = Gutentag::Tag.names_for_scope(Pigeon)
+    
     @q = Pigeon.ransack(params[:q])
     puts params[:q]
     if params[:q].present? && params[:q][:tags_name_cont_any].present?
