@@ -22,7 +22,16 @@
       <% else %>
         <p>Add to favourites</p>
       <% end %>
-    <p>Media type: <%= pigeon.media_type %></p>
+    <p>Media type:
+      <% if pigeon.media_type == "video" %>
+        <i class="fa-brands fa-youtube"></i></p>
+      <% elsif pigeon.media_type == "article" %>
+        <i class="fa-regular fa-newspaper"></i></p>
+      <% elsif pigeon.media_type == "book" %>
+        <i class="fa-solid fa-book"></i></p>
+      <% elsif pigeon.media_type == "podcast" || "audio" || "song" || "playlist"%>
+      <i class="fa-solid fa-headphones"></i></p>
+      <% end %>
     <p>This pigeon is <%= pigeon.length %> words long</p>
     <p>Summary (powered by AI)</p>
     <%= pigeon.summary %>
