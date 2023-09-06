@@ -7,5 +7,6 @@
     <p>Media type: <%= @pigeon.media_type %></p>
     <p>Summary: <%= @pigeon.summary %></p>
     <p>Length: <%= @pigeon.length %></p>
-    <%= link_to "Link", @pigeon.link_to_content, target: "_blank" %>
+    <%= link_to "Link", @pigeon.link_to_content, target: "_blank" %><br>
+    <%= link_to "Back to Pigeons", pigeons_path %>
 </div>
