@@ -8,5 +8,6 @@ class CreateMessages < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
+    #add_foreign_key :messages, :users, column: :sender_id, primary_key: :id
   end
 end
