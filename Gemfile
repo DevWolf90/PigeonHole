@@ -59,7 +59,7 @@ gem "simple_form", github: "heartcombo/simple_form"
 gem 'gutentag', '~> 2.6'
 gem 'google-apis-youtube_v3'
 gem 'open-uri'
-gem 'json', '~> 2.6', '>= 2.6.3'
+gem 'json'
 
 
 

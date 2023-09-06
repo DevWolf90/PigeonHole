@@ -337,7 +337,7 @@ DEPENDENCIES
   gutentag (~> 2.6)
   importmap-rails
   jbuilder
-  json (~> 2.6, >= 2.6.3)
+  json
   open-uri
   pg (~> 1.1)
   puma (~> 5.0)
