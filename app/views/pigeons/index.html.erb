@@ -1,1 +1,24 @@
 <h1>All pigeons here</h1>
+
+<% @pigeons.each do |pigeon| %>
+  <%= pigeon.title %>
+  <p>sent by <%= pigeon.message.sender.nickname %></p>
+  <p>on <%= pigeon.date %></p>
+  <% if pigeon.read? %>
+    <p>read</p>
+  <% else %>
+    <p>unread</p>
+  <% end %>
+  <% if pigeon.favourite? %>
+    <p>added to favourites</p>
+  <% else %>
+    <p>add to favourites</p>
+  <% end %>
+  <%= pigeon.media_type %>
+  <p>this pigeon is <%= pigeon.length %> long</p>
+  <p>summary (powered by AI)</p>
+  <%= pigeon.summary %>
+  
+
+
+<% end %>
