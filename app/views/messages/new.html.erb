@@ -2,11 +2,8 @@
   <%= simple_form_for [@pigeon] do |f| %>
     <%= f.input :link_to_content, type: :string%>
     <%= f.input :title, type: :string %>
+    <%= f.input :description, type: :string, label: 'Write your message here' %>
     <%= f.input :media_type, collection: ["video", "article", "podcast", "song", "book", "movie"] %>
-  <% end %>
-
-  <%= simple_form_for [@chat, @message] do |f| %>
-    <%= f.input :content, type: :string, label: 'Write your message here' %>
     <%= f.submit "Send Pigeon" %>
-    <% end %>
+  <% end %>
 </div>

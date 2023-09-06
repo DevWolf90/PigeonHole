@@ -10,10 +10,10 @@ class PigeonsController < ApplicationController
     @pigeon = Pigeon.find(params[:id])
   end
 
-
   def create
     @pigeon = Pigeon.new(pigeon_params)
-
+    @pigeon.summary = "api"
+    @pigeon.length = "api"
   end
 
   private
