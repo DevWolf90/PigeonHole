@@ -3,8 +3,8 @@ class PigeonsController < ApplicationController
     @pigeons = Pigeon.all
     @alltags = Gutentag::Tag.names_for_scope(Pigeon)
 
-    @q = Pigeon.ransack(params[:q])
-    puts params[:q]
+    # @q = Pigeon.ransack(params[:q])
+    # puts params[:q]
     if params[:q].present? && params[:q][:tags_name_cont_any].present?
       tag_name = params[:q][:tags_name_cont_any]
       @pigeons = Pigeon.tagged_with(names: tag_name)
@@ -22,5 +22,11 @@ class PigeonsController < ApplicationController
   def show
     @pigeon = Pigeon.find(params[:id])
   end
+
+  # private
+
+  # def pigeon_params
+  #   params.require(:pigeon).permit(names: tag_name)
+  # end
 
 end
