@@ -7,6 +7,5 @@ export default class extends Controller {
 
   show() {
     this.searchbarTarget.classList.toggle("d-none")
-    this.searchbarTarget.classList.add("ease")
   }
 }
