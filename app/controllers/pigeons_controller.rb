@@ -16,12 +16,13 @@ class PigeonsController < ApplicationController
         @pigeons = @pigeons.tagged_with(names: tag)
       end
 
-      if params[:q][:media_type].present?
-        selected_media_types = params[:q][:media_type]
-        # @foundpigeons = @pigeons.where(media_type: selected_media_types)
-        selected_media_types.each do |mt|
-          @pigeons = @pigeons.where(media_type: mt)
-        end
+    end
+
+    if params[:q].present? && params[:q][:media_type].present?
+      selected_media_types = params[:q][:media_type]
+      # @foundpigeons = @pigeons.where(media_type: selected_media_types)
+      selected_media_types.each do |mt|
+        @pigeons = @pigeons.where(media_type: mt)
       end
 
     end

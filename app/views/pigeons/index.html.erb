@@ -56,8 +56,12 @@
             <i class="fa-regular fa-newspaper"></i></p>
           <% elsif pigeon.media_type == "book" %>
             <i class="fa-solid fa-book"></i></p>
-          <% elsif pigeon.media_type == "podcast" || "audio" || "song" || "playlist"%>
+          <% elsif pigeon.media_type == "podcast"%>
           <i class="fa-solid fa-headphones"></i></p>
+          <% elsif pigeon.media_type == "audio" || "song" || "playlist"%>
+          <i class="fa-solid fa-music"></i></p>
+          <% elsif pigeon.media_type == "movie"%>
+          <i class="fa-solid fa-film"></i></p>
           <% end %>
       <% end %>
         <% end %>
