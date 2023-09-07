@@ -2,7 +2,11 @@
 
 <div class="container chat">
  <%# need to fix next line so it says who we're chatting with  %>
-  <h1>You're chatting with<%=  %></h1>
+ <% @sender = Chat.find(params[:id]).sender  %>
+ <% @recipient = Chat.find(params[:id]).recipient%>
+ <% if current_user == @sender || current_user == @recipient %>
+ <% @chatting_partner = [@sender, @recipient].reject{ |n| n == current_user } %>
+  <h1>You're chatting with <%=@chatting_partner[0].nickname%></h1>
 
   <div id="messages">
     <% @chat.messages.each do |message| %>
@@ -20,5 +24,9 @@
     wrapper_html: {class: "flex-grow-1"}
   %>
   <%= f.submit "Send", class: "btn btn-primary mb-3" %>
+  <% end %>
+  <% else %>
+  <h1>Get your nosy ass outta here!</h1>
+
 <% end %>
 </div>
