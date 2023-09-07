@@ -1,6 +1,6 @@
 class Pigeon < ApplicationRecord
   has_many :content_categories, through: :labels
-  belongs_to :message
+  belongs_to :chat
   has_many :taggings, as: :taggable, class_name: 'Gutentag::Tagging'
   has_many :tags, through: :taggings, class_name: 'Gutentag::Tag'
 
