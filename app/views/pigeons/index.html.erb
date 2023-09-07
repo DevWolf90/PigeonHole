@@ -1,28 +1,17 @@
 <div class="container">
   <h1>All your pigeons here</h1>
 
-  <% @alltags.each do |tag| %>
-    <%= check_box_tag tag %>
-    <%= label_tag tag %>
-  <% end %>
-    <%#= check_box_tag "clear_all" %>
-    <%#= label_tag "clear all" %>
-
-  <script>
-    const allTags = <%= raw @alltags.to_json %>;
-</script>
-  <script src="../controllers/javascript/pigeonindex.js"></script>
-
-
-
   <div class="row justify-content-center">
     <div class="col-sm-8 my-3">
-      <%= form_with url: pigeons_path, method: :get, data: { turbo_frame: :results }, class: "d-flex" do %>
+      <%= form_with url: pigeons_path, method: :get, class: "d-flex" do %>
         <%= text_field_tag :query,
               params[:query],
               class: "form-control",
-              placeholder: "Type a keyword", oninput: "this.form.requestSubmit()"
-          %>
+              placeholder: "Type a keyword"%>
+        <% @alltags.each do |tag| %>
+        <%= check_box_tag "q[tags_name_cont_any][]", tag, params.dig(:q, :tags_name_cont_any)&.include?(tag)%>
+        <%= label_tag tag %>
+      <% end %>
         <%= submit_tag "Search", name: "", class: "btn btn-dark" %>
       <% end %>
     </div>

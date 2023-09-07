@@ -11,6 +11,12 @@ class PigeonsController < ApplicationController
     else
       puts "No tags"
     end
+
+    # unless (params.keys - %w(controller action query)).empty?
+    #   tags = params.keys - %w(controller action query)
+    #   @pigeons = ...
+    # end
+
     # @q = Pigeon.ransack(params[:q])
     # @tags = @q.result.includes(:pigeons).tag_name(params[:tag_names])
     if params[:query].present?
