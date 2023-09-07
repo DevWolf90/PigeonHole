@@ -6,6 +6,7 @@ class PigeonsController < ApplicationController
 
     if params[:q].present? && params[:q][:tags_name_cont_any].present?
       selected_tags = params[:q][:tags_name_cont_any]
+      @foundpigeons = Pigeon.tagged_with(:names => selected_tags, match: :all)
 
       selected_tags.each do |tag|
         @pigeons = @pigeons.tagged_with(names: tag)
@@ -16,6 +17,7 @@ class PigeonsController < ApplicationController
       sql_subquery = "title ILIKE :query OR description ILIKE :query"
       @pigeons = @pigeons.where(sql_subquery, query: "%#{params[:query]}%")
     end
+
   end
 
   def show
