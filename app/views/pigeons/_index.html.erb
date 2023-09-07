@@ -19,7 +19,7 @@
       <% end %>
     </div>
   </div>
-    <%= turbo_frame_tag :results do %>
+    <%= turbo_frame_tag :results, target: :_top do %>
       <% @pigeons.each do |pigeon| %>
         <p>--------------------</p>
         <%= link_to pigeon.title, pigeon_path(pigeon) %>

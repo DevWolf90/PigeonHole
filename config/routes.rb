@@ -4,11 +4,13 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   # Defines the root path route ("/")
   # root "articles#index"
-  resources :pigeons, only: %i[index show] do
+
+  resources :pigeons, only: %i[index show create] do
     # member do
     #   post 'add_to_favourites'
     # end
   end
+
   resources :chats, only: %i[new show create] do
     resources :messages, only: %i[new create]
   end
