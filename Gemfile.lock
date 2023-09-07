@@ -150,7 +150,12 @@ GEM
       rails (>= 6.0.0)
       stimulus-rails
       turbo-rails
+    httparty (0.21.0)
+      mini_mime (>= 1.0.0)
+      multi_xml (>= 0.5.2)
+
     httpclient (2.8.3)
+
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     importmap-rails (1.2.1)
@@ -180,6 +185,7 @@ GEM
     mini_mime (1.1.5)
     minitest (5.19.0)
     msgpack (1.7.2)
+    multi_xml (0.6.0)
     multi_json (1.15.0)
     multipart-post (2.3.0)
     net-imap (0.3.7)
@@ -346,8 +352,10 @@ DEPENDENCIES
   google-apis-youtube_v3
   gutentag (~> 2.6)
   hotwire-rails
+  httparty
   importmap-rails
   jbuilder
+  nokogiri
   json
   open-uri
   pg (~> 1.1)

@@ -5,13 +5,13 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
-  resources :pigeons, only: %i[index show create] do
+  resources :pigeons, only: %i[index show create new] do
     # member do
     #   post 'add_to_favourites'
     # end
   end
 
   resources :chats, only: %i[new show create] do
-    resources :messages, only: %i[new create]
+    resources :messages, only: %i[ create]
   end
 end

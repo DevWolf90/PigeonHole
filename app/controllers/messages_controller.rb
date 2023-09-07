@@ -1,7 +1,7 @@
 class MessagesController < ApplicationController
   before_action :set_chat
   def create
-    @chat = Chat.find(params[:chat_id])
+    # @chat = Chat.find(params[:chat_id])
     @message = Message.new(message_params)
     @message.chat = @chat
     @message.sender = current_user
@@ -11,11 +11,6 @@ class MessagesController < ApplicationController
     else
       render "chats/show", status: :unprocessable_entity
     end
-  end
-
-  def new
-    @message = Message.new
-    @pigeon = Pigeon.new
   end
 
   private

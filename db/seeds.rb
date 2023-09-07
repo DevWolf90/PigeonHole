@@ -43,21 +43,26 @@ pig1 = Pigeon.new(summary: "something something", message: message1, length: 10,
 pig1.tag_names << "Ukhouse"
 pig1.tag_names << "Chill"
 pig1.save
+puts "Created: #{pig1.title}"
 
 pig2 = Pigeon.new(summary: "something something", message: message2, length: 10,
-              link_to_content: "https://www.nytimes.com/2023/09/05/world/asia/north-korea-russia-kim-jong-un.html",
+              link_to_content: "https://www.theguardian.com/politics/2023/sep/06/gerry-bermingham-obituary",
               media_type: "article", date: Date.today, title: "North Korea Finds New Leverage in the Ukraine War",
               description: "description")
 pig2.tag_names << "World"
 pig2.tag_names << "Politics"
 pig2.save
-pig3 = Pigeon.new(summary: "something something", message: message3, length: 5000,
-              link_to_content: "https://www.epedagogia.com.br/materialbibliotecaonine/797The-Count-of-Monte-Cristo.pdf",
-              media_type: "book", date: Date.today, title: "The count of montecristo",
-              description: "description", favourite: true)
-pig3.tag_names << "Classic"
-pig3.tag_names << "Novel"
-pig3.save
+puts "Created: #{pig2.title}"
+
+# pig3 = Pigeon.new(summary: "something something", message: message3, length: 5000,
+#               link_to_content: "https://www.epedagogia.com.br/materialbibliotecaonine/797The-Count-of-Monte-Cristo.pdf",
+#               media_type: "book", date: Date.today, title: "The count of montecristo",
+#               description: "description", favourite: true)
+# pig3.tag_names << "Classic"
+# pig3.tag_names << "Novel"
+# pig3.save
+# puts "Created: #{pig3.title}"
+
 pig4 = Pigeon.new(summary: "something something", message: message4, length: 125,
               link_to_content: "https://open.spotify.com/episode/6ybdcNPGRMRIYTwXnLVE9w?si=36335912ed7949ac",
               media_type: "podcast", date: Date.today, title: "Bill maher on JRE",
@@ -65,6 +70,8 @@ pig4 = Pigeon.new(summary: "something something", message: message4, length: 125
 pig4.tag_names << "Misc"
 pig4.tag_names << "Politics"
 pig4.save
+puts "Created: #{pig4.title}"
+
 pig5 = Pigeon.new(summary: "something something", message: message5, length: 73,
               link_to_content: "https://www.youtube.com/watch?v=TMHqNoIpqbM",
               media_type: "movie", date: Date.today, title: "Weekenders(2021)",
@@ -72,4 +79,5 @@ pig5 = Pigeon.new(summary: "something something", message: message5, length: 73,
 pig5.tag_names << "Funny"
 pig5.tag_names << "Comedy"
 pig5.save
+puts "Created: #{pig5.title}"
 puts "Pigeons created"
