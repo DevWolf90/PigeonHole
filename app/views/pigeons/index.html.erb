@@ -11,6 +11,8 @@
               placeholder: "Type a keyword"%>
         </div>
         <div class="col-sm-5 d-flex">
+        <div>
+        </div>
           <% @alltags.each do |tag| %>
             <input type="checkbox" id="<%= tag %>" name="q[tags_name_cont_any][]" value="<%= tag %>" class="checkboxaspill tag-selector" <%= params.dig(:q, :tags_name_cont_any)&.include?(tag) ? 'checked' : '' %>>
             <label for="<%= tag %>" class="tag-button"><%= tag %></label>
