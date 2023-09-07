@@ -9,7 +9,7 @@
               class: "form-control",
               placeholder: "Type a keyword"%>
         <% @alltags.each do |tag| %>
-        <%= check_box_tag "q[tags_name_cont_any][]", tag, params.dig(:q, :tags_name_cont_any)&.include?(tag)%>
+        <%= check_box_tag "q[tags_name_cont_any][]", tag, params.dig(:q, :tags_name_cont_any)&.include?(tag), class: "checkboxaspill"%>
         <%= label_tag tag %>
       <% end %>
         <%= submit_tag "Search", name: "", class: "btn btn-dark" %>

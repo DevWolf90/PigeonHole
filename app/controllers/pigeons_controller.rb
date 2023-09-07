@@ -7,18 +7,11 @@ class PigeonsController < ApplicationController
     # puts params[:q]
     if params[:q].present? && params[:q][:tags_name_cont_any].present?
       tag_name = params[:q][:tags_name_cont_any]
-      @pigeons = Pigeon.tagged_with(names: tag_name)
-    else
-      puts "No tags"
+      tag_name.each do |tag|
+        @pigeons = @pigeons.tagged_with(names: tag_name)
+      end
     end
 
-    # unless (params.keys - %w(controller action query)).empty?
-    #   tags = params.keys - %w(controller action query)
-    #   @pigeons = ...
-    # end
-
-    # @q = Pigeon.ransack(params[:q])
-    # @tags = @q.result.includes(:pigeons).tag_name(params[:tag_names])
     if params[:query].present?
       sql_subquery = "title ILIKE :query OR description ILIKE :query"
       @pigeons = @pigeons.where(sql_subquery, query: "%#{params[:query]}%")
@@ -28,11 +21,5 @@ class PigeonsController < ApplicationController
   def show
     @pigeon = Pigeon.find(params[:id])
   end
-
-  # private
-
-  # def pigeon_params
-  #   params.require(:pigeon).permit(names: tag_name)
-  # end
 
 end
