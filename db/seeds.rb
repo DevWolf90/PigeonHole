@@ -73,11 +73,13 @@ pig4.save
 puts "Created: #{pig4.title}"
 
 pig5 = Pigeon.new(summary: "something something", message: message5, length: 73,
-              link_to_content: "https://www.youtube.com/watch?v=TMHqNoIpqbM",
-              media_type: "movie", date: Date.today, title: "Weekenders(2021)",
+              link_to_content: "https://open.spotify.com/episode/4VEeWbuY6zHfY5f5nEvsxS?si=df54bba67d324915",
+              media_type: "podcast", date: Date.today, title: "The Meandering Route To Success",
               description: "description", read: true)
 pig5.tag_names << "Funny"
 pig5.tag_names << "Comedy"
 pig5.save
 puts "Created: #{pig5.title}"
 puts "Pigeons created"
+
+https://open.spotify.com/show/4W9G20JohHbFX7qArG32Bn?si=67b0d30678db4822
