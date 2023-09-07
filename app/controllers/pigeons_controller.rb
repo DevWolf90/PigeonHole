@@ -18,6 +18,13 @@ class PigeonsController < ApplicationController
       sql_subquery = "title ILIKE :query OR description ILIKE :query"
       @pigeons = @pigeons.where(sql_subquery, query: "%#{params[:query]}%")
     end
+
+    if params[:q].present? && params[:q][:tags_name_cont_any].present?
+      new_tag = params[:q][:tags_name_cont_any]
+      @alltags << new_tag
+    end
+
+
   end
 
   def show
