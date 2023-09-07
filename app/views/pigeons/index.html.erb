@@ -14,16 +14,17 @@
           <% @alltags.each do |tag| %>
             <input type="checkbox" id="<%= tag %>" name="q[tags_name_cont_any][]" value="<%= tag %>" class="checkboxaspill tag-selector" <%= params.dig(:q, :tags_name_cont_any)&.include?(tag) ? 'checked' : '' %>>
             <label for="<%= tag %>" class="tag-button"><%= tag %></label>
-        <% end %>
+          <% end %>
           <%= submit_tag "Search", name: "", class: "btn btn-dark" %>
         </div>
       <% end %>
     </div>
-    <div>
-      <button>Add to categories</button>
-    </div>
+
   </div>
-    <%= turbo_frame_tag :results, target: :_top do %>
+    <%= turbo_frame_tag :results, target: :_top, id: "searchResults"  do %>
+      <% if @pigeons == [] %>
+        <p>Oops, too specific. No pigeons satisfy this query</p>
+        <% else %>
       <% @pigeons.each do |pigeon| %>
         <p>--------------------</p>
         <%= link_to pigeon.title, pigeon_path(pigeon) %>
@@ -55,6 +56,7 @@
           <i class="fa-solid fa-headphones"></i></p>
           <% end %>
       <% end %>
+        <% end %>
     <% end %>
 
 
