@@ -153,9 +153,7 @@ GEM
     httparty (0.21.0)
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
-
     httpclient (2.8.3)
-
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     importmap-rails (1.2.1)
@@ -355,7 +353,6 @@ DEPENDENCIES
   httparty
   importmap-rails
   jbuilder
-  nokogiri
   json
   nokogiri
   open-uri
