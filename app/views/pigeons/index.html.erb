@@ -1,10 +1,17 @@
-
 <div class="container">
   <h1>All your pigeons here</h1>
 
   <% @alltags.each do |tag| %>
-  <%= link_to tag, pigeons_path(q: { tags_name_cont_any: [tag]}), class: "btn btn-dark", style: "text-decoration:none" %>
+    <%= check_box_tag tag %>
+    <%= label_tag tag %>
   <% end %>
+    <%#= check_box_tag "clear_all" %>
+    <%#= label_tag "clear all" %>
+
+  <script>
+    const allTags = <%= raw @alltags.to_json %>;
+</script>
+  <script src="../controllers/javascript/pigeonindex.js"></script>
 
 
 
