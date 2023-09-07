@@ -146,7 +146,13 @@ GEM
       signet (>= 0.16, < 2.a)
     gutentag (2.6.2)
       activerecord (>= 3.2.0)
+<<<<<<< HEAD
+    httparty (0.21.0)
+      mini_mime (>= 1.0.0)
+      multi_xml (>= 0.5.2)
+=======
     httpclient (2.8.3)
+>>>>>>> 0668429947df5beb7acbf6a6c6c43c55cbce5fb8
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     importmap-rails (1.2.1)
@@ -176,6 +182,7 @@ GEM
     mini_mime (1.1.5)
     minitest (5.19.0)
     msgpack (1.7.2)
+    multi_xml (0.6.0)
     multi_json (1.15.0)
     multipart-post (2.3.0)
     net-imap (0.3.7)
@@ -341,10 +348,15 @@ DEPENDENCIES
   font-awesome-sass (~> 6.1)
   google-apis-youtube_v3
   gutentag (~> 2.6)
+  httparty
   importmap-rails
   jbuilder
+<<<<<<< HEAD
+  nokogiri
+=======
   json
   open-uri
+>>>>>>> 0668429947df5beb7acbf6a6c6c43c55cbce5fb8
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.7, >= 7.0.7.2)
