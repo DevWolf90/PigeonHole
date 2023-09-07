@@ -6,12 +6,11 @@ class PigeonsController < ApplicationController
     @pigeons = Pigeon.all
     @alltags = Gutentag::Tag.names_for_scope(Pigeon)
 
-    # @q = Pigeon.ransack(params[:q])
-    # puts params[:q]
     if params[:q].present? && params[:q][:tags_name_cont_any].present?
-      tag_name = params[:q][:tags_name_cont_any]
-      tag_name.each do |tag|
-        @pigeons = @pigeons.tagged_with(names: tag_name)
+      selected_tags = params[:q][:tags_name_cont_any]
+
+      selected_tags.each do |tag|
+        @pigeons = @pigeons.tagged_with(names: tag)
       end
     end
 
