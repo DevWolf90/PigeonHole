@@ -15,6 +15,10 @@
             <input type="checkbox" id="<%= tag %>" name="q[tags_name_cont_any][]" value="<%= tag %>" class="checkboxaspill tag-selector" <%= params.dig(:q, :tags_name_cont_any)&.include?(tag) ? 'checked' : '' %>>
             <label for="<%= tag %>" class="tag-button"><%= tag %></label>
           <% end %>
+          <% @mediatypes.each do |mt| %>
+            <input type="checkbox" id="<%= mt %>" name="q[media_type][]" value="<%= mt %>" class="checkboxaspill media-type-selector" <%= params.dig(:q, :media_type)&.include?(mt) ? 'checked' : '' %>>
+            <label for="<%= mt %>" class="media-type-button"><%= mt %></label>
+          <% end %>
           <%= submit_tag "Search", name: "", class: "btn btn-dark" %>
         </div>
       <% end %>
@@ -52,8 +56,12 @@
             <i class="fa-regular fa-newspaper"></i></p>
           <% elsif pigeon.media_type == "book" %>
             <i class="fa-solid fa-book"></i></p>
-          <% elsif pigeon.media_type == "podcast" || "audio" || "song" || "playlist"%>
+          <% elsif pigeon.media_type == "podcast"%>
           <i class="fa-solid fa-headphones"></i></p>
+          <% elsif pigeon.media_type == "audio" || "song" || "playlist"%>
+          <i class="fa-solid fa-music"></i></p>
+          <% elsif pigeon.media_type == "movie"%>
+          <i class="fa-solid fa-film"></i></p>
           <% end %>
       <% end %>
         <% end %>
