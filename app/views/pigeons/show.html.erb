@@ -3,8 +3,17 @@
   <h2 class="mt-4">Pigeon Details</h2>
     <p class="mt-4">Title: <%= @pigeon.title %></p>
     <p>Description: <%= @pigeon.description %></p>
-    <p>Date: <%= @pigeon.date %></p>
-    <p>Media type: <%= @pigeon.media_type %></p>
+    <p>Date: <%= @pigeon.date.strftime("%a, %-d %B %Y") %> at <%= @pigeon.date.strftime("%H:%M") %></p>
+    <p>Media type:
+      <% if @pigeon.media_type == "video" %>
+        <i class="fa-brands fa-youtube"></i></p>
+      <% elsif @pigeon.media_type == "article" %>
+        <i class="fa-regular fa-newspaper"></i></p>
+      <% elsif @pigeon.media_type == "book" %>
+        <i class="fa-solid fa-book"></i></p>
+      <% elsif @pigeon.media_type == "podcast" || "audio" || "song" || "playlist"%>
+        <i class="fa-solid fa-headphones"></i></p>
+      <% end %>
     <p>Summary: <%= @pigeon.summary %></p>
     <p>Length: <%= @pigeon.length %></p>
     <%= link_to "Link", @pigeon.link_to_content, target: "_blank" %><br>
