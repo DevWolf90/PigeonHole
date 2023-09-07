@@ -1,5 +1,6 @@
-require "json"
 require "open-uri"
+require "nokogiri"
+require "json"
 
 class PigeonsController < ApplicationController
   def index
