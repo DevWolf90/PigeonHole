@@ -1,3 +1,6 @@
+require "open-uri"
+require "nokogiri"
+
 class PigeonsController < ApplicationController
   def index
     @pigeons = Pigeon.all
