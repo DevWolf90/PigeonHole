@@ -2,6 +2,7 @@ class ChatsController < ApplicationController
   def show
     @chat = Chat.find(params[:id])
     @message = Message.new
+    @pigeons = Pigeon.where(chat_id: @chat)
   end
 
   def new

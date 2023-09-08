@@ -3,10 +3,8 @@ class PigeonsController < ApplicationController
   def index
     @pigeons = Pigeon.all
     @alltags = Gutentag::Tag.names_for_scope(Pigeon)
-    @mediatypes = []
-    @pigeons.each do |p|
-      @mediatypes << p.media_type
-    end
+    @mediatypes = ["video", "podcast", "article", "playlist", "movie", "book", "song"]
+
 
     if params[:q].present? && params[:q][:tags_name_cont_any].present?
       selected_tags = params[:q][:tags_name_cont_any]
@@ -35,6 +33,18 @@ class PigeonsController < ApplicationController
 
   end
 
+  def unmark_read
+    @pigeon = Pigeon.find(params[:id])
+    @pigeon.read = !@pigeon.read
+    @pigeon.save
+  end
+
+  # def mark_read
+  #   @pigeon = Pigeon.find(params[:id])
+  #   @pigeon.read = !@pigeon.read
+  #   @pigeon.save
+  # end
+
   def show
     @pigeon = Pigeon.find(params[:id])
   end
@@ -44,13 +54,17 @@ class PigeonsController < ApplicationController
   end
 
   def create
+    @chat = Chat.find_or_create_by(sender_id: current_user.id)
+    # @chat = Chat.find_or_create_by(sender: current_user, recipient: @pigeon.recipient)
     @pigeon = Pigeon.new(pigeon_params)
-    @chat = Chat.where(sender: current_user).where(recipient: @pigeon.recipient)
-    if @chat.nil?
-      @chat = Chat.create(sender: current_user, recipient: @pigeon.recipient)
-    end
-
-    @message = Message.new(user: current_user, chat: @chat)
+    @pigeon.chat = @chat
+    recipient_user = User.find_by(id: 12)
+    @pigeon.recipient = recipient_user if recipient_user.present?
+    @pigeon.date = Date.today
+    @pigeon.save
+    @message = Message.new(user_id: current_user.id, chat_id: @chat.id)
+    @message.content = @pigeon.description
+    @message.save
     # if @pigeon.link_to_content.include?("youtu")
 
     #   url = "https://www.googleapis.com/youtube/v3/videos?id=#{get_yt_id(@pigeon.link_to_content)}=#{ENV["GOOGLE_API_KEY"]}

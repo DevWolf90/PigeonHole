@@ -1,7 +1,11 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
+  static targets = ["searchbar"]
   connect() {
-    console.log("helloooo")
+  }
+
+  show() {
+    this.searchbarTarget.classList.toggle("d-none")
   }
 }
