@@ -16,6 +16,7 @@
       <% end %>
     <p>Summary: <%= @pigeon.summary %></p>
     <p>Length: <%= @pigeon.length %></p>
+    <p>This pigeon will take <%=  TimeToReadService.new(@pigeon.link_to_content).call %> minutes to look at.</p>
     <%= link_to "Link", @pigeon.link_to_content, target: "_blank" %><br>
     <% if @pigeon.read %>
       <%= link_to "Mark as unread", unmark_read_path(@pigeon), data: { turbo_method: :patch }  %>
