@@ -1,7 +1,7 @@
-<div class="container">
+<div class="container pigeon-card">
   <% pigeon.id %>
-  <h2 class="mt-4">Pigeon Details</h2>
-    <p class="mt-4">Title: <%= pigeon.title %></p>
+  <p class="pt-4"><strong>Pigeon details</strong></p>
+    <p class="mt-2">Title: <%= pigeon.title %></p>
     <p>Description: <%= pigeon.description %></p>
     <p>Date: <%= pigeon.date.strftime("%a, %-d %B %Y") %> at <%= pigeon.date.strftime("%H:%M") %></p>
     <p>Media type:
@@ -15,5 +15,5 @@
         <i class="fa-solid fa-headphones"></i></p>
       <% end %>
     <p>Length: <%= pigeon.length %></p>
-    <%= link_to "Link", pigeon.link_to_content, target: "_blank" %><br>
+    <%= link_to "Link", pigeon.link_to_content, target: "_blank", class: "pb-2" %>
 </div>
