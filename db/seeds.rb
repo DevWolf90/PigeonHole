@@ -80,7 +80,7 @@ puts "Created: #{pig4.title}"
 pig5 = Pigeon.new(summary: "something something", chat: chat5, length: 73,
               link_to_content: "https://www.youtube.com/watch?v=TMHqNoIpqbM",
               media_type: "movie", date: Date.today, title: "Weekenders(2021)",
-              description: "description", read: true,recipient: elias)
+              description: "description", read: true, recipient: elias)
 pig5.tag_names << "Funny"
 pig5.tag_names << "Comedy"
 pig5.save
