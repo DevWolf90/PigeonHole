@@ -3,19 +3,36 @@ class PigeonsController < ApplicationController
   def index
     @pigeons = Pigeon.all
     @alltags = Gutentag::Tag.names_for_scope(Pigeon)
+    @mediatypes = []
+    @pigeons.each do |p|
+      @mediatypes << p.media_type
+    end
 
     if params[:q].present? && params[:q][:tags_name_cont_any].present?
       selected_tags = params[:q][:tags_name_cont_any]
+      @foundpigeons = Pigeon.tagged_with(:names => selected_tags, match: :all)
 
       selected_tags.each do |tag|
         @pigeons = @pigeons.tagged_with(names: tag)
       end
+
     end
+
+    if params[:q].present? && params[:q][:media_type].present?
+      selected_media_types = params[:q][:media_type]
+      # @foundpigeons = @pigeons.where(media_type: selected_media_types)
+      selected_media_types.each do |mt|
+        @pigeons = @pigeons.where(media_type: mt)
+      end
+
+    end
+
 
     if params[:query].present?
       sql_subquery = "title ILIKE :query OR description ILIKE :query"
       @pigeons = @pigeons.where(sql_subquery, query: "%#{params[:query]}%")
     end
+
   end
 
   def show

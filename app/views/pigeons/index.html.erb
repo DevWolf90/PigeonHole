@@ -1,26 +1,48 @@
-<div class="container">
-  <h1>All your pigeons here</h1>
+<div class="container py-3">
+  <h1>Search your pigeons</h1>
 
-  <div class="row justify-content-center">
-    <div class="col-sm-8 my-3">
-      <%= form_with url: pigeons_path, method: :get, class: "d-flex" do %>
-        <%= text_field_tag :query,
-              params[:query],
-              class: "form-control",
-              placeholder: "Type a keyword"%>
-        <% @alltags.each do |tag| %>
-          <input type="checkbox" id="<%= tag %>" name="q[tags_name_cont_any][]" value="<%= tag %>" class="checkboxaspill tag-selector" <%= params.dig(:q, :tags_name_cont_any)&.include?(tag) ? 'checked' : '' %>>
-          <label for="<%= tag %>" class="tag-button"><%= tag %></label>
-      <% end %>
-        <%= submit_tag "Search", name: "", class: "btn btn-dark" %>
-      <% end %>
+  <div class="row">
+    <div class="my-3">
+      <div class="d-flex align-items-center">
+        <%= form_with url: pigeons_path, method: :get do %>
+          <div class="my-5" >
+            <%= text_field_tag :query,
+                  params[:query],
+                  class: "form-control",
+                  placeholder: "Type a keyword"%>
+          </div>
+          <div class="d-flex">
+          <div class="row">
+            <div class="d-flex justify-content-center">
+              <% @alltags.each do |tag| %>
+                <input type="checkbox" id="<%= tag %>" name="q[tags_name_cont_any][]" value="<%= tag %>" class="checkboxaspill tag-selector" <%= params.dig(:q, :tags_name_cont_any)&.include?(tag) ? 'checked' : '' %>>
+                <label for="<%= tag %>" class="tag-button"><%= tag %></label>
+              <% end %>
+            </div>
+            <div class="d-flex justify-content-center">
+              <% @mediatypes.each do |mt| %>
+                <input type="checkbox" id="<%= mt %>" name="q[media_type][]" value="<%= mt %>" class="checkboxaspill media-type-selector" <%= params.dig(:q, :media_type)&.include?(mt) ? 'checked' : '' %>>
+                <label for="<%= mt %>" class="media-type-button"><%= mt %></label>
+              <% end %>
+            </div>
+            <div class="d-flex justify-content-center">
+              <%= submit_tag "Search", name: "", class: "btn btn-dark mt-3 px-4", style: "background-color: black; box-shadow: 1px 1px 1px 1px gray; border-radius: 5px; font-size: 1.5rem;" %>
+            </div>
+          </div>
+          <% end %>
+          </div>
+      </div>
     </div>
   </div>
-    <%= turbo_frame_tag :results, target: :_top do %>
+
+    <%= turbo_frame_tag :results, target: :_top, id: "searchResults"  do %>
+      <% if @pigeons == [] %>
+        <p>Oops, too specific. No pigeons satisfy this query</p>
+        <% else %>
       <% @pigeons.each do |pigeon| %>
         <p>--------------------</p>
         <%= link_to pigeon.title, pigeon_path(pigeon) %>
-        <p>sent by <%= pigeon.message.sender.nickname %> on <%= pigeon.date.strftime("%a, %-d %B %Y") %> at <%= pigeon.date.strftime("%H:%M") %></p>
+        <p>sent by <%#= pigeon.message.sender.nickname %> on <%= pigeon.date.strftime("%a, %-d %B %Y") %> at <%= pigeon.date.strftime("%H:%M") %></p>
           <% @tags = pigeon.tag_names %>
           <ul>
             <% @tags.each do |tag| %>
@@ -44,10 +66,15 @@
             <i class="fa-regular fa-newspaper"></i></p>
           <% elsif pigeon.media_type == "book" %>
             <i class="fa-solid fa-book"></i></p>
-          <% elsif pigeon.media_type == "podcast" || "audio" || "song" || "playlist"%>
+          <% elsif pigeon.media_type == "podcast"%>
           <i class="fa-solid fa-headphones"></i></p>
+          <% elsif pigeon.media_type == "audio" || "song" || "playlist"%>
+          <i class="fa-solid fa-music"></i></p>
+          <% elsif pigeon.media_type == "movie"%>
+          <i class="fa-solid fa-film"></i></p>
           <% end %>
       <% end %>
+        <% end %>
     <% end %>
 
 
