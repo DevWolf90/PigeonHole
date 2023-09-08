@@ -81,5 +81,3 @@ pig5.tag_names << "Comedy"
 pig5.save
 puts "Created: #{pig5.title}"
 puts "Pigeons created"
-
-https://open.spotify.com/show/4W9G20JohHbFX7qArG32Bn?si=67b0d30678db4822
