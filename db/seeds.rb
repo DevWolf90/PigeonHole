@@ -39,7 +39,7 @@ puts "Messages created"
 pig1 = Pigeon.new(summary: "something something", chat:chat1, length: 10,
                       link_to_content: "https://www.youtube.com/watch?v=HuiIZzdG7EI&list=RDHuiIZzdG7EI&start_radio=1",
                       media_type: "video", date: Date.today, title: "AlunaGeorge - Not above Love",
-                      description: "description")
+                      description: "description", recipient: sara)
 pig1.tag_names << "Ukhouse"
 pig1.tag_names << "Chill"
 pig1.save
@@ -48,7 +48,7 @@ puts "Created: #{pig1.title}"
 pig2 = Pigeon.new(summary: "something something", chat: chat2, length: 10,
               link_to_content: "https://www.theguardian.com/politics/2023/sep/06/gerry-bermingham-obituary",
               media_type: "article", date: Date.today, title: "North Korea Finds New Leverage in the Ukraine War",
-              description: "description")
+              description: "description", recipient: jode)
 pig2.tag_names << "World"
 pig2.tag_names << "Politics"
 pig2.save
@@ -66,7 +66,7 @@ puts "Created: #{pig2.title}"
 pig4 = Pigeon.new(summary: "something something", chat: chat4, length: 125,
               link_to_content: "https://open.spotify.com/episode/6ybdcNPGRMRIYTwXnLVE9w?si=36335912ed7949ac",
               media_type: "podcast", date: Date.today, title: "Bill maher on JRE",
-              description: "description")
+              description: "description", recipient: duarte)
 pig4.tag_names << "Misc"
 pig4.tag_names << "Politics"
 pig4.save
@@ -75,7 +75,7 @@ puts "Created: #{pig4.title}"
 pig5 = Pigeon.new(summary: "something something", chat: chat5, length: 73,
               link_to_content: "https://www.youtube.com/watch?v=TMHqNoIpqbM",
               media_type: "movie", date: Date.today, title: "Weekenders(2021)",
-              description: "description", read: true)
+              description: "description", read: true,recipient: elias)
 pig5.tag_names << "Funny"
 pig5.tag_names << "Comedy"
 pig5.save
