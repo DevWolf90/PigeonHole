@@ -44,13 +44,14 @@ class PigeonsController < ApplicationController
   end
 
   def create
+    @chat = Chat.find_or_create_by(sender_id: current_user)
+    # @chat = Chat.find_or_create_by(sender: current_user, recipient: @pigeon.recipient)
     @pigeon = Pigeon.new(pigeon_params)
-    @chat = Chat.where(sender: current_user).where(recipient: @pigeon.recipient)
-    if @chat.nil?
-      @chat = Chat.create(sender: current_user, recipient: @pigeon.recipient)
-    end
-
-    @message = Message.new(user: current_user, chat: @chat)
+    @pigeon.chat = @chat
+    @pigeon.recipient = User.find_by(id: 7)
+    @pigeon.date = Date.now
+    @pigeon.save
+    @message = Message.new(user_id: current_user, chat_id: @chat)
     @message.content = @pigeon.description
     @message.save
     # if @pigeon.link_to_content.include?("youtu")
