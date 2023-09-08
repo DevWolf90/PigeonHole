@@ -10,8 +10,12 @@
 
   <div id="messages">
     <% @chat.messages.each do |message| %>
+    ##if message has got a pigeon associated with it, then display the pigeon card
       <%= message.sender.email %>
       <%= render 'messages/message', message: message %>
+      <% if message.pigeon.exists? %>
+        
+      <% end %>
     <% end %>
   </div>
 
@@ -30,4 +34,3 @@
 
 <% end %>
 </div>
-
