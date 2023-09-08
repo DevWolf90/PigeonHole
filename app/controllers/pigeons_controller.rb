@@ -3,10 +3,7 @@ class PigeonsController < ApplicationController
   def index
     @pigeons = Pigeon.all
     @alltags = Gutentag::Tag.names_for_scope(Pigeon)
-    @mediatypes = []
-    @pigeons.each do |p|
-      @mediatypes << p.media_type
-    end
+    @mediatypes = ["video", "podcast", "article", "playlist", "movie", "book", "song"]
 
     if params[:q].present? && params[:q][:tags_name_cont_any].present?
       selected_tags = params[:q][:tags_name_cont_any]
@@ -44,7 +41,7 @@ class PigeonsController < ApplicationController
   end
 
   def create
-    @chat = Chat.find_or_create_by(sender_id: current_user)
+    @chat = Chat.find_or_create_by(sender_id: current_user.id)
     # @chat = Chat.find_or_create_by(sender: current_user, recipient: @pigeon.recipient)
     @pigeon = Pigeon.new(pigeon_params)
     @pigeon.chat = @chat
@@ -52,7 +49,7 @@ class PigeonsController < ApplicationController
     @pigeon.recipient = recipient_user if recipient_user.present?
     @pigeon.date = Date.today
     @pigeon.save
-    @message = Message.new(user_id: current_user, chat_id: @chat)
+    @message = Message.new(user_id: current_user.id, chat_id: @chat.id)
     @message.content = @pigeon.description
     @message.save
     raise
