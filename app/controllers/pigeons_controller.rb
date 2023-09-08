@@ -5,6 +5,7 @@ class PigeonsController < ApplicationController
     @alltags = Gutentag::Tag.names_for_scope(Pigeon)
     @mediatypes = ["video", "podcast", "article", "playlist", "movie", "book", "song"]
 
+
     if params[:q].present? && params[:q][:tags_name_cont_any].present?
       selected_tags = params[:q][:tags_name_cont_any]
       @foundpigeons = Pigeon.tagged_with(:names => selected_tags, match: :all)
@@ -31,6 +32,18 @@ class PigeonsController < ApplicationController
     end
 
   end
+
+  def unmark_read
+    @pigeon = Pigeon.find(params[:id])
+    @pigeon.read = !@pigeon.read
+    @pigeon.save
+  end
+
+  # def mark_read
+  #   @pigeon = Pigeon.find(params[:id])
+  #   @pigeon.read = !@pigeon.read
+  #   @pigeon.save
+  # end
 
   def show
     @pigeon = Pigeon.find(params[:id])
