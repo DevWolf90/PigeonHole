@@ -15,7 +15,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <button class="btn fs-4" type="button" data-controller="display" ">
+    <button class="btn fs-4" type="button" data-controller="display">
       <i class="fa-solid fa-magnifying-glass" data-action="click->display#show"></i>
       <div class="searchbar d-none"  data-display-target="searchbar">
         <%= form_with url: pigeons_path, method: :get, data: { turbo_frame: :results }, class: "d-flex" do %>
@@ -25,7 +25,7 @@
                 placeholder: "Type a keyword", oninput: "this.form.requestSubmit()"
             %>
           <%# <%= submit_tag "Search", name: "", class: "btn btn-dark" %>
-        <%# end %>
+       <% end %>
       <%# </div>
     </button> %>
 
