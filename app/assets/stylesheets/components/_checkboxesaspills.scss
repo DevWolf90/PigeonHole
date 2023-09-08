@@ -1,0 +1,66 @@
+.checkboxaspill {
+  position: absolute;
+  transform: scale(0);
+  padding-top: 3px;
+}
+
+// .checkboxaspill + label {
+//   cursor: pointer;
+//   background-color: aqua;
+//   border-radius: 5px;
+//   align-items: center;
+// }
+
+// .checkboxaspill:checked +label {
+//   background-color: purple;
+//   border-radius: 5px;
+// }
+
+.tag-item {
+  display: inline-block;
+}
+
+.tag-selector {
+  position: absolute;
+  transform: scale(0);
+}
+
+.tag-selector + label {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1.5rem;
+  border-radius: 5px;
+  padding: 0.1rem 0.5rem;
+  background-color: $green;
+  color: black;
+  // border: 1px solid #000000;
+  box-shadow: 1px 1px 1px 1px rgba($color: black, $alpha: 0.5);
+  margin-right: 0.6rem;
+  margin-bottom: 0.4rem;
+}
+
+.tag-selector:checked + label {
+  background-color: black;
+  color: white;
+  box-shadow: 1px 1px 1px 1px rgba($color: black, $alpha: 0.5) ;
+}
+
+.media-type-selector + label {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1.5rem;
+  border-radius: 5px;
+  padding: 0.1rem 0.5rem;
+  background-color: $lilac;
+  color: black;
+  // border: 1px solid #000000;
+  margin-right: 0.6rem;
+  margin-bottom: 0.4rem;
+  box-shadow: 1px 1px 1px 1px rgba($color: black, $alpha: 0.5) ;
+}
+
+.media-type-selector:checked + label {
+  background-color: $purple;
+  color: white;
+  box-shadow: 1px 1px 1px 1px rgba($color: black, $alpha: 0.5) ;
+}
