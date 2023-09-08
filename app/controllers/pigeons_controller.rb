@@ -35,6 +35,18 @@ class PigeonsController < ApplicationController
 
   end
 
+  def unmark_read
+    @pigeon = Pigeon.find(params[:id])
+    @pigeon.read = !@pigeon.read
+    @pigeon.save
+  end
+
+  # def mark_read
+  #   @pigeon = Pigeon.find(params[:id])
+  #   @pigeon.read = !@pigeon.read
+  #   @pigeon.save
+  # end
+
   def show
     @pigeon = Pigeon.find(params[:id])
   end
