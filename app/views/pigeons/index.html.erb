@@ -26,7 +26,7 @@
               <% end %>
             </div>
             <div class="d-flex justify-content-center">
-              <%= submit_tag "Search", name: "", class: "btn btn-dark mt-3", style: "background-color: black; box-shadow: 1px 1px 1px 1px gray; border-radius: 5px;" %>
+              <%= submit_tag "Search", name: "", class: "btn btn-dark mt-3 px-4", style: "background-color: black; box-shadow: 1px 1px 1px 1px gray; border-radius: 5px; font-size: 1.5rem;" %>
             </div>
           </div>
           <% end %>
@@ -42,7 +42,7 @@
       <% @pigeons.each do |pigeon| %>
         <p>--------------------</p>
         <%= link_to pigeon.title, pigeon_path(pigeon) %>
-        <p>sent by <%= pigeon.chat.sender.nickname %> on <%= pigeon.date.strftime("%a, %-d %B %Y") %> at <%= pigeon.date.strftime("%H:%M") %></p>
+        <p>sent by <%#= pigeon.message.sender.nickname %> on <%= pigeon.date.strftime("%a, %-d %B %Y") %> at <%= pigeon.date.strftime("%H:%M") %></p>
           <% @tags = pigeon.tag_names %>
           <ul>
             <% @tags.each do |tag| %>
