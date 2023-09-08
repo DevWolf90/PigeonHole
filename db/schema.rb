@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_07_145929) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_08_094613) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -83,7 +83,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_07_145929) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "chat_id", null: false
+    t.bigint "recipient_id", null: false
     t.index ["chat_id"], name: "index_pigeons_on_chat_id"
+    t.index ["recipient_id"], name: "index_pigeons_on_recipient_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -106,4 +108,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_07_145929) do
   add_foreign_key "messages", "chats"
   add_foreign_key "messages", "users"
   add_foreign_key "pigeons", "chats"
+  add_foreign_key "pigeons", "users", column: "recipient_id"
 end
