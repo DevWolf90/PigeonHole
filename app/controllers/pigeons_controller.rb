@@ -51,6 +51,8 @@ class PigeonsController < ApplicationController
     end
 
     @message = Message.new(user: current_user, chat: @chat)
+    @message.content = @pigeon.description
+    @message.save
     # if @pigeon.link_to_content.include?("youtu")
 
     #   url = "https://www.googleapis.com/youtube/v3/videos?id=#{get_yt_id(@pigeon.link_to_content)}=#{ENV["GOOGLE_API_KEY"]}

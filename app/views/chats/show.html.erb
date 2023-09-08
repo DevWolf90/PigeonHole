@@ -12,10 +12,10 @@
     <% @chat.messages.each do |message| %>
       <%= message.sender.nickname %>
       <%= render 'messages/message', message: message %>
-      <% @pigeons.each do |pigeon| %>
-        <% if pigeon.description == message.content && pigeon.chat_id == message.chat_id%>
-        <%= render "pigeons/pigeoncardwithnodetails",  %>
-      <% end %>
+        <% @pigeons.each do |pigeon| %>
+          <% if pigeon.description == message.content %>
+          <%= render "pigeons/pigeoncardwithnodetails", pigeon: pigeon %>
+        <% end %>
       <% end %>
     <% end %>
   </div>
