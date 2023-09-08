@@ -1,5 +1,6 @@
 <div class="container mt-4">
   <%= simple_form_for [@pigeon] do |f| %>
+    <%= f.input :recipient, type: :string %>
     <%= f.input :link_to_content, type: :string%>
     <%= f.input :title, type: :string %>
     <%= f.input :description, type: :string, label: 'Write your message here' %>

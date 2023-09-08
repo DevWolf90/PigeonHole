@@ -18,4 +18,14 @@
     <p>Length: <%= @pigeon.length %></p>
     <%= link_to "Link", @pigeon.link_to_content, target: "_blank" %><br>
     <%= link_to "Browse all pigeons", pigeons_path %>
+  <div class = "chatWindow">
+    <div id="messages">
+        <% @pigeon.chat.messages.each do |message| %>
+          <% if @pigeon.created_at < message.created_at %>
+            <%= message.sender.email %>
+            <%= render 'messages/message', message: message %>
+          <% end %>
+        <% end %>
+    </div>
+  </div>
 </div>
