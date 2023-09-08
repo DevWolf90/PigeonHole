@@ -5,6 +5,7 @@ ruby "3.1.2"
 
 gem 'ransack'
 
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.7", ">= 7.0.7.2"
 
@@ -25,6 +26,8 @@ gem "turbo-rails"
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails"
+
+gem 'hotwire-rails'
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
@@ -60,7 +63,7 @@ gem 'gutentag', '~> 2.6'
 gem 'google-apis-youtube_v3'
 gem 'open-uri'
 gem 'json'
-
+gem "cloudinary"
 
 
 group :development, :test do
