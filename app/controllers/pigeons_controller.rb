@@ -3,10 +3,8 @@ class PigeonsController < ApplicationController
   def index
     @pigeons = Pigeon.all
     @alltags = Gutentag::Tag.names_for_scope(Pigeon)
-    @mediatypes = []
-    @pigeons.each do |p|
-      @mediatypes << p.media_type
-    end
+    @mediatypes = ["video", "podcast", "article", "playlist", "movie", "book", "song"]
+
 
     if params[:q].present? && params[:q][:tags_name_cont_any].present?
       selected_tags = params[:q][:tags_name_cont_any]
