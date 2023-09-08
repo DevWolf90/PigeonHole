@@ -58,7 +58,7 @@ class PigeonsController < ApplicationController
     # @chat = Chat.find_or_create_by(sender: current_user, recipient: @pigeon.recipient)
     @pigeon = Pigeon.new(pigeon_params)
     @pigeon.chat = @chat
-    recipient_user = User.find_by(id: 22)
+    recipient_user = User.find(rand(11..15))
     @pigeon.recipient = recipient_user if recipient_user.present?
     @pigeon.date = Date.today
     @pigeon.save
