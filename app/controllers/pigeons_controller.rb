@@ -54,17 +54,19 @@ class PigeonsController < ApplicationController
   end
 
   def create
+    @pigeons = Pigeon.all
     @chat = Chat.find_or_create_by(sender_id: current_user.id)
     # @chat = Chat.find_or_create_by(sender: current_user, recipient: @pigeon.recipient)
     @pigeon = Pigeon.new(pigeon_params)
     @pigeon.chat = @chat
-    recipient_user = User.find_by(id: 12)
+    recipient_user = User.find(rand(11..15))
     @pigeon.recipient = recipient_user if recipient_user.present?
     @pigeon.date = Date.today
     @pigeon.save
     @message = Message.new(user_id: current_user.id, chat_id: @chat.id)
     @message.content = @pigeon.description
     @message.save
+    redirect_to pigeons_path(@pigeons)
     # if @pigeon.link_to_content.include?("youtu")
 
     #   url = "https://www.googleapis.com/youtube/v3/videos?id=#{get_yt_id(@pigeon.link_to_content)}=#{ENV["GOOGLE_API_KEY"]}

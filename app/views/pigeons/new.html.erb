@@ -4,11 +4,11 @@
     <%= f.input :title, type: :string %>
     <%= f.input :description, type: :string, label: 'Write your message here' %>
     <%= f.input :media_type, collection: ["video", "article", "podcast", "song", "book", "movie"] %>
-    <%= f.submit "Send Pigeon" %>
-    <%= f.text_field :query,
+    <%= f.submit "Send Pigeon", class: "btn btn-primary", style: "background-color: black" %>
+    <% end %>
+    <%#= f.text_field :query,
                      class: "form-control",
                      placeholder: "Send to",
                      value: params[:query],
                      data: {search_users_target: "input"} %>
-  <% end %>
 </div>
