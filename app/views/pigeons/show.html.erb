@@ -35,12 +35,13 @@
     <%= link_to "Link", @pigeon.link_to_content, target: "_blank" %><br>
     <%= link_to "Browse all pigeons", pigeons_path %>
   <div class = "chatWindow">
-    <div id="messages">
+    <div id="messages" data-controller="chat-scroll">
         <% @pigeon.chat.messages.each do |message| %>
-          <% if @pigeon.created_at < message.created_at %>
+
             <%= message.sender.email %>
-            <%= render 'messages/message', message: message %>
-          <% end %>
+
+            <%= render 'messages/message', message: message, scroll:message.content == @pigeon.description  %>
+
         <% end %>
     </div>
   </div>
