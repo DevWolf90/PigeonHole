@@ -1,8 +1,6 @@
 <div class="navbar navbar-expand-sm navbar-light navbar">
   <div class="logo d-flex p-3 justify-content-start">
     <img src="https://res.cloudinary.com/dm2lbzmmn/image/upload/v1694162506/PigeonHole_Logolarge_v3_wmviji.png" alt="PigeonHoleLogo" height="80">
-    <%# <p>Be more present, wherever you are</p> %>
-
   </div>
   <div class="row">
     <div class="d-flex justify-content-center">
@@ -16,10 +14,8 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-
     <a href="#" class="avatar justify-content-start" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
@@ -30,10 +26,9 @@
             <%= link_to "Messages", "#", class: "nav-link" %>
           </li>
           <li class="nav-item dropdown">
-          </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Action", "#", class: "dropdown-item" %>
-              <%= link_to "Another action", "#", class: "dropdown-item" %>
+              <%= link_to "User Profile", "#", class: "dropdown-item" %>
+              <%= link_to "Settings", "#", class: "dropdown-item" %>
               <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
             </div>
           </li>
