@@ -38,7 +38,7 @@
     <div id="messages" data-controller="chat-scroll">
         <% @pigeon.chat.messages.each do |message| %>
 
-            <%= message.sender.email %>
+
 
             <%= render 'messages/message', message: message, scroll:message.content == @pigeon.description  %>
 
