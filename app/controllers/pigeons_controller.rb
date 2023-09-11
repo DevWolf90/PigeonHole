@@ -32,14 +32,14 @@ class PigeonsController < ApplicationController
     end
   end
 
-  def toggle_read
+  def toggle_read #toggle read on show page
     @pigeon = Pigeon.find(params[:id])
     @pigeon.read = !@pigeon.read
     @pigeon.save
     redirect_to pigeon_path(@pigeon)
   end
 
-  def mark_read
+  def mark_read #marks read after opening
     @pigeon = Pigeon.find(params[:id])
     if !@pigeon.read
       @pigeon.read = true
@@ -48,9 +48,23 @@ class PigeonsController < ApplicationController
     redirect_to pigeon_path(@pigeon)
   end
 
-  def link_read
+  def link_read #marks read on index page without redirecting to show page
     @pigeon = Pigeon.find(params[:id])
     @pigeon.read = !@pigeon.read
+    @pigeon.save
+    redirect_to pigeons_path
+  end
+
+  def toggle_favourite #toggles favourite on show page
+    @pigeon = Pigeon.find(params[:id])
+    @pigeon.favourite = !@pigeon.favourite
+    @pigeon.save
+    redirect_to pigeon_path(@pigeon)
+  end
+
+  def link_favourite #toggles favourite on index page without redirecting to show page
+    @pigeon = Pigeon.find(params[:id])
+    @pigeon.favourite = !@pigeon.favourite
     @pigeon.save
     redirect_to pigeons_path
   end

@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     patch "pigeons/:id/toggle_read", to: "pigeons#toggle_read", as: "toggle_read"
     patch "pigeons/:id/mark_read", to: "pigeons#mark_read", as: "mark_read"
     patch "pigeons/:id/link_read", to: "pigeons#link_read", as: "link_read"
+    patch "pigeons/:id/toggle_favourite", to: "pigeons#toggle_favourite", as: "toggle_favourite"
+    patch "pigeons/:id/link_favourite", to: "pigeons#link_favourite", as: "link_favourite"
 
   resources :chats, only: %i[new show create] do
     resources :messages, only: %i[ create]
