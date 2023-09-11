@@ -103,10 +103,12 @@ class PigeonsController < ApplicationController
     # @pigeons = Pigeon.all
     @pigeon = Pigeon.new(pigeon_params)
     @pigeon.chat = @chat
+    recipient_id = params[:pigeon][:recipient]
+    @pigeon.recipient = User.find_by_id(recipient_id)
     # custom_tags = []
-    @chat = Chat.where(sender: current_user).where(recipient: @pigeon.recipient)
+    @chat = Chat.find_by(sender: current_user, recipient: @pigeon.recipient)
     if @chat.nil?
-      @chat = Chat.where(sender: @pigeon.recipient).where(recipient: current_user)
+      @chat = Chat.find_by(sender: @pigeon.recipient, recipient: current_user)
     end
     if @chat.nil?
       @chat = Chat.create(sender: current_user, recipient: @pigeon.recipient)
@@ -130,12 +132,10 @@ class PigeonsController < ApplicationController
       end
     end
 
-    recipient_user = User.find(rand(11..15))
-    @pigeon.recipient = recipient_user if recipient_user.present?
-    raise
+
     @pigeon.date = Date.today
     @pigeon.save
-    @message = Message.new(user_id: current_user.id, chat_id: @chat.id)
+    @message = Message.new(sender: current_user, chat: @chat)
     @message.content = @pigeon.description
     @message.save
 
