@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
-  resources :pigeons, only: %i[index show create new ]
+  resources :pigeons, only: %i[index show create new edit update destroy]
     patch "pigeons/:id/unmark_read", to: "pigeons#unmark_read", as: "unmark_read"
     # patch "pigeons/:id/mark_read", to: "pigeons#mark_read"
 

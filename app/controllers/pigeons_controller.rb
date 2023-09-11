@@ -53,6 +53,19 @@ class PigeonsController < ApplicationController
     @pigeon = Pigeon.new
   end
 
+  def edit
+    @pigeon = Pigeon.find(params[:id])
+  end
+
+  def update
+    @pigeon = Pigeon.find(params[:id])
+    if @pigeon.update(pigeon_params)
+      redirect_to pigeons_path(current_user)
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   def create
     @pigeons = Pigeon.all
     @chat = Chat.find_or_create_by(sender_id: current_user.id)
@@ -78,6 +91,12 @@ class PigeonsController < ApplicationController
     #   @pigeon.summary = "api"
     #   @pigeon.length = "api"
     # end
+  end
+
+  def destroy
+    @pigeon = Pigeon.find(params[:id])
+    @pigeon.destroy
+    redirect_to pigeons_path, notice: "Pigeon was successfully deleted!", status: :see_other
   end
 
   private
