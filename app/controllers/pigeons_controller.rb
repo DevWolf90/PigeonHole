@@ -65,24 +65,6 @@ class PigeonsController < ApplicationController
     @alltags = Gutentag::Tag.names_for_scope(Pigeon)
   end
 
-  def create
-    @pigeon = Pigeon.new(pigeon_params)
-    @chat = Chat.where(sender: current_user).where(recipient: @pigeon.recipient)
-    if @chat.nil?
-      @chat = @chat = Chat.where(sender: @pigeon.recipient).where(recipient: current_user)
-
-    end
-    if @chat.nil?
-      @chat = Chat.create(sender: current_user, recipient: @pigeon.recipient)
-    end
-    @pigeon.chat = @chat
-    @pigeon.save
-    @message = Message.new(user: current_user, chat: @chat)
-    @message.content = @pigeon.description
-    @message.save
-    redirect_to pigeons_path(@pigeons)
-  end
-
   def edit
     @pigeon = Pigeon.find(params[:id])
   end
@@ -97,33 +79,45 @@ class PigeonsController < ApplicationController
   end
 
   def create
-    @pigeons = Pigeon.all
-    custom_tags = []
-    @chat = Chat.find_or_create_by(sender_id: current_user.id)
-    # @chat = Chat.find_or_create_by(sender: current_user, recipient: @pigeon.recipient)
+    # @pigeons = Pigeon.all
     @pigeon = Pigeon.new(pigeon_params)
     @pigeon.chat = @chat
-    selected_tags = [params[:pigeon][:tags_name_cont_any]]
-    custom_tags << params[:pigeon][:custom_tags]
-
+    # custom_tags = []
+    @chat = Chat.where(sender: current_user).where(recipient: @pigeon.recipient)
+    if @chat.nil?
+      @chat = Chat.where(sender: @pigeon.recipient).where(recipient: current_user)
+    end
+    if @chat.nil?
+      @chat = Chat.create(sender: current_user, recipient: @pigeon.recipient)
+    end
+    selected_tags = params[:pigeon][:tags]
+    unless selected_tags.nil?
     selected_tags.each do |tag_name|
       tag = Gutentag::Tag.find_by(name: tag_name)
-      @pigeon.tag_names << tag
+      @pigeon.tag_names << tag_name if tag.present? && !tag_name.empty?
+      end
     end
 
-    custom_tags.each do |custom_tag_name|
-      tag = Gutentag::Tag.create(name: custom_tag_name.strip.downcase)
-      @pigeon.tag_names << tag
-      raise
+    custom_tags = params[:pigeon][:custom_tags]
+    unless custom_tags.nil?
+      if custom_tags.include?(",")
+        custom_tags.split(",").each do |tag|
+        @pigeon.tag_names << tag.strip.downcase unless tag.strip.empty?
+        end
+      else
+        @pigeon.tag_names << custom_tags.strip.downcase
+      end
     end
 
     recipient_user = User.find(rand(11..15))
     @pigeon.recipient = recipient_user if recipient_user.present?
+    raise
     @pigeon.date = Date.today
     @pigeon.save
     @message = Message.new(user_id: current_user.id, chat_id: @chat.id)
     @message.content = @pigeon.description
     @message.save
+
     redirect_to pigeons_path(@pigeons)
     # if @pigeon.link_to_content.include?("youtu")
 
