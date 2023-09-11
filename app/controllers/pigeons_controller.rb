@@ -26,25 +26,34 @@ class PigeonsController < ApplicationController
 
     end
 
-
     if params[:query].present?
       sql_subquery = "title ILIKE :query OR description ILIKE :query"
       @pigeons = @pigeons.where(sql_subquery, query: "%#{params[:query]}%")
     end
-
   end
 
-  def unmark_read
+  def toggle_read
     @pigeon = Pigeon.find(params[:id])
     @pigeon.read = !@pigeon.read
     @pigeon.save
+    redirect_to pigeon_path(@pigeon)
   end
 
-  # def mark_read
-  #   @pigeon = Pigeon.find(params[:id])
-  #   @pigeon.read = !@pigeon.read
-  #   @pigeon.save
-  # end
+  def mark_read
+    @pigeon = Pigeon.find(params[:id])
+    if !@pigeon.read
+      @pigeon.read = true
+      @pigeon.save
+    end
+    redirect_to pigeon_path(@pigeon)
+  end
+
+  def link_read
+    @pigeon = Pigeon.find(params[:id])
+    @pigeon.read = !@pigeon.read
+    @pigeon.save
+    redirect_to pigeons_path
+  end
 
   def show
     @pigeon = @pigeons.find(params[:id])

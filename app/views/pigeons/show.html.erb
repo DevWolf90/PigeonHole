@@ -35,7 +35,11 @@
     </div>
   </div>
     <% if @pigeon.read %>
-      <%= link_to "Mark as unread", unmark_read_path(@pigeon), data: { turbo_method: :patch }  %>
+      <p>Status: read</p>
+      <%= link_to "Mark as unread", toggle_read_path(@pigeon), data: { turbo_method: :patch }  %>
+    <% else %>
+      <p>Status: unread</p>
+      <%= link_to "Mark as read", toggle_read_path(@pigeon), data: { turbo_method: :patch } %>
     <% end %>
     <%= link_to "Back to Pigeons", pigeons_path %>
     <%= link_to "Browse all pigeons", pigeons_path %><br>
