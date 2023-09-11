@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container card">
   <% @pigeon.id %>
   <h2 class="mt-4">Pigeon Details</h2>
     <p class="mt-4">Title: <%= @pigeon.title %></p>
@@ -54,5 +54,4 @@
     <%= link_to "Back to Pigeons", pigeons_path %>
     <%= link_to "Browse all pigeons", pigeons_path %><br>
     <%= link_to "Delete", pigeon_path(@pigeon), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
-
 </div>
