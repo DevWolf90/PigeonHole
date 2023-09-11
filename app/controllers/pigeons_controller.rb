@@ -69,21 +69,23 @@ class PigeonsController < ApplicationController
 
   def create
     @pigeons = Pigeon.all
+    custom_tags = []
     @chat = Chat.find_or_create_by(sender_id: current_user.id)
     # @chat = Chat.find_or_create_by(sender: current_user, recipient: @pigeon.recipient)
     @pigeon = Pigeon.new(pigeon_params)
     @pigeon.chat = @chat
-    selected_tags = params[:pigeon][:tags] || []
-    custom_tags = params[:pigeon][:custom_tags] || []
+    selected_tags = [params[:pigeon][:tags_name_cont_any]]
+    custom_tags << params[:pigeon][:custom_tags]
 
     selected_tags.each do |tag_name|
-      tag = Gutentag::Tag.find_or_create_by(name: tag_name)
+      tag = Gutentag::Tag.find_by(name: tag_name)
       @pigeon.tag_names << tag
     end
 
     custom_tags.each do |custom_tag_name|
-      tag = Gutentag::Tag.find_or_create_by(name: custom_tag_name.strip)
+      tag = Gutentag::Tag.create(name: custom_tag_name.strip.downcase)
       @pigeon.tag_names << tag
+      raise
     end
 
     recipient_user = User.find(rand(11..15))
@@ -116,14 +118,7 @@ class PigeonsController < ApplicationController
   private
 
   def pigeon_params
-    params.require(:pigeon).permit(
-      :link_to_content,
-      :title,
-      :description,
-      :media_type,
-      tags: [],       # Allow an array of selected tags
-      custom_tags: [] # Allow an array of custom tags
-    )
+    params.require(:pigeon).permit(:link_to_content, :title, :description, :media_type, :tags, :custom_tags)
   end
 
   # def get_yt_id(url)
