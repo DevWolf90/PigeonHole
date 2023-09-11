@@ -1,4 +1,6 @@
-<div id="message-<%= message.id %>">
+<% scroll = scroll.presence || false %>
+<div id="message-<%= message.id %>" <%= 'data-chat-scroll-target=scroll' if scroll%>>
+
     <small>
         <strong><%= message.sender.nickname %></strong>
         <i><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></i>
