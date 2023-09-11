@@ -25,7 +25,7 @@
         <% else %>
           <% @pigeons.each do |pigeon| %>
             <% unless pigeon.read %>
-              <%= link_to pigeon_path(pigeon) do%>
+              <%= link_to mark_read_path(pigeon), data: { turbo_method: :patch }  do%>
                 <li class="pigeon-card"><%= pigeon.title %></li>
               <% end %>
             <% end %>
