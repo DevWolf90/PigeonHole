@@ -102,7 +102,7 @@ class PigeonsController < ApplicationController
   def create
     # @pigeons = Pigeon.all
     @pigeon = Pigeon.new(pigeon_params)
-    @pigeon.chat = @chat
+
     recipient_id = params[:pigeon][:recipient]
     @pigeon.recipient = User.find_by_id(recipient_id)
     # custom_tags = []
@@ -113,6 +113,7 @@ class PigeonsController < ApplicationController
     if @chat.nil?
       @chat = Chat.create(sender: current_user, recipient: @pigeon.recipient)
     end
+    @pigeon.chat = @chat
     selected_tags = params[:pigeon][:tags]
     unless selected_tags.nil?
     selected_tags.each do |tag_name|
