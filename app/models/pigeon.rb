@@ -4,7 +4,6 @@ class Pigeon < ApplicationRecord
   belongs_to :recipient, class_name: "User", foreign_key: "recipient_id"
   has_many :taggings, as: :taggable, class_name: 'Gutentag::Tagging'
   has_many :tags, through: :taggings, class_name: 'Gutentag::Tag'
-
   before_save :summarize_url, if: :link_to_content_changed?
 
   Gutentag::ActiveRecord.call self

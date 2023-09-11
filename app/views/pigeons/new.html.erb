@@ -1,14 +1,14 @@
-<div data-controller="search-users" class="container mt-4">
-  <%= simple_form_for [@pigeon], data: {search_users_target: "form"} do |f| %>
+
+<div class="container mt-4" >
+  <%= simple_form_for [@pigeon],  data: {search_users_target: "form"} do |f| %>
+    <%= f.input :recipient, class: "form-control", placeholder:
+                     "Type a nickname or email...", collection: User.all, label_method: :nickname,
+                    input_html: {data: {controller: "search-users"}}%>
+
     <%= f.input :link_to_content, type: :string%>
     <%= f.input :title, type: :string %>
-    <%= f.input :description, type: :string, label: 'Write your message here' %>
+    <%= f.input :description, type: :string, label: 'Write your message here'%>
     <%= f.input :media_type, collection: ["video", "article", "podcast", "song", "book", "movie"] %>
-    <%= f.submit "Send Pigeon" %>
-    <%= f.text_field :query,
-                     class: "form-control",
-                     placeholder: "Send to",
-                     value: params[:query],
-                     data: {search_users_target: "input"} %>
-  <% end %>
+    <%= f.submit "Send Pigeon", class: "btn btn-primary", style: "background-color: black" %>
+    <% end %>
 </div>
