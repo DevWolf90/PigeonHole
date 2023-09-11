@@ -1,10 +1,13 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from "@hotwired/stimulus";
+import  TomSelect from "tom-select";
 
 // Connects to data-controller="search-users"
 export default class extends Controller {
-  static targets = ["form", "input"]
 
+  static values = { options: Object }
   connect() {
-    console.log(this.formTarget)
+    new TomSelect(this.element,{
+                  maxOptions: 5,
+                  })
   }
 }
