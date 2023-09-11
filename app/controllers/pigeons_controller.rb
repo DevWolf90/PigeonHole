@@ -60,6 +60,19 @@ class PigeonsController < ApplicationController
     # @chat = Chat.find_or_create_by(sender: current_user, recipient: @pigeon.recipient)
     @pigeon = Pigeon.new(pigeon_params)
     @pigeon.chat = @chat
+    selected_tags = params[:pigeon][:tags] || []
+    custom_tags = params[:pigeon][:custom_tags] || []
+
+    selected_tags.each do |tag_name|
+      tag = Gutentag::Tag.find_or_create_by(name: tag_name)
+      @pigeon.tag_names << tag
+    end
+
+    custom_tags.each do |custom_tag_name|
+      tag = Gutentag::Tag.find_or_create_by(name: custom_tag_name.strip)
+      @pigeon.tag_names << tag
+    end
+
     recipient_user = User.find(rand(11..15))
     @pigeon.recipient = recipient_user if recipient_user.present?
     @pigeon.date = Date.today
@@ -84,7 +97,14 @@ class PigeonsController < ApplicationController
   private
 
   def pigeon_params
-    params.require(:pigeon).permit(:link_to_content, :title, :media_type, :description)
+    params.require(:pigeon).permit(
+      :link_to_content,
+      :title,
+      :description,
+      :media_type,
+      tags: [],       # Allow an array of selected tags
+      custom_tags: [] # Allow an array of custom tags
+    )
   end
 
   # def get_yt_id(url)
