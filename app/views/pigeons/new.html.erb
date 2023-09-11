@@ -2,8 +2,8 @@
   <%= simple_form_for [@pigeon],  data: {search_users_target: "form"} do |f| %>
     <%= f.association :recipient %>
     <%= f.input :recipient, class: "form-control", placeholder:
-                     "Type a nickname or email...",
-                    input_html: {multiple: true, data: {controller: "search-users", search_users_options_value: {tags: true}}}%>
+                     "Type a nickname or email...", collection: User.all, label_method: :nickname,
+                    input_html: {data: {controller: "search-users"}}%>
 
     <%= f.input :link_to_content, type: :string%>
     <%= f.input :title, type: :string %>
