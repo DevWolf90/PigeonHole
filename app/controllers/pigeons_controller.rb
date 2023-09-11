@@ -129,7 +129,7 @@ class PigeonsController < ApplicationController
         @pigeon.tag_names << tag.strip.downcase unless tag.strip.empty?
         end
       else
-        @pigeon.tag_names << custom_tags.strip.downcase
+        @pigeon.tag_names << custom_tags.strip.downcase unless custom_tags.strip.empty?
       end
     end
 
