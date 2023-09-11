@@ -42,8 +42,8 @@ message5 = Message.create(content: "this Netflix movie blew my mind", date: Date
 puts "Messages created"
 
 pig1 = Pigeon.new(summary: "something something", chat:chat1, length: 10,
-                      link_to_content: "https://www.youtube.com/watch?v=HuiIZzdG7EI&list=RDHuiIZzdG7EI&start_radio=1",
-                      media_type: "video", date: Date.today, title: "AlunaGeorge - Not above Love",
+                      link_to_content: "https://www.bbc.co.uk/news/science-environment-24021772",
+                      media_type: "article", date: Date.today, title: "What is climate change?",
                       description: "description", recipient: sara)
 pig1.tag_names << "Ukhouse"
 pig1.tag_names << "Chill"
@@ -78,8 +78,8 @@ pig4.save
 puts "Created: #{pig4.title}"
 
 pig5 = Pigeon.new(summary: "something something", chat: chat5, length: 73,
-              link_to_content: "https://www.youtube.com/watch?v=TMHqNoIpqbM",
-              media_type: "movie", date: Date.today, title: "Weekenders(2021)",
+              link_to_content: "https://www.bicycling.com/repair/g20032398/how-to-do-these-five-common-bicycle-repairs/",
+              media_type: "Tutorial", date: Date.today, title: "How to fix a bike🚲",
               description: "description", read: true, recipient: elias)
 pig5.tag_names << "Funny"
 pig5.tag_names << "Comedy"
