@@ -23,8 +23,23 @@
       <% end %>
     </p>
     <%= link_to "Link", @pigeon.link_to_content, target: "_blank" %><br>
+    <%= link_to "Browse all pigeons", pigeons_path %>
+  <div class = "chatWindow">
+    <div id="messages">
+        <% @pigeon.chat.messages.each do |message| %>
+          <% if @pigeon.created_at < message.created_at %>
+            <%= message.sender.email %>
+            <%= render 'messages/message', message: message %>
+          <% end %>
+        <% end %>
+    </div>
+  </div>
     <% if @pigeon.read %>
-      <%= link_to "Mark as unread", unmark_read_path(@pigeon), data: { turbo_method: :patch }  %>
+      <p>Status: read</p>
+      <%= link_to "Mark as unread", toggle_read_path(@pigeon), data: { turbo_method: :patch }  %>
+    <% else %>
+      <p>Status: unread</p>
+      <%= link_to "Mark as read", toggle_read_path(@pigeon), data: { turbo_method: :patch } %>
     <% end %>
     <%= link_to "Back to Pigeons", pigeons_path %>
     <%= link_to "Browse all pigeons", pigeons_path %><br>

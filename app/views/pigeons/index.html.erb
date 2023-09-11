@@ -41,42 +41,46 @@
       <% if @pigeons == [] %>
         <p>Oops, too specific. No pigeons satisfy this query</p>
         <% else %>
-      <% @pigeons.each do |pigeon| %>
-        <p>--------------------</p>
-        <%= link_to pigeon.title, pigeon_path(pigeon) %>
-        <p>sent by <%#= pigeon.message.sender.nickname %> on <%= pigeon.date.strftime("%a, %-d %B %Y") %> at <%= pigeon.date.strftime("%H:%M") %></p>
-          <% @tags = pigeon.tag_names %>
-          <ul>
-            <% @tags.each do |tag| %>
-              <li><%= tag %></li>
-            <% end %>
-          </ul>
-          <% if pigeon.read? %>
-            <p>Status: read</p>
-          <% else %>
-            <p>Status: unread</p>
-          <% end %>
-          <% if pigeon.favourite? %>
-            <p><i class="fa-solid fa-heart"></i></p>
-          <% else %>
-            <p> <i class="fa-regular fa-heart"></i> </p>
-          <% end %>
-        <p>Media type:
-          <% if pigeon.media_type == "video" %>
-            <i class="fa-brands fa-youtube"></i></p>
-          <% elsif pigeon.media_type == "article" %>
-            <i class="fa-regular fa-newspaper"></i></p>
-          <% elsif pigeon.media_type == "book" %>
-            <i class="fa-solid fa-book"></i></p>
-          <% elsif pigeon.media_type == "podcast"%>
-          <i class="fa-solid fa-headphones"></i></p>
-          <% elsif pigeon.media_type == "song" || "playlist"%>
-          <i class="fa-solid fa-music"></i></p>
-          <% elsif pigeon.media_type == "movie"%>
-          <i class="fa-solid fa-film"></i></p>
-          <% elsif pigeon.media_type == "other"%>
-          <i class="fa-solid fa-film"></i></p>
-          <% end %>
+        <div class="pigeons-container" >
+          <% @pigeons.each do |pigeon| %>
+            <div class="border">
+              <%= link_to pigeon.title, mark_read_path(pigeon), data: { turbo_method: :patch } %>
+              <p>--------------------</p>
+              <p>sent by <%#= pigeon.message.sender.nickname %> on <%= pigeon.date.strftime("%a, %-d %B %Y") %> at <%= pigeon.date.strftime("%H:%M") %></p>
+                <% @tags = pigeon.tag_names %>
+                <ul>
+                  <% @tags.each do |tag| %>
+                    <li><%= tag %></li>
+                  <% end %>
+                </ul>
+                <% if pigeon.read? %>
+                  <p>Status: read</p>
+                  <%= link_to "Mark as unread", link_read_path(pigeon), data: { turbo_method: :patch }  %>
+                <% else %>
+                  <p>Status: unread</p>
+                  <%= link_to "Mark as read", link_read_path(pigeon), data: { turbo_method: :patch } %>
+                <% end %>
+                <% if pigeon.favourite? %>
+                  <p><i class="fa-solid fa-heart"></i></p>
+                <% else %>
+                  <p> <i class="fa-regular fa-heart"></i> </p>
+                <% end %>
+              <p>Media type:
+                <% if pigeon.media_type == "video" %>
+                  <i class="fa-brands fa-youtube"></i></p>
+                <% elsif pigeon.media_type == "article" %>
+                  <i class="fa-regular fa-newspaper"></i></p>
+                <% elsif pigeon.media_type == "book" %>
+                  <i class="fa-solid fa-book"></i></p>
+                <% elsif pigeon.media_type == "podcast"%>
+                <i class="fa-solid fa-headphones"></i></p>
+                <% elsif pigeon.media_type == "audio" || "song" || "playlist"%>
+                <i class="fa-solid fa-music"></i></p>
+                <% elsif pigeon.media_type == "movie"%>
+                <i class="fa-solid fa-film"></i></p>
+                <% end %>
+            </div>
+        </div>
       <% end %>
         <% end %>
     <% end %>
