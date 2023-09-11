@@ -9,13 +9,13 @@ export default class extends Controller {
     console.log("Hello");
   }
 
-  mark(event) {
-    event.preventDefault();
-    fetch(`/pigeons/${id}/toggle_read`, {
-      method: 'PATCH',
-      headers: { "Accept": 'application/json' }
-    })
-    .then(response => response.json())
-    .then(data => console.log(data))
-}
+//   mark(event) {
+//     event.preventDefault();
+//     fetch(`/pigeons/${id}/toggle_read`, {
+//       method: 'PATCH',
+//       headers: { "Accept": 'application/json' }
+//     })
+//     .then(response => response.json())
+//     .then(data => console.log(data))
+// }
 }
