@@ -8,7 +8,7 @@ import { Controller} from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ["scroll"]
   connect() {
-    console.log("heo");
+
     this.scrollTarget.scrollIntoView()
 
   }
