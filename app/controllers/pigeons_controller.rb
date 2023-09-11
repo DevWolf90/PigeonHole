@@ -1,7 +1,8 @@
 
 class PigeonsController < ApplicationController
+  before_action :set_pigeons, only: %i[index show]
+
   def index
-    @pigeons = Pigeon.all
     @alltags = Gutentag::Tag.names_for_scope(Pigeon)
     @mediatypes = []
     @pigeons.each do |p|
@@ -36,10 +37,11 @@ class PigeonsController < ApplicationController
   end
 
   def show
-    @pigeon = Pigeon.find(params[:id])
+    @pigeon = @pigeons.find(params[:id])
   end
 
   def new
+    @user = User.new()
     @pigeon = Pigeon.new
   end
 
@@ -47,6 +49,11 @@ class PigeonsController < ApplicationController
     @pigeon = Pigeon.new(pigeon_params)
     @chat = Chat.where(sender: current_user).where(recipient: @pigeon.recipient)
     if @chat.nil?
+      @chat = @chat = Chat.where(sender: @pigeon.recipient).where(recipient: current_user)
+
+    end
+    if @chat.nil?
+
       @chat = Chat.create(sender: current_user, recipient: @pigeon.recipient)
     end
 
@@ -68,6 +75,10 @@ class PigeonsController < ApplicationController
 
   def pigeon_params
     params.require(:pigeon).permit(:link_to_content, :title, :media_type, :description)
+  end
+
+  def set_pigeons
+    @pigeons = Pigeon.where(recipient: current_user)
   end
 
   # def get_yt_id(url)

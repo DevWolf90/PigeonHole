@@ -9,9 +9,12 @@ Rails.application.routes.draw do
     # member do
     #   post 'add_to_favourites'
     # end
+
   end
 
   resources :chats, only: %i[new show create] do
     resources :messages, only: %i[ create]
   end
+
+  resources :users, only: [:index]
 end
