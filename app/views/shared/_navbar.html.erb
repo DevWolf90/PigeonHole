@@ -1,43 +1,52 @@
-<div class="navbar navbar-expand-sm navbar-light navbar">
-  <div class="logo d-flex p-3 justify-content-start">
-    <img src="https://res.cloudinary.com/dm2lbzmmn/image/upload/v1694162506/PigeonHole_Logolarge_v3_wmviji.png" alt="PigeonHoleLogo" height="80">
-  </div>
-  <div class="row">
-    <div class="d-flex justify-content-center">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    </div>
-  </div>
+<body>
+  <header>
+    <div class="navbar">
+       <div class="logo d-flex p-3 justify-content-start">
+       <%= link_to root_path do %>
+       <img src="https://res.cloudinary.com/dm2lbzmmn/image/upload/v1694162506/PigeonHole_Logolarge_v3_wmviji.png" alt="PigeonHoleLogo" height="60">
+       <%  end %>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <a href="#" class="avatar justify-content-start" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto">
-        <% if user_signed_in? %>
-          <li class="nav-item active">
-            <%= link_to "Home", "#", class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Messages", "#", class: "nav-link" %>
-          </li>
-          <li class="nav-item dropdown">
-            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "User Profile", "#", class: "dropdown-item" %>
-              <%= link_to "Settings", "#", class: "dropdown-item" %>
-              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
-            </div>
-          </li>
-        <% else %>
-          <li class="nav-item">
-            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
-          </li>
-        <% end %>
+       </div>
+      <ul class="links">
+        <%# <li><a href="Messages">Messages</a></li> %>
+        <li><%= link_to "My Pigeons", pigeons_path %></li>
+        <%# <li><a href="Categories">Categories</a></li> %>
       </ul>
+      <div class="avatar-dropdown">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto">
+            <% if user_signed_in? %>
+              <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown-menu" %>
+              <li class="nav-item dropdown">
+                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                  <%= link_to "My Profile", "#", class: "dropdown-item" %>
+                  <%= link_to "Settings", "#", class: "dropdown-item" %>
+                  <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
+                </div>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+              </li>
+            <% end %>
+          </div>
+      <div class="toggle_btn">
+        <i class="fa-solid fa-bars"></i>
+      </div>
     </div>
-  </div>
-</div>
+  </header>
+
+  <script>
+    const toggleBtn = document.querySelector('.toggle_btn');
+    const avatarDropdown = document.querySelector('.avatar-dropdown');
+    const dropDownMenu = document.querySelector('.dropdown-menu');
+
+    toggleBtn.onclick = function () {
+      dropDownMenu.classList.toggle('open');
+      const isOpen = dropDownMenu.classList.contains('open');
+
+      avatarDropdown.classList.toggle('open');
+      toggleBtn.classList.toggle('open');
+    };
+  </script>
+</body>
