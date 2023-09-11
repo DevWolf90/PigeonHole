@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [ :home ]
+  skip_before_action :authenticate_user!, only: [:home]
 
   def home
-    @pigeons = Pigeon.all
+    @pigeons = Pigeon.where(recipient: current_user)
   end
 end
