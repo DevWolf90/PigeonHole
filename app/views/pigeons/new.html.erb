@@ -3,7 +3,9 @@
     <%= f.input :link_to_content, type: :string%>
     <%= f.input :title, type: :string %>
     <%= f.input :description, type: :string, label: 'Write your message here' %>
-    <%= f.input :media_type, collection: ["video", "article", "podcast", "song", "book", "movie"] %>
+    <%= f.input :media_type, collection: ["article", "book", "movie", "playlist", "podcast", "song", "video", "other"] %>
+    <%= f.input :media_type, collection: ["article", "book", "movie", "playlist", "podcast", "song", "video", "other"] %>
+    <%#= f.input :tags, collection: @alltags %>
     <%= f.submit "Send Pigeon", class: "btn btn-primary", style: "background-color: black" %>
     <% end %>
     <%#= f.text_field :query,

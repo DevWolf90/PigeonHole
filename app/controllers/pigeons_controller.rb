@@ -3,7 +3,7 @@ class PigeonsController < ApplicationController
   def index
     @pigeons = Pigeon.all
     @alltags = Gutentag::Tag.names_for_scope(Pigeon)
-    @mediatypes = ["video", "podcast", "article", "playlist", "movie", "book", "song"]
+    @mediatypes = ["article", "book", "movie", "playlist", "podcast", "song", "video", "other"]
 
 
     if params[:q].present? && params[:q][:tags_name_cont_any].present?
@@ -51,6 +51,7 @@ class PigeonsController < ApplicationController
 
   def new
     @pigeon = Pigeon.new
+    @alltags = Gutentag::Tag.names_for_scope(Pigeon)
   end
 
   def create
