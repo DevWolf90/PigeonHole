@@ -3,7 +3,7 @@ class PigeonsController < ApplicationController
   before_action :set_pigeons, only: %i[index show]
 
   def index
-    @alltags = Gutentag::Tag.names_for_scope(Pigeon)
+    @alltags = Gutentag::Tag.names_for_scope(Pigeon.where(recipient: current_user))
     @mediatypes = ["article", "book", "movie", "playlist", "podcast", "song", "video", "other"]
 
 
