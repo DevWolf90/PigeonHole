@@ -28,7 +28,6 @@
       <% if @pigeon.media_type == "video" %>
         <i class="fa-brands fa-youtube"></i>
       <% elsif @pigeon.media_type == "article" %>
-<<<<<<< HEAD
         <i class="fa-regular fa-newspaper"></i></p>
       <% elsif @pigeon.media_type == "book" %>
         <i class="fa-solid fa-book"></i></p>
@@ -56,11 +55,6 @@
       <div class= "tag-button">
           <%= tag %>
       </div>
-=======
-        <i class="fa-regular fa-newspaper"></i>
-      <% elsif @pigeon.media_type == "book" || @pigeon.media_type == "podcast" || @pigeon.media_type == "audio" || @pigeon.media_type == "song" || @pigeon.media_type == "playlist" %>
-        <i class="fa-solid fa-headphones"></i>
->>>>>>> master
       <% end %>
     </p>
     <p>Summary by AI: <%= @pigeon.summary %></p>
