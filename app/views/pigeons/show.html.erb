@@ -1,7 +1,16 @@
-<div class="container card">
+<div class="container">
   <% @pigeon.id %>
-  <h2 class="mt-4">Pigeon Details</h2>
-    <p class="mt-4">Title: <%= @pigeon.title %></p>
+  <div class="card-detail">
+    <h2 class="mt-4">Pigeon Details</h2>
+      <div class="title-play">
+        <p class="mt-4">Title: <%= @pigeon.title %></p>
+
+        <%= link_to @pigeon.link_to_content, target: "_blank", class: "link-play" do %>
+          <i class="fa fa-play icon-play" aria-hidden="true"></i>
+        <% end %>
+
+    </div>
+
     <p>Description: <%= @pigeon.description %></p>
     <p>Date: <%= @pigeon.date.strftime("%a, %-d %B %Y") %> at <%= @pigeon.date.strftime("%H:%M") %></p>
     <p>Media type:
@@ -16,26 +25,29 @@
       <% end %>
     <p>Summary by AI: <%= @pigeon.summary %></p>
     <p>This pigeon will take <%=  TimeToReadService.new(@pigeon.link_to_content).call %> minutes to look at.</p>
-    <% if @pigeon.favourite? %>
-      <%= link_to toggle_favourite_path(@pigeon), data: { turbo_method: :patch } do %>
-        <p><i class="fa-solid fa-heart"></i></p>
+    <div class="heart-container">
+      <% if @pigeon.favourite? %>
+        <%= link_to toggle_favourite_path(@pigeon), data: { turbo_method: :patch } do %>
+          <i class="fa-solid fa-heart heart"></i>
+        <% end %>
+      <% else %>
+        <%= link_to toggle_favourite_path(@pigeon), data: { turbo_method: :patch } do %>
+          <i class="fa-regular fa-heart heart"></i>
+        <% end %>
       <% end %>
-    <% else %>
-       <%= link_to toggle_favourite_path(@pigeon), data: { turbo_method: :patch } do %>
-         <p> <i class="fa-regular fa-heart"></i> </p>
-       <% end %>
-    <% end %>
+    </div>
 
+  </div>
     <p class= "mt-5 mb-5">Category:
       <% @tags = @pigeon.tag_names %>
       <% @tags.each do |tag| %>
         <%= tag %>
       <% end %>
     </p>
-    <%= link_to "Link", @pigeon.link_to_content, target: "_blank" %><br>
     <%= link_to "Browse all pigeons", pigeons_path %>
-  <div class = "chatWindow">
-    <div id="messages" data-controller="chat-scroll">
+
+  <div class="chatWindow">
+    <div class="scroll-message" id="messages" data-controller="chat-scroll">
         <% @pigeon.chat.messages.each do |message| %>
 
 

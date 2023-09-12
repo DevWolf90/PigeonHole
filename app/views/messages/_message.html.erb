@@ -1,5 +1,5 @@
 <% scroll = scroll.presence || false %>
-<div id="message-<%= message.id %>" <%= 'data-chat-scroll-target=scroll' if scroll%>>
+<div class="message-card" id="message-<%= message.id %>" <%= 'data-chat-scroll-target=scroll' if scroll%>>
 
     <small>
         <strong><%= message.sender.nickname %></strong>

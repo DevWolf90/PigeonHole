@@ -84,6 +84,7 @@
                 <% elsif pigeon.media_type == "movie"%>
                 <i class="fa-solid fa-film"></i></p>
                 <% end %>
+              <%= link_to "Delete", pigeon_path(pigeon), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
             </div>
         </div>
       <% end %>
