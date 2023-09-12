@@ -1,9 +1,8 @@
-.card-detail {
-  background-color: white;
+.card {
+  background-color: black;
   padding: 20px 40px 20px 20px;
   box-shadow: -4px 9px 5px 0px rgba(0,0,0,0.16);
   border-radius: 20px;
-  background-color: white;
 
 }
 
@@ -12,42 +11,4 @@
   width: 100%;
   justify-content: space-between;
   align-items: center;
-}
-
-.link-play {
-  background-color: black;
-  width: 35px;
-  aspect-ratio: 1;
-  border-radius: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition-duration: 500ms;
-
-  &:hover{
-    opacity: 0.8;
-  }
-
-}
-
-.icon-play {
-  color: white;
-
-}
-
-.scroll-message {
-
-}
-
-.heart-container {
-  display: flex;
-  justify-content: flex-end;
-
-}
-
-.heart {
-  font-size: 2rem;
-
-
 }

@@ -1,0 +1,31 @@
+.icon-play {
+  background-color: $green;
+  width: 32px;
+  aspect-ratio: 1;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition-duration: 500ms;
+  color: black;
+
+  &:hover{
+    opacity: 0.8;
+  }
+}
+
+.heart {
+  font-size: 2rem;
+}
+
+.delete-cross {
+  font-size: 2rem;
+  color: $green;
+}
+
+.back-icon {
+  font-size: 2rem;
+  background-color: $green;
+  width: 32px;
+  border-radius: 100%;
+}
