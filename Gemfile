@@ -93,3 +93,5 @@ end
 gem "ruby-openai"
 gem 'nokogiri'
 gem 'httparty'
+gem 'rspotify'
+gem 'video_info'
