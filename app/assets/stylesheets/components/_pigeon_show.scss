@@ -1,14 +1,31 @@
-.card {
+.page-details {
   background-color: black;
-  padding: 20px 40px 20px 20px;
-  box-shadow: -4px 9px 5px 0px rgba(0,0,0,0.16);
-  border-radius: 20px;
+  color: white;
+  padding-top: 1rem;
+}
+
+.tag-button {
+  font-size: 1rem;
+  border-radius: 50%;
+  padding: 0.4rem 0.7rem;
+  background-color: $green;
+  color: black;
+  margin: 0.4rem;
+  border: 0px;
 
 }
 
-.title-play {
+.category {
   display: flex;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: 1rem 0;
+}
+
+.description {
+  background-color: #D9D9D9;
+  color: black;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 1rem 0;
 }

@@ -1,7 +1,5 @@
-<div class="container">
+<div class="container page-details">
   <div class="card-detail">
-    <h2 class="mt-4">Pigeon Details</h2>
-    <p class="mt-4">Title: <%= @pigeon.title %></p>
 
     <div style="border-radius: 50px; height: 100px; width: 100px; overflow: hidden; background: gray;">
       <% if @pigeon.user.avatar.attached? %>
@@ -9,12 +7,16 @@
       <% end %>
     </div>
 
-    <p>Description: <%= @pigeon.description %></p>
+    <p class="mt-4"><%= @pigeon.title %></p>
+
+    <div class="description">
+    <p><%= @pigeon.description %></p>
     <% if @pigeon.chat.sender == current_user %>
       <% @sender = @pigeon.chat.recipient %>
     <% else %>
       <% @sender = @pigeon.chat.sender %>
     <% end %>
+    </div>
 
     <p>Sent on <%= @pigeon.date.strftime("%a, %-d %B %Y") %> at <%= @pigeon.date.strftime("%H:%M") %> by <%= @sender.nickname %></p>
 
@@ -29,9 +31,29 @@
         <i class="fa-solid fa-headphones"></i></p>
       <% end %>
 
+    <div class="category">
+      <% @tags = @pigeon.tag_names %>
+      <% @tags.each do |tag| %>
+        <button class="tag-button"><%= tag %></button>
+      <% end %>
+    </div>
 
+    <div class="summary">
+      <p class="summary-title">Summary by AI: </p>
+      <p><%= @pigeon.summary %></p>
+      <% time_to_read = TimeToReadService.new(@pigeon.link_to_content).call %>
+      <p>
+        <% if time_to_read <= 1 %>
+          This pigeon will take <%= time_to_read %> minute to look at.
+        <% else %>
+          This pigeon will take <%= time_to_read %> minutes to look at.
+        <% end %>
+      </p>
+    </div>
 
-    <div class="mt-5 card">
+    <i class='fa fa-hourglass-start' style="color:#BBC800;"></i>
+
+    <div class="mt-5 card-icons">
       <%= link_to @pigeon.link_to_content, target: "_blank", class: "icon-play" do %>
         <i class="fa fa-play" aria-hidden="true"></i>
       <% end %>
@@ -40,48 +62,30 @@
       <% end %>
       <% if @pigeon.favourite? %>
         <%= link_to toggle_favourite_path(@pigeon), data: { turbo_method: :patch } do %>
-          <i class="fa-solid fa-heart heart" style="color: #BBC800;"></i>
+          <i class="fa-solid fa-heart heart" style="color: #4C19B9;"></i>
         <% end %>
       <% else %>
         <%= link_to toggle_favourite_path(@pigeon), data: { turbo_method: :patch } do %>
-          <i class="fa-solid fa-heart heart" style="color: #4C19B9;"></i>
+          <i class="fa-solid fa-heart heart" style="color: #BBC800;"></i>
         <% end %>
       <% end %>
       <%= link_to pigeons_path do %>
         <i class="fa-solid fa-arrow-left back-icon"></i>
       <% end %>
+      <% unless @pigeon.reply_later %>
+        <%= link_to add_to_reply_path(@pigeon), data: { turbo_method: :patch } do %>
+        <i class="fa-regular fa-clock reply-icon"></i>
+        <% end %>
+      <% end %>
     </div>
-
-
-
-    <p class= "mt-5 mb-5">Category:
-      <% @tags = @pigeon.tag_names %>
-      <% @tags.each do |tag| %>
-        <%= tag %>
-      <% end %>
-    </p>
-    <p>Summary by AI: <%= @pigeon.summary %></p>
-    <% time_to_read = TimeToReadService.new(@pigeon.link_to_content).call %>
-    <p>
-      <% if time_to_read <= 1 %>
-        This pigeon will take <%= time_to_read %> minute to look at.
-      <% else %>
-        This pigeon will take <%= time_to_read %> minutes to look at.
-      <% end %>
-    </p>
 
     <% if @pigeon.media_type == "video" %>
       <p>Length: <%= @pigeon.length %></p>
     <% end %>
-
     <% if @pigeon.media_type == "music" %>
       <p>Duaration: = <%= pigeon.length %></p>
     <% end %>
-
-
-
   </div>
-  <%= link_to "Browse all pigeons", pigeons_path %>
 
   <div class="chatWindow">
     <div class="scroll-message" id="messages" data-controller="chat-scroll">
@@ -90,30 +94,21 @@
       <% end %>
     </div>
   </div>
+
   <%= simple_form_for [@chat, @message], html: { class: "d-flex pt-3" } do |f| %>
     <%= f.input :content, as: :string, label: false, placeholder: "Drop a few lines", wrapper_html: { class: "flex-grow-1" } %>
     <%= f.submit "Send", class: "btn btn-primary mb-3" %>
   <% end %>
 
-  <% if @pigeon.read %>
-        <p>Status: read</p>
-        <%= link_to "Mark as unread", toggle_read_path(@pigeon), data: { turbo_method: :patch }  %>
-      <% else %>
-        <p>Status: unread</p>
-        <%= link_to "Mark as read", toggle_read_path(@pigeon), data: { turbo_method: :patch } %>
-      <% end %>
-      <% unless @pigeon.reply_later %>
-        <%= link_to add_to_reply_path(@pigeon), data: { turbo_method: :patch } do %>
-        <i class="fa-regular fa-clock"></i>
-        <% end %>
-      <% end %>
+    <% if @pigeon.read %>
+      <p>Status: read</p>
+      <%= link_to "Mark as unread", toggle_read_path(@pigeon), data: { turbo_method: :patch }  %>
+    <% else %>
+      <p>Status: unread</p>
+      <%= link_to "Mark as read", toggle_read_path(@pigeon), data: { turbo_method: :patch } %>
+    <% end %>
 
+    <%= link_to "Browse all pigeons", pigeons_path %><br>
 
-      <%= link_to "Browse all pigeons", pigeons_path %><br>
   </div>
-
-
-
 </div>
-
-<!-- <i class="fa fa-clock-o" aria-hidden="true"></i> -->
