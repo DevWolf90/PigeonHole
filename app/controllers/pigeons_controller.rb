@@ -84,7 +84,7 @@ class PigeonsController < ApplicationController
   end
 
   def show
-    @pigeon = @pigeons.find(params[:id])
+    @pigeon = Pigeon.find(params[:id])
     @chat = @pigeon.chat
     @message = Message.new
   end
@@ -176,6 +176,6 @@ class PigeonsController < ApplicationController
   end
 
   def set_pigeons
-    @pigeons = Pigeon.where(pigeons: {recipient: current_user})
+    @pigeons = Pigeon.where(recipient: current_user)
   end
 end

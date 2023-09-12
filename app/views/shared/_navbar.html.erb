@@ -1,52 +1,40 @@
-<body>
-  <header>
-    <div class="navbar">
-       <div class="logo d-flex p-3 justify-content-start">
-       <%= link_to root_path do %>
-       <img src="https://res.cloudinary.com/dm2lbzmmn/image/upload/v1694162506/PigeonHole_Logolarge_v3_wmviji.png" alt="PigeonHoleLogo" height="60">
-       <%  end %>
+<div>
 
-       </div>
-      <ul class="links">
-        <%# <li><a href="Messages">Messages</a></li> %>
-        <li><%= link_to "My Pigeons", pigeons_path %></li>
-        <%# <li><a href="Categories">Categories</a></li> %>
-      </ul>
-      <div class="avatar-dropdown">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto">
-            <% if user_signed_in? %>
-              <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown-menu" %>
-              <li class="nav-item dropdown">
-                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                  <%= link_to "My Profile", "#", class: "dropdown-item" %>
-                  <%= link_to "Settings", "#", class: "dropdown-item" %>
-                  <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
-                </div>
-              </li>
-            <% else %>
-              <li class="nav-item">
-                <%= link_to "Login", new_user_session_path, class: "nav-link" %>
-              </li>
-            <% end %>
-          </div>
-      <div class="toggle_btn">
-        <i class="fa-solid fa-bars"></i>
+
+  <%# DROPDOWN %>
+  <div class="dropdown nav-btn d-flex justify-content-between align-items-center">
+    <div class="nav-icon">
+      <%= link_to root_path do %>
+        <img src="https://res.cloudinary.com/dm2lbzmmn/image/upload/v1694509537/Logo_round_wqhw6m.png" alt="mini-logo" height="60">
+      <% end %>
       </div>
+      <div>
+        <button type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-menu-2" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <path d="M4 6l16 0" />
+              <path d="M4 12l16 0" />
+              <path d="M4 18l16 0" />
+            </svg>
+        </button>
+        <ul class="dropdown-menu">
+          <% if user_signed_in? %>
+            <li>
+              <%= link_to "Home", root_path, class: "dropdown-item" %></li>
+            </li>
+            <li>
+              <%= link_to "My Pigeons", pigeons_path, class: "dropdown-item" %>
+            </li>
+            <li>
+              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete} , class: "dropdown-item" %>
+            </li>
+          <% else %>
+            <li>
+              <%= link_to "Login", new_user_session_path, class: "dropdown-item" %>
+              <%= link_to "Sign up", new_user_registration_path, class: "dropdown-item" %>
+            </li>
+          <% end %>
+        </ul>
     </div>
-  </header>
-
-  <script>
-    const toggleBtn = document.querySelector('.toggle_btn');
-    const avatarDropdown = document.querySelector('.avatar-dropdown');
-    const dropDownMenu = document.querySelector('.dropdown-menu');
-
-    toggleBtn.onclick = function () {
-      dropDownMenu.classList.toggle('open');
-      const isOpen = dropDownMenu.classList.contains('open');
-
-      avatarDropdown.classList.toggle('open');
-      toggleBtn.classList.toggle('open');
-    };
-  </script>
-</body>
+  </div>
+</div>

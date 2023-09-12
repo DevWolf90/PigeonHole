@@ -6,4 +6,5 @@ class User < ApplicationRecord
   has_many :chats
   has_many :messages
   has_many :pigeons
+  has_one_attached :avatar
 end
