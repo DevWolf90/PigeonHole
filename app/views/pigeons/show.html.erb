@@ -44,10 +44,12 @@
     </div>
 
   </div>
-    <p class= "mt-5 mb-5">Category:
+    <p class= "mt-5 mb-5">
       <% @tags = @pigeon.tag_names %>
       <% @tags.each do |tag| %>
-        <%= tag %>
+      <div class= "tag-button">
+          <%= tag %>
+      </div>
       <% end %>
     </p>
     <%= link_to "Browse all pigeons", pigeons_path %>
