@@ -27,19 +27,18 @@ class PigeonsController < ApplicationController
     end
 
     if params[:query].present?
-
       sql_subquery = "
-        pigeons.title ILIKE :query
-        OR pigeons.description ILIKE :query
-        OR pigeons.summary ILIKE :query
-        "
+      pigeons.title ILIKE :query
+      OR pigeons.description ILIKE :query
+      OR pigeons.summary ILIKE :query
+      "
       @pigeons = @pigeons.where(sql_subquery, query: "%#{params[:query]}%")
     end
 
-    # respond_to do |format|
-    #   format.html # Follow regular flow of Rails
-    #   format.text { render "pigeons/pigeoncardwithnodetails", locals: { pigeons: @pigeons }, formats: [:html] }
-    # end
+    respond_to do |format|
+      format.html
+      format.text { render partial: "pigeons/list", locals: { pigeons: @pigeons }, formats: [:html] }
+    end
   end
 
   def toggle_read #toggle read on show page
