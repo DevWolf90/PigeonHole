@@ -27,7 +27,12 @@ class PigeonsController < ApplicationController
     end
 
     if params[:query].present?
-      sql_subquery = "title ILIKE :query OR description ILIKE :query"
+
+      sql_subquery = "
+        pigeons.title ILIKE :query
+        OR pigeons.description ILIKE :query
+        OR pigeon.summary ILIKE :query
+        "
       @pigeons = @pigeons.where(sql_subquery, query: "%#{params[:query]}%")
     end
   end
@@ -78,6 +83,8 @@ class PigeonsController < ApplicationController
 
   def show
     @pigeon = @pigeons.find(params[:id])
+    @chat = @pigeon.chat
+    @message = Message.new
   end
 
   def new
@@ -167,6 +174,6 @@ class PigeonsController < ApplicationController
   end
 
   def set_pigeons
-    @pigeons = Pigeon.where(recipient: current_user)
+    @pigeons = Pigeon.where(pigeons: {recipient: current_user})
   end
 end
