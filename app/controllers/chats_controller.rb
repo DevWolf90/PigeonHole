@@ -24,4 +24,5 @@ class ChatsController < ApplicationController
   def index
     @chats = Chat.where(sender: current_user).or(Chat.where(recipient: current_user))
   end
+
 end

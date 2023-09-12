@@ -4,21 +4,5 @@
 
 <div id="message-<%= message.id %>" <%= 'data-chat-scroll-target=scroll' if scroll%>>
 
-        <% if message.sender == current_user %>
-        <div class="message-card-sent">
-          <div class="sender-info">
-                <strong><%= message.sender.nickname %></strong>
-                <i><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></i>
-          </div>
-          <%= message.content %>
-        </div>
-        <% else %>
-        <div class="message-card-received">
-          <div class="sender-info">
-              <strong><%= message.sender.nickname %></strong>
-              <i><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></i>
-          </div>
-              <%= message.content %>
-        </div>
-        <% end %>
+        
 </div>
