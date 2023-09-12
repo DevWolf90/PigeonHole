@@ -1,7 +1,7 @@
 <%= turbo_stream_from @chat %>
 
 
-<div class="container chat" style="background-color: black;">
+<div class="container chat d-flex flex-column">
   <div>
     <%= link_to chats_path(@chats) do %>
     <i class="fa-solid fa-arrow-left" style="font-size: large;"></i>
@@ -15,17 +15,13 @@
   <% chatting_partner = [sender, recipient].reject{ |n| n == current_user } %>
   <h1>You're chatting with @<%=chatting_partner[0].nickname%></h1>
 
-  <div id="messages" class="message-card">
     <% @chat.messages.each do |message| %>
-      <div class="<%= sender == current_user ? 'sent' : 'received' %>">
-        <%= render 'messages/message', message: message%>
-      </div>
+        <%= render 'messages/message', message: message %>
         <% @pigeons.each do |pigeon| %>
           <% if pigeon.description == message.content && pigeon.present?%>
           <%= render "pigeons/pigeoncardwithnodetails", pigeon: pigeon %>
           <% end %>
       <% end %>
-
     <% end %>
   <%= simple_form_for [@chat, @message],
   html: {class: "d-flex pt-3"} do |f| %>
