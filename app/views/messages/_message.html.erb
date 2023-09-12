@@ -2,7 +2,8 @@
 <% sender = message.chat.sender  %>
 <% recipient = message.chat.recipient%>
 
-<div class="message-card" id="message-<%= message.id %>" <%= 'data-chat-scroll-target=scroll' if scroll%>>
+<div class="message-card" <%#= sender == current_user ? "sent" : "received" %> id="message-<%= message.id %>" <%= 'data-chat-scroll-target=scroll' if scroll%>>
+
   <div class="sender-info">
         <strong><%= message.sender.nickname %></strong>
         <i><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></i>
