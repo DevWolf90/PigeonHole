@@ -3,6 +3,7 @@ class ChatsController < ApplicationController
     @chat = Chat.find(params[:id])
     @message = Message.new
     @pigeons = Pigeon.where(chat_id: @chat)
+    @chats = Chat.where(sender: current_user).or(Chat.where(recipient: current_user))
   end
 
   def new
@@ -17,5 +18,9 @@ class ChatsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def index
+    @chats = Chat.where(sender: current_user).or(Chat.where(recipient: current_user))
   end
 end
