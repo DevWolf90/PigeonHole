@@ -31,7 +31,7 @@ class PigeonsController < ApplicationController
       sql_subquery = "
         pigeons.title ILIKE :query
         OR pigeons.description ILIKE :query
-        OR pigeon.summary ILIKE :query
+        OR pigeons.summary ILIKE :query
         "
       @pigeons = @pigeons.where(sql_subquery, query: "%#{params[:query]}%")
     end
