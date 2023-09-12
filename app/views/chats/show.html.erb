@@ -1,21 +1,31 @@
 <%= turbo_stream_from @chat %>
 
-<div class="container chat">
+
+<div class="container chat" style="background-color: black;">
+  <div>
+    <%= link_to chats_path(@chats) do %>
+    <i class="fa-solid fa-arrow-left" style="font-size: large;"></i>
+    <% end %>
+  </div>
  <%# need to fix next line so it says who we're chatting with  %>
- <% @sender = Chat.find(params[:id]).sender  %>
- <% @recipient = Chat.find(params[:id]).recipient %>
- <% if current_user == @sender || current_user == @recipient %>
- <% @chatting_partner = [@sender, @recipient].reject{ |n| n == current_user } %>
-  <h1>You're chatting with @<%=@chatting_partner[0].nickname%></h1>
+ <%# raise %>
+ <% sender = @chat.sender  %>
+ <% recipient = @chat.recipient %>
+ <% if current_user == sender || current_user == recipient %>
+  <% chatting_partner = [sender, recipient].reject{ |n| n == current_user } %>
+  <h1>You're chatting with @<%=chatting_partner[0].nickname%></h1>
 
   <div id="messages" class="message-card">
     <% @chat.messages.each do |message| %>
-      <%= render 'messages/message', message: message%>
+      <div class="<%= sender == current_user ? 'sent' : 'received' %>">
+        <%= render 'messages/message', message: message%>
+      </div>
         <% @pigeons.each do |pigeon| %>
-          <% if pigeon.description == message.content %>
+          <% if pigeon.description == message.content && pigeon.present?%>
           <%= render "pigeons/pigeoncardwithnodetails", pigeon: pigeon %>
-        <% end %>
+          <% end %>
       <% end %>
+
     <% end %>
   <%= simple_form_for [@chat, @message],
   html: {class: "d-flex pt-3"} do |f| %>
@@ -30,7 +40,7 @@
   <% else %>
   <h1>Get your nosy ass outta here!</h1>
   <% end %>
-<%= link_to "Back to all chats", chats_path(@chats) %>
+
   </div>
 
 </div>

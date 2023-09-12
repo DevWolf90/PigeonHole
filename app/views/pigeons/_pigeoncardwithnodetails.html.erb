@@ -1,8 +1,7 @@
 <div class="container pigeon-card">
   <% pigeon.id %>
-  <p class="pt-4"><strong>Pigeon details</strong></p>
-    <p class="mt-2">Title: <%= pigeon.title %></p>
-    <p>Description: <%= pigeon.description %></p>
+  <p class="py-2"><strong>Pigeon details</strong></p>
+    <p>Title: <%= pigeon.title %></p>
     <p>Date: <%= pigeon.date.strftime("%a, %-d %B %Y") %> at <%= pigeon.date.strftime("%H:%M") %></p>
     <p>Media type:
       <% if pigeon.media_type == "video" %>

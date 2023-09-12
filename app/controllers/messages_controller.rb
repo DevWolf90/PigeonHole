@@ -10,7 +10,7 @@ class MessagesController < ApplicationController
     if @message.save
       flash[:notice] = "Message successfully sent"
       if current_page?(chat_path(@chat))
-        redirect_to chat_path(@chat)
+        redirect_to chat_path(@chat), status: :see_other
       else
         redirect_back(fallback_location: root_path)
       end
