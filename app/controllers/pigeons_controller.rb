@@ -93,18 +93,18 @@ class PigeonsController < ApplicationController
     @alltags = Gutentag::Tag.names_for_scope(Pigeon)
   end
 
-  def edit
-    @pigeon = Pigeon.find(params[:id])
-  end
+  # def edit
+    # @pigeon = Pigeon.find(params[:id])
+  # end
 
-  def update
-    @pigeon = Pigeon.find(params[:id])
-    if @pigeon.update(pigeon_params)
-      redirect_to pigeons_path(current_user)
-    else
-      render :edit, status: :unprocessable_entity
-    end
-  end
+  # def update
+    # @pigeon = Pigeon.find(params[:id])
+    # if @pigeon.update(pigeon_params)
+      # redirect_to pigeons_path(current_user)
+    # else
+      # render :edit, status: :unprocessable_entity
+    # end
+  # end
 
   def create
     # @pigeons = Pigeon.all
