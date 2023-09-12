@@ -1,5 +1,4 @@
 <div class="container">
-  <%= @pigeon.id %>
   <div class="card-detail">
     <h2 class="mt-4">Pigeon Details</h2>
     <div class="title-play">
@@ -10,12 +9,19 @@
       <% end %>
     </div>
 
+    <div style="border-radius: 50px; height: 100px; width: 100px; overflow: hidden; background: gray;">
+      <% if @pigeon.user.avatar.attached? %>
+        <%= cl_image_tag @pigeon.user.avatar.key, height: 100, width:100, crop: :fill %>
+      <% end %>
+    </div>
+
     <p>Description: <%= @pigeon.description %></p>
     <% if @pigeon.chat.sender == current_user %>
       <% @sender = @pigeon.chat.recipient %>
     <% else %>
       <% @sender = @pigeon.chat.sender %>
     <% end %>
+
     <p>Sent on <%= @pigeon.date.strftime("%a, %-d %B %Y") %> at <%= @pigeon.date.strftime("%H:%M") %> by <%= @sender.nickname %></p>
 
     <p>
@@ -36,13 +42,20 @@
         This pigeon will take <%= time_to_read %> minutes to look at.
       <% end %>
     </p>
+
     <% if @pigeon.media_type == "video" %>
       <p>Length: <%= @pigeon.length %></p>
     <% end %>
+
+    <% if @pigeon.media_type == "music" %>
+      <p>Duaration: = <%= pigeon.length %></p>
+    <% end %>
+
     <% if @pigeon.favourite? %>
       <%= link_to toggle_favourite_path(@pigeon), data: { turbo_method: :patch } do %>
         <p><i class="fa-solid fa-heart"></i></p>
       <% end %>
+
       <div class="heart-container">
         <% if @pigeon.favourite? %>
           <%= link_to toggle_favourite_path(@pigeon), data: { turbo_method: :patch } do %>

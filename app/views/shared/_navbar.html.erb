@@ -2,35 +2,39 @@
 
 
   <%# DROPDOWN %>
-  <div class="dropdown nav-btn">
+  <div class="dropdown nav-btn d-flex justify-content-between align-items-center">
     <div class="nav-icon">
-      <img src="https://res.cloudinary.com/dm2lbzmmn/image/upload/v1694509537/Logo_round_wqhw6m.png" alt="mini-logo" height="60">
-      </div>
-    <button type="button" data-bs-toggle="dropdown" aria-expanded="false">
-     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-menu-2" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
-      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-      <path d="M4 6l16 0" />
-      <path d="M4 12l16 0" />
-      <path d="M4 18l16 0" />
-    </svg>
-    </button>
-    <ul class="dropdown-menu">
-      <% if user_signed_in? %>
-        <li>
-          <%= link_to "Home", root_path, class: "dropdown-item" %></li>
-        </li>
-        <li>
-          <%= link_to "My Pigeons", pigeons_path, class: "dropdown-item" %>
-        </li>
-        <li>
-          <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete} , class: "dropdown-item" %>
-        </li>
-      <% else %>
-        <li>
-          <%= link_to "Login", new_user_session_path, class: "dropdown-item" %>
-          <%= link_to "Sign up", new_user_registration_path, class: "dropdown-item" %>
-        </li>
+      <%= link_to root_path do %>
+        <img src="https://res.cloudinary.com/dm2lbzmmn/image/upload/v1694509537/Logo_round_wqhw6m.png" alt="mini-logo" height="60">
       <% end %>
-    </ul>
+      </div>
+      <div>
+        <button type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-menu-2" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <path d="M4 6l16 0" />
+              <path d="M4 12l16 0" />
+              <path d="M4 18l16 0" />
+            </svg>
+        </button>
+        <ul class="dropdown-menu">
+          <% if user_signed_in? %>
+            <li>
+              <%= link_to "Home", root_path, class: "dropdown-item" %></li>
+            </li>
+            <li>
+              <%= link_to "My Pigeons", pigeons_path, class: "dropdown-item" %>
+            </li>
+            <li>
+              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete} , class: "dropdown-item" %>
+            </li>
+          <% else %>
+            <li>
+              <%= link_to "Login", new_user_session_path, class: "dropdown-item" %>
+              <%= link_to "Sign up", new_user_registration_path, class: "dropdown-item" %>
+            </li>
+          <% end %>
+        </ul>
+    </div>
   </div>
 </div>
