@@ -42,11 +42,10 @@
       <% if @pigeons == [] %>
         <p>Oops, too specific. No pigeons satisfy this query</p>
         <% else %>
-        <div class="pigeons-container" >
+        <div class="pigeons-container">
           <% @pigeons.each do |pigeon| %>
-            <div class="border">
-              <%= link_to pigeon.title, pigeon_path(pigeon) %>
-              <p>--------------------</p>
+            <div class="pigeon_card">
+              <h3><%= link_to pigeon.title, pigeon_path(pigeon) %></h3>
               <p>sent by <%#= pigeon.message.sender.nickname %> on <%= pigeon.date.strftime("%a, %-d %B %Y") %> at <%= pigeon.date.strftime("%H:%M") %></p>
                 <% @tags = pigeon.tag_names %>
                 <ul>
