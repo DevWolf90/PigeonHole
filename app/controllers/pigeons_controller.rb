@@ -35,6 +35,11 @@ class PigeonsController < ApplicationController
         "
       @pigeons = @pigeons.where(sql_subquery, query: "%#{params[:query]}%")
     end
+
+    # respond_to do |format|
+    #   format.html # Follow regular flow of Rails
+    #   format.text { render "pigeons/pigeoncardwithnodetails", locals: { pigeons: @pigeons }, formats: [:html] }
+    # end
   end
 
   def toggle_read #toggle read on show page
