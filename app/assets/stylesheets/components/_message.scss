@@ -2,7 +2,7 @@
   // -moz-box-shadow: -4px 9px 5px 0px rgba(0,0,0,0.16);
   // box-shadow: -4px 9px 5px 0px rgba(0,0,0,0.16);
   margin: 10px;
-  padding: 5px;
+  padding: 10px;
   width: 60%;
   border-radius: 15px;
   display: flex;
@@ -17,7 +17,7 @@
   // -moz-box-shadow: -4px 9px 5px 0px rgba(0,0,0,0.16);
   // box-shadow: -4px 9px 5px 0px rgba(0,0,0,0.16);
   margin: 10px;
-  padding: 5px;
+  padding: 10px;
   width: 60%;
   border-radius: 15px;
   display: flex;
@@ -44,4 +44,6 @@
 .sender-info {
   display: flex;
   justify-content: space-between;
+  font-size: x-small;
+  font-weight: bolder;
 }
