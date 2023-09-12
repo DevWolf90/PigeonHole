@@ -41,12 +41,13 @@
     <%= link_to "Link", @pigeon.link_to_content, target: "_blank" %><br>
     <%= link_to "Browse all pigeons", pigeons_path %>
   <div class = "chatWindow">
-    <div id="messages">
+    <div id="messages" data-controller="chat-scroll">
         <% @pigeon.chat.messages.each do |message| %>
-          <% if @pigeon.created_at < message.created_at %>
-            <%= message.sender.email %>
-            <%= render 'messages/message', message: message %>
-          <% end %>
+
+
+
+            <%= render 'messages/message', message: message, scroll:message.content == @pigeon.description  %>
+
         <% end %>
     </div>
   </div>
@@ -57,6 +58,11 @@
       <p>Status: unread</p>
       <%= link_to "Mark as read", toggle_read_path(@pigeon), data: { turbo_method: :patch } %>
     <% end %>
+     <% unless @pigeon.reply_later %>
+      <%= link_to "Reply Later", add_to_reply_path(@pigeon), data: { turbo_method: :patch }  %>
+    <% end %>
+
+
     <%= link_to "Back to Pigeons", pigeons_path %>
     <%= link_to "Browse all pigeons", pigeons_path %><br>
     <%= link_to "Delete", pigeon_path(@pigeon), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
