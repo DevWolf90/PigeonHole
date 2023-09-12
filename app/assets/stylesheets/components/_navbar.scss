@@ -152,6 +152,19 @@ header {
   display: block;
 }
 
+.nav-btn {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
+  align-items: center;
+}
+
+// .nav-icon {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   margin-right: 10px
+// }
 
 // @media(max-width: 500px) {
 //   .navbar .logo {
