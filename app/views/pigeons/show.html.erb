@@ -1,10 +1,15 @@
 <div class="container">
   <% @pigeon.id %>
   <h2 class="mt-4">Pigeon Details</h2>
-    <p class="mt-4">Title: <%= @pigeon.title %></p>
-    <p>Description: <%= @pigeon.description %></p>
-    <p>Date: <%= @pigeon.date.strftime("%a, %-d %B %Y") %> at <%= @pigeon.date.strftime("%H:%M") %></p>
-    <p>Media type:
+    <p class="mt-4"><%= @pigeon.title %></p>
+    <p><%= @pigeon.description %></p>
+    <% if @pigeon.chat.sender == current_user  %>
+      <% @sender = @pigeon.chat.recipient %>
+    <% else %>
+      <% @sender = @pigeon.chat.sender %>
+    <% end %>
+    <p>Sent on <%= @pigeon.date.strftime("%a, %-d %B %Y") %> at <%= @pigeon.date.strftime("%H:%M")%> by <%=@sender.nickname%></p>
+    <p>
       <% if @pigeon.media_type == "video" %>
         <i class="fa-brands fa-youtube"></i></p>
       <% elsif @pigeon.media_type == "article" %>
@@ -32,7 +37,7 @@
        <% end %>
     <% end %>
 
-    <p class= "mt-5 mb-5">Category:
+    <p class= "mt-5 mb-5">
       <% @tags = @pigeon.tag_names %>
       <% @tags.each do |tag| %>
         <%= tag %>
@@ -43,14 +48,21 @@
   <div class = "chatWindow">
     <div id="messages" data-controller="chat-scroll">
         <% @pigeon.chat.messages.each do |message| %>
-
-
-
             <%= render 'messages/message', message: message, scroll:message.content == @pigeon.description  %>
-
         <% end %>
     </div>
-  </div>
+
+    </div>
+    <%= simple_form_for [@chat, @message],
+        html: {class: "d-flex pt-3"} do |f| %>
+        <%= f.input :content,
+          as: :string,
+          label: false,
+          placeholder: "Drop a few lines",
+          wrapper_html: {class: "flex-grow-1"}
+        %>
+        <%= f.submit "Send", class: "btn btn-primary mb-3" %>
+        <% end %>
     <% if @pigeon.read %>
       <p>Status: read</p>
       <%= link_to "Mark as unread", toggle_read_path(@pigeon), data: { turbo_method: :patch }  %>

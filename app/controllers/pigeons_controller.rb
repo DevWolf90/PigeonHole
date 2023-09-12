@@ -3,7 +3,7 @@ class PigeonsController < ApplicationController
   before_action :set_pigeons, only: %i[index show]
 
   def index
-    @alltags = Gutentag::Tag.names_for_scope(Pigeon)
+    @alltags = Gutentag::Tag.names_for_scope(Pigeon.where(recipient: current_user))
     @mediatypes = ["article", "book", "movie", "playlist", "podcast", "song", "video", "other"]
 
 
@@ -27,7 +27,12 @@ class PigeonsController < ApplicationController
     end
 
     if params[:query].present?
-      sql_subquery = "title ILIKE :query OR description ILIKE :query"
+
+      sql_subquery = "
+        pigeons.title ILIKE :query
+        OR pigeons.description ILIKE :query
+        OR pigeons.summary ILIKE :query
+        "
       @pigeons = @pigeons.where(sql_subquery, query: "%#{params[:query]}%")
     end
   end
@@ -78,6 +83,8 @@ class PigeonsController < ApplicationController
 
   def show
     @pigeon = @pigeons.find(params[:id])
+    @chat = @pigeon.chat
+    @message = Message.new
   end
 
   def new
@@ -167,6 +174,6 @@ class PigeonsController < ApplicationController
   end
 
   def set_pigeons
-    @pigeons = Pigeon.where(recipient: current_user)
+    @pigeons = Pigeon.where(pigeons: {recipient: current_user})
   end
 end
