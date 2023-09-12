@@ -152,6 +152,11 @@ header {
   display: block;
 }
 
+.nav-btn {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
+}
 
 // @media(max-width: 500px) {
 //   .navbar .logo {

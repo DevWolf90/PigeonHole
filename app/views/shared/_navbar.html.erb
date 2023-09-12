@@ -2,14 +2,20 @@
 
 
   <%# DROPDOWN %>
-  <div class="dropdown">
+  <div class="dropdown nav-btn">
     <button type="button" data-bs-toggle="dropdown" aria-expanded="false">
       <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown-menu" %>
     </button>
     <ul class="dropdown-menu">
       <% if user_signed_in? %>
         <li>
-          <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
+          <%= link_to "Home", root_path, class: "dropdown-item" %></li>
+        </li>
+        <li>
+          <%= link_to "My Pigeons", pigeons_path, class: "dropdown-item" %>
+        </li>
+        <li>
+          <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete} , class: "dropdown-item" %>
         </li>
       <% else %>
         <li>

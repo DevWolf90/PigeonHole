@@ -20,7 +20,13 @@
         <i class="fa-solid fa-headphones"></i></p>
       <% end %>
     <p>Summary by AI: <%= @pigeon.summary %></p>
+    <% if TimeToReadService.new(@pigeon.link_to_content).call <= 1 %>
+    <p>This pigeon will take <%=  TimeToReadService.new(@pigeon.link_to_content).call %> minute to look at.</p>
+    <% else %>
     <p>This pigeon will take <%=  TimeToReadService.new(@pigeon.link_to_content).call %> minutes to look at.</p>
+    <% end %>
+    <% if @pigeon.media_type == "video" %>
+    <p>Length: <%= @pigeon.length %></p>
     <% if @pigeon.favourite? %>
       <%= link_to toggle_favourite_path(@pigeon), data: { turbo_method: :patch } do %>
         <p><i class="fa-solid fa-heart"></i></p>
