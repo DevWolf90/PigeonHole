@@ -32,8 +32,10 @@ class PigeonsController < ApplicationController
         pigeons.title ILIKE :query
         OR pigeons.description ILIKE :query
         OR pigeons.summary ILIKE :query
+        OR chats.sender_id IN (SELECT id FROM users WHERE nickname ILIKE :query)
+        OR chats.recipient_id IN (SELECT id FROM users WHERE nickname ILIKE :query)
         "
-      @pigeons = @pigeons.where(sql_subquery, query: "%#{params[:query]}%")
+      @pigeons = @pigeons.joins(chat: :sender).joins(chat: :recipient).where(sql_subquery, query: "%#{params[:query]}%")
     end
   end
 
