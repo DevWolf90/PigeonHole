@@ -10,7 +10,6 @@
 
   <div id="messages">
     <% @chat.messages.each do |message| %>
-      <%= message.sender.nickname %>
       <%= render 'messages/message', message: message %>
         <% @pigeons.each do |pigeon| %>
           <% if pigeon.description == message.content %>
