@@ -28,11 +28,13 @@ class PigeonsController < ApplicationController
 
     if params[:query].present?
       sql_subquery = "
-      pigeons.title ILIKE :query
-      OR pigeons.description ILIKE :query
-      OR pigeons.summary ILIKE :query
-      "
-      @pigeons = @pigeons.where(sql_subquery, query: "%#{params[:query]}%")
+        pigeons.title ILIKE :query
+        OR pigeons.description ILIKE :query
+        OR pigeons.summary ILIKE :query
+        OR chats.sender_id IN (SELECT id FROM users WHERE nickname ILIKE :query)
+        OR chats.recipient_id IN (SELECT id FROM users WHERE nickname ILIKE :query)
+        "
+      @pigeons = @pigeons.joins(chat: :sender).joins(chat: :recipient).where(sql_subquery, query: "%#{params[:query]}%")
     end
 
     respond_to do |format|
@@ -86,7 +88,7 @@ class PigeonsController < ApplicationController
   end
 
   def show
-    @pigeon = @pigeons.find(params[:id])
+    @pigeon = Pigeon.find(params[:id])
     @chat = @pigeon.chat
     @message = Message.new
   end
@@ -178,6 +180,6 @@ class PigeonsController < ApplicationController
   end
 
   def set_pigeons
-    @pigeons = Pigeon.where(pigeons: {recipient: current_user})
+    @pigeons = Pigeon.where(recipient: current_user)
   end
 end

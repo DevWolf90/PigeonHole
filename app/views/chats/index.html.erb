@@ -1,0 +1,17 @@
+<h1>All chats</h1>
+
+<% @chats.each do |chat| %>
+<div>
+    <% if chat.sender == current_user %>
+  <%= link_to chat.recipient.nickname, chat_path(chat)%>
+  <%=  %>
+    <% else %>
+  <%= link_to chat.recipient.nickname, chat_path(chat) %>
+    <% end %>
+  <% if chat.messages.present? %>
+    <%= chat.messages.last.content%>
+  <% else %>
+    <p>No messages yet</p>
+  <% end %>
+</div>
+<% end %>

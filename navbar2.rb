@@ -1,14 +1,14 @@
 <div class="navbar">
   <div class="logo"><a href="#">PigeonHole<a/></div>
   <ul class="links">
-    <li><a href="hero">Home<a/></li>
-    <li><a href="about">About<a/></li>
-    <li><a href="hero">Services<a/></li>
-    <li><a href="hero">Contact<a/></li>
+    <li><a href="hero">Home</a></li>
+    <li><a href="about">About</a></li>
+    <li><a href="hero">Services</a></li>
+    <li><a href="hero">Contact</a></li>
   </ul>
 <a hrefs="#" class="action_btn">Login</a>
 <div class="toggle_btn">
-  <i class="fa-regular fa-bars"><i/>
+  <i class="fa-regular fa-bars"></i>
   </div>
 </div>
 
@@ -17,7 +17,6 @@
 <div class="navbar navbar-expand-sm navbar-light navbar">
   <div class="logo d-flex p-3 justify-content-center">
     <h1>PIGEONHOLE LOGO</h1>
-    <%# <p>Be more present, wherever you are</p> %>
   </div>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,8 +52,8 @@
           <li class="nav-item dropdown">
           </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Action", "#", class: "dropdown-item" %>
-              <%= link_to "Another action", "#", class: "dropdown-item" %>
+              <%= link_to "User Profile", "#", class: "dropdown-item" %>
+              <%= link_to "Settings", "#", class: "dropdown-item" %>
               <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
             </div>
           </li>

@@ -24,14 +24,12 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Open Sans', sans-serif;
 }
 
 body {
   height: 100vh;
   background-size: cover;
   background-position: center;
-  font-family: "Nunito";
 }
 
 li {
@@ -152,6 +150,19 @@ header {
   display: block;
 }
 
+.nav-btn {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
+  align-items: center;
+}
+
+// .nav-icon {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   margin-right: 10px
+// }
 
 // @media(max-width: 500px) {
 //   .navbar .logo {
