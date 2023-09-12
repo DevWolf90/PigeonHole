@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     patch "pigeons/:id/link_favourite", to: "pigeons#link_favourite", as: "link_favourite"
     patch "pigeons/:id/add_to_reply", to: "pigeons#add_to_reply", as: "add_to_reply"
 
-  resources :chats, only: %i[new show create] do
+  resources :chats, only: %i[new show create index] do
     resources :messages, only: %i[ create]
   end
 
