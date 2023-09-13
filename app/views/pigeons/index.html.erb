@@ -48,101 +48,85 @@
     <p>Oops, too specific. No pigeons satisfy this query</p>
   <% else %>
     <div class="pigeons-container px-2" >
-      <div class="" style="display: grid; ">
-        <div>
-          <% @pigeons.each do |pigeon| %>
-
-            </div>
-            <div class="d-flex">
+      <div style="display: grid; ">
               <% @pigeons.each do |pigeon| %>
                   <%#= link_to pigeon.title, mark_read_path(pigeon), data: { turbo_method: :patch } %>
-                    <%# <i class="fa-solid fa-heart heart offset-icon"></i> %>
-                    <div class="pigeon-card-with-details">
-                <%# if pigeon.favourite? %>
-                  <%#= link_to mark_read_path(pigeon), data: { turbo_method: :patch }  do%>
-                      <div class="d-flex justify-content-between">
-                        <div class="sender-date-info">
-                          <div style="border-radius: 50px; height: 30px; width: 30px; overflow: hidden; background: gray;">
-                            <% if pigeon.user.avatar.attached? %>
-                              <%= cl_image_tag @pigeon.user.avatar.key, height: 30, width:30, crop: :fill %>
-                              <% else %>
-                              <%= image_tag("https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000", height:30, width:30) %>
-                            <% end %>
-                          </div>
-                          <p class="mt-2">@<%= pigeon.user.nickname %></p>
-                          <p class="m-0"><%= pigeon.date.strftime("%a %b %e") %></p>
-                        </div>
-                        <div>
-                          <%= link_to pigeon_path(pigeon), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
-                            <i class="fa fa-times delete-cross"></i>
-                          <% end %>
-                        </div>
-                      </div>
-                      <div class="mt-3">
-                          <% @tags = pigeon.tag_names %>
-                          <ul style="padding-left: 0px;">
-                            <% @tags.each do |tag| %>
-                              <li><%= tag %></li>
-                            <% end %>
-                          </ul>
-                      </div>
-                      <h3><%= pigeon.title.truncate(23) %></h3>
-                      <div class="d-flex align-items-center ">
-                        <div>
-                          <% if pigeon.favourite? %>
-                            <%= link_to link_favourite_path(pigeon), data: { turbo_method: :patch } do %>
-                            <p><i class="fa-solid fa-heart"></i></p>
-                            <% end %>
+                  <%# <i class="fa-solid fa-heart heart offset-icon"></i> %>
+                <div class="pigeon-card-with-details justify-content-center">
+                    <%# if pigeon.favourite? %>
+                    <%#= link_to mark_read_path(pigeon), data: { turbo_method: :patch }  do%>
+                  <div class="d-flex">
+                    <div class="sender-date-info">
+                      <div style="border-radius: 50px; height: 30px; width: 30px; overflow: hidden; background: gray;">
+                        <% if pigeon.user.avatar.attached? %>
+                          <%= cl_image_tag @pigeon.user.avatar.key, height: 30, width:30, crop: :fill %>
                           <% else %>
-                            <%= link_to link_favourite_path(pigeon), data: { turbo_method: :patch } do %>
-                            <p> <i class="fa-regular fa-heart"></i> </p>
-                            <% end %>
-                          <% end %>
-                        </div>
-                        <div>
-                          <% if pigeon.read? %>
-                            <%= link_to link_read_path(pigeon), data: { turbo_method: :patch }  do %>
-                              <i class="fa-solid fa-folder"></i>
-                            <% end %>
-                          <% else %>
-                            <%= link_to link_read_path(pigeon), data: { turbo_method: :patch } do %>
-                              <i class="fa-solid fa-folder-open"></i>
-                            <% end %>
-                          <% end %>
-                        </div>
+                          <%= image_tag("https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000", height:30, width:30) %>
+                        <% end %>
                       </div>
-                      <div class="">
-                            <% if pigeon.media_type == "video" %>
-                                <p><i class="fa-brands fa-youtube pigeon-card-media"></i></p>
-                            <% elsif pigeon.media_type == "article" %>
-                                <p><i class="fa-regular fa-newspaper pigeon-card-media"></i></p>
-                            <% elsif pigeon.media_type == "book" %>
-                                <p><i class="fa-solid fa-book pigeon-card-media"></i></p>
-                            <% elsif pigeon.media_type == "podcast"%>
-                                <p><i class="fa-solid fa-headphones pigeon-card-media"></i></p>
-                            <% elsif pigeon.media_type == "audio" || "song" || "playlist"%>
-                                <p><i class="fa-solid fa-music pigeon-card-media"></i></p>
-                            <% elsif pigeon.media_type == "movie"%>
-                                <p><i class="fa-solid fa-film pigeon-card-media"></i></p>
-                            <% end %>
-                        </div>
-
-                      </div>
+                      <p class="mt-2">@<%= pigeon.user.nickname %></p>
+                      <p class="m-0"><%= pigeon.date.strftime("%a %b %e") %></p>
                     </div>
-                    <%# end %>
-                <% end %>
+                    <div>
+                      <%= link_to pigeon_path(pigeon), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+                        <i class="fa fa-times delete-cross"></i>
+                      <% end %>
+                    </div>
+                  </div>
+                  <div class="mt-3">
+                      <% @tags = pigeon.tag_names %>
+                      <ul style="padding-left: 0px;">
+                        <% @tags.each do |tag| %>
+                          <li><%= tag %></li>
+                        <% end %>
+                      </ul>
+                  </div>
+                  <h3><%= pigeon.title.truncate(23) %></h3>
+                  <div class="d-flex align-items-center justify-content-between">
+                    <div>
+                      <% if pigeon.favourite? %>
+                        <%= link_to link_favourite_path(pigeon), data: { turbo_method: :patch } do %>
+                        <p><i class="fa-solid fa-heart"></i></p>
+                        <% end %>
+                      <% else %>
+                        <%= link_to link_favourite_path(pigeon), data: { turbo_method: :patch } do %>
+                        <p> <i class="fa-regular fa-heart"></i> </p>
+                        <% end %>
+                      <% end %>
+                    </div>
+                    <div>
+                      <% if pigeon.read? %>
+                        <%= link_to link_read_path(pigeon), data: { turbo_method: :patch }  do %>
+                          <i class="fa-solid fa-folder"></i>
+                        <% end %>
+                      <% else %>
+                        <%= link_to link_read_path(pigeon), data: { turbo_method: :patch } do %>
+                          <i class="fa-solid fa-folder-open"></i>
+                        <% end %>
+                      <% end %>
+                    </div>
+                    <div>
+                          <% if pigeon.media_type == "video" %>
+                              <p><i class="fa-brands fa-youtube pigeon-card-media"></i></p>
+                          <% elsif pigeon.media_type == "article" %>
+                              <p><i class="fa-regular fa-newspaper pigeon-card-media"></i></p>
+                          <% elsif pigeon.media_type == "book" %>
+                              <p><i class="fa-solid fa-book pigeon-card-media"></i></p>
+                          <% elsif pigeon.media_type == "podcast"%>
+                              <p><i class="fa-solid fa-headphones pigeon-card-media"></i></p>
+                          <% elsif pigeon.media_type == "audio" || "song" || "playlist"%>
+                              <p><i class="fa-solid fa-music pigeon-card-media"></i></p>
+                          <% elsif pigeon.media_type == "movie"%>
+                              <p><i class="fa-solid fa-film pigeon-card-media"></i></p>
+                          <% end %>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                  <%# end %>
               <% end %>
-          <% end %>
-        </div>
       </div>
-  <%# end %>
-
+              <% end %>
+      <%# end %>
     </div>
-
-      </div>
-    </div>
-  </div>
-
-
-
-</div>
