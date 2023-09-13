@@ -9,23 +9,22 @@
   color: white;
   background-size: cover;
   background-position: center;
-  width: 30vw;
-  min-height: 35vh;
-  height: auto;
+  width: 40vw;
+  height: 20vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  align-items: start;
   border-radius: 15px;
   line-height: 0.8rem;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  margin-left: 0px;
-  margin-right: 20px;
-  margin-top: 30px;
+  margin-left: 0rem;
+  margin-right: 1rem;
+  margin-top: 1rem;
   text-align: left;
   scroll-snap-align: start;
   font-family: "Inter", sans-serif!important;
-  font-size: 0.7rem;
+  font-size: 0.6rem;
     // &:hover {
     //   height: 280px;
     //   width: 280px;
@@ -33,6 +32,10 @@
     //   background-color: black;
     //   color: white;
     // }
+    &h3 {
+      font-size:medium;
+      margin: 0px;
+    }
 }
 
 .pigeon-card-unread {
@@ -46,23 +49,22 @@
   color: white;
   background-size: cover;
   background-position: center;
-  width: 30vw;
-  min-height: 35vh;
-  height: auto;
+  width: 40vw;
+  height: 30vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  align-items: start;
   border-radius: 15px;
   line-height: 0.8rem;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  margin-left: 0px;
-  margin-right: 20px;
-  margin-top: 30px;
+  margin-left: 0rem;
+  margin-right: 1rem;
+  margin-top: 1rem;
   text-align: left;
   scroll-snap-align: start;
   font-family: "Inter", sans-serif!important;
-  font-size: 0.7rem;
+  font-size: 0.6rem;
     // &:hover {
     //   height: 280px;
     //   width: 280px;
@@ -79,9 +81,18 @@ a {
 .pigeon-card-media {
   font-size: x-large;
   color: black;
+  text-align: right;
+  margin: 0px;
+  padding: 0px;
 }
 
 .offset-before {
   position: relative;
   top: 3px;
+}
+
+.sender-date-info {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
 }

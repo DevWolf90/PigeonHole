@@ -1,5 +1,5 @@
 .plogo {
-  width: 250px;
+  width: 350px;
 }
 
 
@@ -25,13 +25,22 @@
 
 .home-container {
   background-color: black;
-  height: 90vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
+  padding: 40px 20px;
 }
 
 .home-container h1 {
   color: white;
+}
+
+.scrolling-wrapper {
+  background-color: $gray;
+  padding-left: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 15px;
 }
