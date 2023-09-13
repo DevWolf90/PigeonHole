@@ -1,7 +1,15 @@
 .form-container {
   margin:auto;
   width: 75%;
-
   color:white;
   padding: 10px;
+  h2 {
+    margin-top: 5rem;
+    margin-bottom: 2rem;
+  }
+  form {
+    margin-bottom: 2rem;
+  }
+
+  input {margin-left: 0;}
 }
