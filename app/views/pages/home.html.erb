@@ -25,19 +25,19 @@
                   </div>
                   <div>
                     <h3><%= pigeon.title.truncate(30) %></h3>
-                    <div class="pigeon-card-media ml-auto">
+                    <div class="pigeon-card-bottom">
                         <% if pigeon.media_type == "video" %>
-                            <p><i class="fa-brands fa-youtube"></i></p>
+                            <p><i class="fa-brands fa-youtube pigeon-card-media"></i></p>
                         <% elsif pigeon.media_type == "article" %>
-                            <p><i class="fa-regular fa-newspaper"></i></p>
+                            <p><i class="fa-regular fa-newspaper pigeon-card-media"></i></p>
                         <% elsif pigeon.media_type == "book" %>
-                            <p><i class="fa-solid fa-book"></i></p>
+                            <p><i class="fa-solid fa-book pigeon-card-media"></i></p>
                         <% elsif pigeon.media_type == "podcast"%>
-                            <p><i class="fa-solid fa-headphones"></i></p>
+                            <p><i class="fa-solid fa-headphones pigeon-card-media"></i></p>
                         <% elsif pigeon.media_type == "audio" || "song" || "playlist"%>
-                            <p><i class="fa-solid fa-music"></i></p>
+                            <p><i class="fa-solid fa-music pigeon-card-media"></i></p>
                         <% elsif pigeon.media_type == "movie"%>
-                            <p><i class="fa-solid fa-film"></i></p>
+                            <p><i class="fa-solid fa-film pigeon-card-media"></i></p>
                         <% end %>
                     </div>
                   </div>
@@ -70,19 +70,19 @@
                   </div>
                   <div>
                     <h3><%= pigeon.title.truncate(17) %></h3>
-                    <div class="pigeon-card-media">
+                    <div class="pigeon-card-bottom">
                         <% if pigeon.media_type == "video" %>
-                            <p><i class="fa-brands fa-youtube"></i></p>
+                            <p><i class="fa-brands fa-youtube pigeon-card-media"></i></p>
                         <% elsif pigeon.media_type == "article" %>
-                            <p><i class="fa-regular fa-newspaper"></i></p>
+                            <p><i class="fa-regular fa-newspaper pigeon-card-media"></i></p>
                         <% elsif pigeon.media_type == "book" %>
-                            <p><i class="fa-solid fa-book"></i></p>
+                            <p><i class="fa-solid fa-book pigeon-card-media"></i></p>
                         <% elsif pigeon.media_type == "podcast"%>
-                            <p><i class="fa-solid fa-headphones"></i></p>
+                            <p><i class="fa-solid fa-headphones pigeon-card-media"></i></p>
                         <% elsif pigeon.media_type == "audio" || "song" || "playlist"%>
-                            <p><i class="fa-solid fa-music"></i></p>
+                            <p><i class="fa-solid fa-music pigeon-card-media"></i></p>
                         <% elsif pigeon.media_type == "movie"%>
-                            <p><i class="fa-solid fa-film"></i></p>
+                            <p><i class="fa-solid fa-film pigeon-card-media"></i></p>
                         <% end %>
                     </div>
                   </div>
@@ -113,19 +113,19 @@
                 </div>
                 <div>
                   <h3><%= pigeon.title.truncate(17) %></h3>
-                  <div class="pigeon-card-media">
+                  <div class="pigeon-card-bottom">
                     <% if pigeon.media_type == "video" %>
-                        <p><i class="fa-brands fa-youtube"></i></p>
+                        <p><i class="fa-brands fa-youtube pigeon-card-media"></i></p>
                     <% elsif pigeon.media_type == "article" %>
-                        <p><i class="fa-regular fa-newspaper"></i></p>
+                        <p><i class="fa-regular fa-newspaper pigeon-card-media"></i></p>
                     <% elsif pigeon.media_type == "book" %>
-                        <p><i class="fa-solid fa-book"></i></p>
+                        <p><i class="fa-solid fa-book pigeon-card-media"></i></p>
                     <% elsif pigeon.media_type == "podcast"%>
-                        <p><i class="fa-solid fa-headphones"></i></p>
+                        <p><i class="fa-solid fa-headphones pigeon-card-media"></i></p>
                     <% elsif pigeon.media_type == "audio" || "song" || "playlist"%>
-                        <p><i class="fa-solid fa-music"></i></p>
+                        <p><i class="fa-solid fa-music pigeon-card-media"></i></p>
                     <% elsif pigeon.media_type == "movie"%>
-                        <p><i class="fa-solid fa-film"></i></p>
+                        <p><i class="fa-solid fa-film pigeon-card-media"></i></p>
                     <% end %>
                   </div>
                 </div>

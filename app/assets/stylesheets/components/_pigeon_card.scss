@@ -86,12 +86,18 @@ a {
   text-decoration:none;
 }
 
-.pigeon-card-media {
-  font-size: x-large;
-  color: black;
+.pigeon-card-bottom {
   text-align: right;
   margin: 0px;
   padding: 0px;
+}
+
+.pigeon-card-media {
+  font-size: x-large;
+  color: black;
+  background-color: $green;
+  padding: 0.5rem;
+  border-radius: 50%;
 }
 
 .offset-before {
