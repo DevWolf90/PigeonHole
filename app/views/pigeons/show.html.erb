@@ -2,20 +2,20 @@
   <div class="card-detail">
 
     <%= link_to(chat_path(@pigeon.chat)) do %>
-    <div style="border-radius: 50px; height: 100px; width: 100px; overflow: hidden; background: gray;">
-      <% if @pigeon.user.avatar.attached? %>
-        <%= cl_image_tag @pigeon.user.avatar.key, height: 100, width:100, crop: :fill %>
-        <% else %>
-        <%= image_tag("https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000", height:100, width:100) %>
-      <% end %>
-    </div>
+      <div style="border-radius: 50px; height: 100px; width: 100px; overflow: hidden; background: gray;">
+        <% if @pigeon.user.avatar.attached? %>
+          <%= cl_image_tag @pigeon.user.avatar.key, height: 100, width:100, crop: :fill %>
+          <% else %>
+          <%= image_tag("https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000", height:100, width:100) %>
+        <% end %>
+      </div>
 
-    <% if @pigeon.chat.sender == current_user %>
-      <% @sender = @pigeon.chat.recipient %>
-    <% else %>
-      <% @sender = @pigeon.chat.sender %>
-    <% end %>
-      <p>@<%= @sender.nickname %></p>
+      <% if @pigeon.chat.sender == current_user %>
+        <% @sender = @pigeon.chat.recipient %>
+      <% else %>
+        <% @sender = @pigeon.chat.sender %>
+      <% end %>
+        <p>@<%= @sender.nickname %></p>
     <% end %>
 
     <p><%= @pigeon.date.strftime("%a, %-d %B %Y") %> at <%= @pigeon.date.strftime("%H:%M") %></p>
@@ -26,8 +26,6 @@
 
       <%= @pigeon.description %>
     </div>
-
-
 
     <div class="category">
       <% @tags = @pigeon.tag_names %>
