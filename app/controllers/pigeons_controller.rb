@@ -146,7 +146,7 @@ class PigeonsController < ApplicationController
       end
     end
 
-
+    @pigeon.user = current_user
     @pigeon.date = Date.today
     @pigeon.save
     @message = Message.new(sender: current_user, chat: @chat)
