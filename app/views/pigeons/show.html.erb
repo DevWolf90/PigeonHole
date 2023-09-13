@@ -9,7 +9,8 @@
       <% end %>
     </div>
 
-    <p class="mt-4"><%= @pigeon.title %></p>
+
+    <h2 class="mt-4"><%= @pigeon.title %></h2>
       <% if @pigeon.chat.sender == current_user %>
         <% @sender = @pigeon.chat.recipient %>
       <% else %>
@@ -33,35 +34,46 @@
       <% end %>
     </div>
 
-    <div class="summary">
-      <% if @pigeon.media_type == "article" || @pigeon.media_type == "book" %>
-      <p class="summary-title">Summary by AI: </p>
-      <p><%= @pigeon.summary %></p>
+    <% if @pigeon.media_type == "article" || @pigeon.media_type == "book" %>
+      <div class="summary">
+
+        <p class="summary-title">Summary by AI: </p>
+        <p><%= @pigeon.summary %></p>
+      </div>
+    <% end %>
+
+    <div>
+      <i class='fa fa-hourglass-start sand-clock mt-3' style="color:#BBC800;"></i>
       <% time_to_read = TimeToReadService.new(@pigeon.link_to_content).call %>
       <p>
         <% if time_to_read <= 1 %>
-          This pigeon will take <%= time_to_read %> minute to read.
+          <%= time_to_read %> minute
         <% else %>
-          This pigeon will take <%= time_to_read %> minutes to read.
+          <%= time_to_read %> minutes
         <% end %>
       </p>
-      <% end %>
     </div>
 
-    <i class='fa fa-hourglass-start sand-clock' style="color:#BBC800;"></i>
+    <div>
+      <button class="link-button">
+        <%= link_to @pigeon.link_to_content, target: "_blank", class: "icon-play" do %>
+          <% if @pigeon.media_type == "video" %>
+          <i class="fa-brands fa-youtube play-icon"></i>
+        <% elsif @pigeon.media_type == "article" %>
+          <i class="fa-regular fa-newspaper article-icon"></i>
+        <% elsif @pigeon.media_type == "book" %>
+          <i class="fa-solid fa-book book-icon"></i>
+        <% elsif @pigeon.media_type == "podcast" || "audio" || "song" || "playlist"%>
+          <i class="fa-solid fa-headphones music-icon"></i>
+        <% end %>
+        <% end %>
+        <div>Go to link</div>
+      </button>
+    </div>
+
+
 
     <div class="mt-5 card-icons">
-      <%= link_to @pigeon.link_to_content, target: "_blank", class: "icon-play" do %>
-        <% if @pigeon.media_type == "video" %>
-        <i class="fa-brands fa-youtube play-icon"></i>
-      <% elsif @pigeon.media_type == "article" %>
-        <i class="fa-regular fa-newspaper article-icon"></i></p>
-      <% elsif @pigeon.media_type == "book" %>
-        <i class="fa-solid fa-book book-icon"></i></p>
-      <% elsif @pigeon.media_type == "podcast" || "audio" || "song" || "playlist"%>
-        <i class="fa-solid fa-headphones music-icon"></i>
-      <% end %>
-      <% end %>
       <%= link_to pigeon_path(@pigeon), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
         <i class="fa fa-times delete-cross"></i>
       <% end %>
@@ -82,6 +94,13 @@
         <i class="fa-regular fa-clock reply-icon"></i>
         <% end %>
       <% end %>
+      <i class="fa-solid fa-paper-plane send-icon"></i>
+      <% if @pigeon.read %>
+        <%= link_to toggle_read_path(@pigeon), data: { turbo_method: :patch }  do %>
+          <i class="fa-solid fa-book unread-icon"></i>
+        <% end %>
+      <% end %>
+
     </div>
 
     <% if (@pigeon.media_type == "video" || @pigeon.media_type == "music") && @pigeon.link_to_content.include?("youtu") %>
@@ -96,10 +115,6 @@
   </div>
 
 
-
-    <% if @pigeon.read %>
-      <%= link_to "Mark as unread", toggle_read_path(@pigeon), data: { turbo_method: :patch }  %>
-    <% end %>
 
     <!-- <%= link_to "Browse all pigeons", pigeons_path %><br> -->
 
