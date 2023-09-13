@@ -1,7 +1,50 @@
-.message-card {
-  background-color: white;
-  color: black;
-  border-radius: 10px;
-  margin: 10px 0;
+
+.message-card-sent {
+  // -moz-box-shadow: -4px 9px 5px 0px rgba(0,0,0,0.16);
+  // box-shadow: -4px 9px 5px 0px rgba(0,0,0,0.16);
+  margin: 10px;
   padding: 10px;
+  width: 60%;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: $green;
+  align-self: end;
+  margin-left: auto;
+}
+
+.message-card-received {
+  // -moz-box-shadow: -4px 9px 5px 0px rgba(0,0,0,0.16);
+  // box-shadow: -4px 9px 5px 0px rgba(0,0,0,0.16);
+  margin: 10px;
+  padding: 10px;
+  width: 60%;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: white;
+  align-self: start;
+  margin-right: auto;
+}
+
+// &.sent {
+//   -moz-box-shadow: -4px 9px 5px 0px rgba(0,0,0,0.16);
+//   margin-left: auto;
+// }
+
+// &.received {
+//   -moz-box-shadow: -4px 9px 5px 0px rgba(0,0,0,0.16);
+//   margin-right: auto;
+//   background-color: white;
+//   text-align: right;
+// }
+
+
+.sender-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: x-small;
+  font-weight: bolder;
 }

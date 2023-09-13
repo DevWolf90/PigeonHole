@@ -1,0 +1,27 @@
+.navbar-chats{
+  width: 100%;
+  height: 60px;
+  margin: 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 36px !important;
+  background-color: black;
+}
+
+.navbar-chats .logo a {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar-chats .links {
+  display: flex;
+  gap: 2rem;
+}
+
+.navbar-chats .toggle_btn{
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: none;
+}

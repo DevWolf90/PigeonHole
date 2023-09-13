@@ -4,6 +4,7 @@ class ChatsController < ApplicationController
     @message = Message.new
     @pigeons = Pigeon.where(chat_id: @chat)
     @chats = Chat.where(sender: current_user).or(Chat.where(recipient: current_user))
+    @current_user = current_user
   end
 
   def new
@@ -23,4 +24,5 @@ class ChatsController < ApplicationController
   def index
     @chats = Chat.where(sender: current_user).or(Chat.where(recipient: current_user))
   end
+
 end
