@@ -1,7 +1,7 @@
 <% if user_signed_in? %>
 <div class="container-fluid">
 
-  <h2>Unread Pigeons</h2>
+  <h2 class="mt-2">Unread Pigeons</h2>
     <div class="scrolling-wrapper">
       <ul class="d-flex align-items-center p-0">
         <% pigeons_read = @pigeons.all? { |pigeon| pigeon.read} %>
@@ -50,8 +50,8 @@
       </ul>
     </div>
 
-   <h2>Favourite Pigeons</h2>
-    <div class="scrolling-wrapper">
+   <h2 class="mt-2">Favourite Pigeons</h2>
+    <div class="scrolling-wrapper pb-3">
       <div class="d-flex align-items-center p-0">
           <% @pigeons.each do |pigeon| %>
             <% if pigeon.favourite? %>
@@ -92,8 +92,8 @@
           <% end %>
     </div>
     </div>
-    <h2>Don't Forget to Reply!</h2>
-    <div class="scrolling-wrapper">
+    <h2 class="mt-2">Don't Forget to Reply!</h2>
+    <div class="scrolling-wrapper pb-3">
       <div class="reply-pigeons d-flex align-items-center p-0">
           <% @pigeons.each do |pigeon| %>
             <% if pigeon.reply_later %>
