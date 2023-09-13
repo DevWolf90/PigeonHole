@@ -9,37 +9,51 @@
       <% end %>
       </div>
       <div>
-        <button type="button" data-bs-toggle="dropdown" aria-expanded="false" class="icon-btn">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-menu-2" style="background-color: grey;" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <%# SIDE SLIDE MENU %>
+        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+        aria-controls="offcanvasRight" style="
+        background: grey;
+        border:none;
+        background-color: grey;">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-menu-2" style="background-color: grey;" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
               <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
               <path d="M4 6l16 0" />
               <path d="M4 12l16 0" />
               <path d="M4 18l16 0" />
             </svg>
         </button>
-        <ul class="dropdown-menu">
-          <% if user_signed_in? %>
+
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasRightLabel"></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body" style="background: darkgray;">
+            <% if user_signed_in? %>
             <li>
-              <%= link_to "Home", root_path, class: "dropdown-item" %></li>
+              <%= link_to "Home", root_path%></li>
             </li>
             <li>
-              <%= link_to "My pigeons", pigeons_path, class: "dropdown-item" %>
+              <%= link_to "My pigeons", pigeons_path%>
             </li>
             <li>
-              <%= link_to "My messages", chats_path, class: "dropdown-item" %>
+              <%= link_to "My messages", chats_path%>
             </li>
             <li>
-              <%= link_to "Create a new pigeon", new_pigeon_path, class:"dropdown-item" %>
+              <%= link_to "Create a new pigeon", new_pigeon_path%>
             <li>
-              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete} , class: "dropdown-item" %>
+              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete} %>
             </li>
           <% else %>
             <li>
-              <%= link_to "Login", new_user_session_path, class: "dropdown-item" %>
-              <%= link_to "Sign up", new_user_registration_path, class: "dropdown-item" %>
+              <%= link_to "Login", new_user_session_path %>
+              <%= link_to "Sign up", new_user_registration_path %>
             </li>
           <% end %>
         </ul>
+          </div>
+        </div>
+       <%# DROP DOWN MENU %>
     </div>
   </div>
 </div>
