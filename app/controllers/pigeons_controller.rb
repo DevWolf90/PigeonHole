@@ -27,7 +27,6 @@ class PigeonsController < ApplicationController
     end
 
     if params[:query].present?
-
       sql_subquery = "
         pigeons.title ILIKE :query
         OR pigeons.description ILIKE :query
@@ -36,6 +35,11 @@ class PigeonsController < ApplicationController
         OR chats.recipient_id IN (SELECT id FROM users WHERE nickname ILIKE :query)
         "
       @pigeons = @pigeons.joins(chat: :sender).joins(chat: :recipient).where(sql_subquery, query: "%#{params[:query]}%")
+    end
+
+    respond_to do |format|
+      format.html
+      format.text { render partial: "pigeons/list", locals: { pigeons: @pigeons }, formats: [:html] }
     end
   end
 

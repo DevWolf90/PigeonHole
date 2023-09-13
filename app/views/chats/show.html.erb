@@ -1,37 +1,61 @@
 <%= turbo_stream_from @chat %>
 
-<div class="container chat">
- <%# need to fix next line so it says who we're chatting with  %>
- <% @sender = Chat.find(params[:id]).sender  %>
- <% @recipient = Chat.find(params[:id]).recipient%>
- <% if current_user == @sender || current_user == @recipient %>
- <% @chatting_partner = [@sender, @recipient].reject{ |n| n == current_user } %>
-  <h1>You're chatting with @<%=@chatting_partner[0].nickname%></h1>
-
-  <div id="messages">
-    <% @chat.messages.each do |message| %>
-      <%= render 'messages/message', message: message %>
-        <% @pigeons.each do |pigeon| %>
-          <% if pigeon.description == message.content %>
-          <%= render "pigeons/pigeoncardwithnodetails", pigeon: pigeon %>
-        <% end %>
-      <% end %>
+<% sender = @chat.sender  %>
+<% recipient = @chat.recipient %>
+<% if current_user == sender || current_user == recipient %>
+<% chatting_partner = [sender, recipient].reject{ |n| n == current_user } %>
+<div class="container d-flex justify-content-between">
+  <div>
+    <%= link_to chats_path(@chats) do %>
+    <i class="fa-solid fa-arrow-left" style="font-size: larger;"></i>
     <% end %>
   </div>
+  <p>
+    You're chatting with @<%=chatting_partner[0].nickname%></p>
+  <p>
+</div>
 
+<div class="container chat d-flex flex-column">
+ <%# need to fix next line so it says who we're chatting with  %>
+ <%# raise %>
+    <% @chat.messages.each do |message| %>
+        <% if message.sender == current_user %>
+        <div class="message-card-sent">
+          <div class="sender-info">
+                <strong><%= message.sender.nickname %></strong>
+                <i><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></i>
+          </div>
+          <%= message.content %>
+        </div>
+        <% else %>
+        <div class="message-card-received">
+          <div class="sender-info">
+              <strong><%= message.sender.nickname %></strong>
+              <i><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></i>
+          </div>
+              <%= message.content %>
+        </div>
+        <% end %>
+        <% @pigeons.each do |pigeon| %>
+          <% if pigeon.description == message.content && pigeon.present?%>
+          <%= render "pigeons/pigeoncardwithnodetails", pigeon: pigeon %>
+          <% end %>
+      <% end %>
+    <% end %>
   <%= simple_form_for [@chat, @message],
-  html: {class: "d-flex pt-3"} do |f| %>
+  html: {class: "container d-flex pt-3 fixed-bottom"} do |f| %>
   <%= f.input :content,
     as: :string,
     label: false,
-    placeholder: "Drop a few lines",
+    placeholder: "Type here",
     wrapper_html: {class: "flex-grow-1"}
   %>
   <%= f.submit "Send", class: "btn btn-primary mb-3" %>
   <% end %>
   <% else %>
   <h1>Get your nosy ass outta here!</h1>
-<% end %>
-</div>
+  <% end %>
 
-<%= link_to "Back to all chats", chats_path(@chats) %>
+  </div>
+
+</div>

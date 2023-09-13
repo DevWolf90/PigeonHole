@@ -28,9 +28,33 @@
       <% if @pigeon.media_type == "video" %>
         <i class="fa-brands fa-youtube"></i>
       <% elsif @pigeon.media_type == "article" %>
-        <i class="fa-regular fa-newspaper"></i>
-      <% elsif @pigeon.media_type == "book" || @pigeon.media_type == "podcast" || @pigeon.media_type == "audio" || @pigeon.media_type == "song" || @pigeon.media_type == "playlist" %>
-        <i class="fa-solid fa-headphones"></i>
+        <i class="fa-regular fa-newspaper"></i></p>
+      <% elsif @pigeon.media_type == "book" %>
+        <i class="fa-solid fa-book"></i></p>
+      <% elsif @pigeon.media_type == "podcast" || "audio" || "song" || "playlist"%>
+        <i class="fa-solid fa-headphones"></i></p>
+      <% end %>
+    <p>Summary by AI: <%= @pigeon.summary %></p>
+    <p>This pigeon will take <%=  TimeToReadService.new(@pigeon.link_to_content).call %> minutes to look at.</p>
+    <div class="heart-container">
+      <% if @pigeon.favourite? %>
+        <%= link_to toggle_favourite_path(@pigeon), data: { turbo_method: :patch } do %>
+          <i class="fa-solid fa-heart heart"></i>
+        <% end %>
+      <% else %>
+        <%= link_to toggle_favourite_path(@pigeon), data: { turbo_method: :patch } do %>
+          <i class="fa-regular fa-heart heart"></i>
+        <% end %>
+      <% end %>
+    </div>
+
+  </div>
+    <p class= "mt-5 mb-5">
+      <% @tags = @pigeon.tag_names %>
+      <% @tags.each do |tag| %>
+      <div class= "tag-button">
+          <%= tag %>
+      </div>
       <% end %>
     </p>
 
