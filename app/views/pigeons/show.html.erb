@@ -1,6 +1,7 @@
 <div class="container page-details">
   <div class="card-detail">
 
+    <%= link_to(chat_path(@pigeon.chat)) do %>
     <div style="border-radius: 50px; height: 100px; width: 100px; overflow: hidden; background: gray;">
       <% if @pigeon.user.avatar.attached? %>
         <%= cl_image_tag @pigeon.user.avatar.key, height: 100, width:100, crop: :fill %>
@@ -9,22 +10,23 @@
       <% end %>
     </div>
 
+    <% if @pigeon.chat.sender == current_user %>
+      <% @sender = @pigeon.chat.recipient %>
+    <% else %>
+      <% @sender = @pigeon.chat.sender %>
+    <% end %>
+      <p>@<%= @sender.nickname %></p>
+    <% end %>
+
+    <p><%= @pigeon.date.strftime("%a, %-d %B %Y") %> at <%= @pigeon.date.strftime("%H:%M") %></p>
 
     <h2 class="mt-4"><%= @pigeon.title %></h2>
-      <% if @pigeon.chat.sender == current_user %>
-        <% @sender = @pigeon.chat.recipient %>
-      <% else %>
-        <% @sender = @pigeon.chat.sender %>
-      <% end %>
 
-    <%= link_to(chat_path(@pigeon.chat)) do %>
     <div class="message-card-received text-dark">
 
       <%= @pigeon.description %>
     </div>
-    <% end %>
 
-    <p>Sent on <%= @pigeon.date.strftime("%a, %-d %B %Y") %> at <%= @pigeon.date.strftime("%H:%M") %> by <%= @sender.nickname %></p>
 
 
     <div class="category">
@@ -54,7 +56,7 @@
       </p>
     </div>
 
-    <div>
+    <div class="d-flex justify-content-between">
       <button class="link-button">
         <%= link_to @pigeon.link_to_content, target: "_blank", class: "icon-play" do %>
           <% if @pigeon.media_type == "video" %>
@@ -67,15 +69,22 @@
           <i class="fa-solid fa-headphones music-icon"></i>
         <% end %>
         <% end %>
-        <div>Go to link</div>
+        <div class="ms-2">Go to link</div>
+      </button>
+
+      <button class="reply-chat">
+        <%= link_to (chat_path(@pigeon.chat)) do %>
+          <i class="fa-solid fa-paper-plane send-icon"></i>
+          <% end %>
+        <div class="ms-2">Reply in chat</div>
       </button>
     </div>
 
-
-
     <div class="mt-5 card-icons">
-      <%= link_to pigeon_path(@pigeon), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
-        <i class="fa fa-times delete-cross"></i>
+      <% unless @pigeon.reply_later %>
+        <%= link_to add_to_reply_path(@pigeon), data: { turbo_method: :patch } do %>
+        <i class="fa-regular fa-clock reply-icon"></i>
+        <% end %>
       <% end %>
       <% if @pigeon.favourite? %>
         <%= link_to toggle_favourite_path(@pigeon), data: { turbo_method: :patch } do %>
@@ -86,21 +95,14 @@
           <i class="fa-solid fa-heart heart" style="color: #BBC800;"></i>
         <% end %>
       <% end %>
-      <%= link_to pigeons_path do %>
-        <i class="fa-solid fa-arrow-left back-icon"></i>
-      <% end %>
-      <% unless @pigeon.reply_later %>
-        <%= link_to add_to_reply_path(@pigeon), data: { turbo_method: :patch } do %>
-        <i class="fa-regular fa-clock reply-icon"></i>
-        <% end %>
-      <% end %>
-      <i class="fa-solid fa-paper-plane send-icon"></i>
       <% if @pigeon.read %>
         <%= link_to toggle_read_path(@pigeon), data: { turbo_method: :patch }  do %>
           <i class="fa-solid fa-book unread-icon"></i>
         <% end %>
       <% end %>
-
+      <%= link_to pigeon_path(@pigeon), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+        <i class="fa fa-times delete-cross"></i>
+      <% end %>
     </div>
 
     <% if (@pigeon.media_type == "video" || @pigeon.media_type == "music") && @pigeon.link_to_content.include?("youtu") %>
