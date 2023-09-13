@@ -103,58 +103,65 @@ pig7.save
 puts "Created: #{pig7.title}"
 puts "Pigeons created"
 
-pig8 = Pigeon.new(summary: "something something", chat: chat7, length: 15, user:jode,              link_to_content: "https://www.theguardian.com/environment/2023/sep/08/biggest-clean-energy-disaster-in-years-uk-auction-secures-no-offshore-windfarms",
-              media_type: "article", date: Date.today, title: "Biggest clean energy disaster in years",
-              description: "description", recipient: yustiniya)
+pig8 = Pigeon.new(summary: "something something", chat: chat7, length: 15, user:jode,
+  link_to_content: "https://www.theguardian.com/environment/2023/sep/08/biggest-clean-energy-disaster-in-years-uk-auction-secures-no-offshore-windfarms",
+  media_type: "article", date: Date.today, title: "Biggest clean energy disaster in years",
+  description: "description", recipient: yustiniya)
 pig8.tag_names << "World"
 pig8.tag_names << "Politics"
 pig8.save
 puts "Created: #{pig8.title}"
 puts "Pigeons created"
 
-pig9 = Pigeon.new(summary: "something something", chat: chat3, length: 20, user:jode,              link_to_content: "https://www.theguardian.com/commentisfree/2023/sep/07/britain-brexit-eu-horizon-programme-science",
-              media_type: "article", date: Date.today, title: "Britain can recover from the self-harm of Brexit",
-              description: "description", recipient: yustiniya)
+pig9 = Pigeon.new(summary: "something something", chat: chat3, length: 20, user:jode,
+  link_to_content: "https://www.theguardian.com/commentisfree/2023/sep/07/britain-brexit-eu-horizon-programme-science",
+  media_type: "article", date: Date.today, title: "Britain can recover from the self-harm of Brexit",
+  description: "description", recipient: yustiniya)
 pig9.tag_names << "World"
 pig9.tag_names << "Politics"
 pig9.save
 puts "Created: #{pig9.title}"
 puts "Pigeons created"
 
-pig10 = Pigeon.new(summary: "something something", chat: chat4, length: 30, user:jode,              link_to_content: "https://open.spotify.com/episode/2T757nicqi1eoefOefrtqK",
-              media_type: "podcast", date: Date.today, title: "Trump surrenders to Georgia authorities",
-              description: "description", recipient: yustiniya)
+pig10 = Pigeon.new(summary: "something something", chat: chat4, length: 30, user:jode,
+  link_to_content: "https://open.spotify.com/episode/2T757nicqi1eoefOefrtqK",
+  media_type: "podcast", date: Date.today, title: "Trump surrenders to Georgia authorities",
+  description: "description", recipient: yustiniya)
 pig10.tag_names << "Misc"
 pig10.tag_names << "Politics"
 pig10.save
 puts "Created: #{pig10.title}"
 
-pig11 = Pigeon.new(summary: "something something", chat:chat1, length: 3, user:jode,              link_to_content: "https://open.spotify.com/playlist/37i9dQZF1DWTvNyxOwkztu",
-              media_type: "video", date: Date.today, title: "Chillout Lounge",
-              description: "description", recipient: yustiniya)
+pig11 = Pigeon.new(summary: "something something", chat:chat1, length: 3, user:jode,
+  link_to_content: "https://www.youtube.com/watch?v=OAM1qPeYyM4&list=RDOAM1qPeYyM4&start_radio=1",
+  media_type: "video", date: Date.today, title: "Chillout Lounge",
+  description: "description", recipient: yustiniya)
 pig11.tag_names << "Ukhouse"
 pig11.tag_names << "Chill"
 pig11.save
 puts "Created: #{pig11.title}"
 
-pig12 = Pigeon.new(summary: "something something", chat: chat6, length: 28, user:jode,              link_to_content: "https://open.spotify.com/show/2yh3hbULLIewV87rTogCdR",
-              media_type: "podcast", date: Date.today, title: "World Business Report",
-              description: "description", recipient: yustiniya)
+pig12 = Pigeon.new(summary: "something something", chat: chat6, length: 28, user:jode,
+  link_to_content: "https://open.spotify.com/show/2yh3hbULLIewV87rTogCdR",
+  media_type: "podcast", date: Date.today, title: "World Business Report",
+  description: "description", recipient: yustiniya)
 pig12.tag_names << "World"
 pig12.save
 puts "Created: #{pig12.title}"
 puts "Pigeons created"
 
-pig13 = Pigeon.new(summary: "something something", chat:chat1, length: 4, user:jode,              link_to_content: "https://open.spotify.com/playlist/37i9dQZF1DWXRvPx3nttRN",
-              media_type: "video", date: Date.today, title: "Fell Good Acoustic",
-              description: "description", recipient: yustiniya)
+pig13 = Pigeon.new(summary: "something something", chat:chat1, length: 4, user:jode,
+  link_to_content: "https://www.youtube.com/watch?v=LrLUuiFxYL4",
+  media_type: "video", date: Date.today, title: "Fell Good Acoustic",
+  description: "description", recipient: yustiniya)
 pig13.tag_names << "Chill"
 pig13.save
 puts "Created: #{pig13.title}"
 
-pig13 = Pigeon.new(summary: "something something", chat:chat1, length: 9, user:jode,  link_to_content: "https://www.youtube.com/watch?v=h_D3VFfhvs4",
+pig14 = Pigeon.new(summary: "something something", chat:chat1, length: 9, user:jode,
+  link_to_content: "https://www.youtube.com/watch?v=h_D3VFfhvs4",
   media_type: "song", date: Date.today, title: "Micheal Jackson - Smooth Criminal",
   description: "description", recipient: duarte)
-pig13.tag_names << "Music"
-pig13.save
-puts "Created: #{pig13.title}"
+pig14.tag_names << "Music"
+pig14.save
+puts "Created: #{pig14.title}"

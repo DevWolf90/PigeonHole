@@ -33,22 +33,29 @@
         <i class="fa-solid fa-headphones"></i>
       <% end %>
     </p>
-    <p>Summary by AI: <%= @pigeon.summary %></p>
-    <% time_to_read = TimeToReadService.new(@pigeon.link_to_content).call %>
-    <p>
-      <% if time_to_read <= 1 %>
-        This pigeon will take <%= time_to_read %> minute to look at.
-      <% else %>
-        This pigeon will take <%= time_to_read %> minutes to look at.
-      <% end %>
-    </p>
 
-    <% if @pigeon.media_type == "video" %>
-      <p>Length: <%= @pigeon.length %></p>
+    <% if @pigeon.media_type == "article" || @pigeon.media_type == "book" %>
+      <p>Summary by AI: <%= @pigeon.summary %></p>
+      <% time_to_read = TimeToReadService.new(@pigeon.link_to_content).call %>
+      <p>
+        <% if time_to_read <= 1 %>
+          This pigeon will take <%= time_to_read %> minute to read.
+        <% else %>
+          This pigeon will take <%= time_to_read %> minutes to read.
+        <% end %>
+      </p>
     <% end %>
 
-    <% if @pigeon.media_type == "music" %>
-      <p>Duaration: = <%= pigeon.length %></p>
+
+    <% if (@pigeon.media_type == "video" || pigeon.media_type == "music") && @pigeon.link_to_content.include?("youtu") %>
+      <p>
+        <% if @pigeon.length <= 1 %>
+         Length: This pigeon will take <%= @pigeon.length %> minute to listen to.
+        <% else %>
+          Length: This pigeon will take <%= @pigeon.length %> minutes to listen to.
+        <% end %>
+      </p>
+
     <% end %>
 
     <% if @pigeon.favourite? %>

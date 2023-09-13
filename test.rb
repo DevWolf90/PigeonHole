@@ -8,3 +8,9 @@ html_doc = Nokogiri::HTML.parse(html_file)
 puts html_doc.at("body").text
 
 OpenaiService.new("How long would it take to read this text? #{html_doc.at("body").text}").call
+
+
+
+# <% if @pigeon.media_type == "music" %>
+#   <p>Length: = <%= pigeon.duration %></p>
+# <% end %>
