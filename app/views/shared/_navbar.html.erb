@@ -9,8 +9,8 @@
       <% end %>
       </div>
       <div>
-        <button type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-menu-2" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <button type="button" data-bs-toggle="dropdown" aria-expanded="false" class="icon-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-menu-2" style="background-color: grey;" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
               <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
               <path d="M4 6l16 0" />
               <path d="M4 12l16 0" />
@@ -23,8 +23,13 @@
               <%= link_to "Home", root_path, class: "dropdown-item" %></li>
             </li>
             <li>
-              <%= link_to "My Pigeons", pigeons_path, class: "dropdown-item" %>
+              <%= link_to "My pigeons", pigeons_path, class: "dropdown-item" %>
             </li>
+            <li>
+              <%= link_to "My messages", chats_path, class: "dropdown-item" %>
+            </li>
+            <li>
+              <%= link_to "Create a new pigeon", new_pigeon_path, class:"dropdown-item" %>
             <li>
               <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete} , class: "dropdown-item" %>
             </li>
