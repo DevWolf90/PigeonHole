@@ -29,3 +29,31 @@
   padding: 10px;
   margin: 1rem 0;
 }
+
+.link-button {
+  font-size: 1rem;
+  border-radius: 15px;
+  padding: 0.6rem 0.9rem;
+  display: flex;
+  align-items: center;
+  background-color: $purple;
+  color: white;
+  margin: 0.4rem;
+  border: 0px;
+  justify-content: space-between;
+  width: auto;
+}
+
+.reply-chat{
+  font-size: 1rem;
+  border-radius: 15px;
+  padding: 0.6rem 0.9rem;
+  display: flex;
+  align-items: center;
+  background-color: $green;
+  color: black;
+  margin: 0.4rem;
+  border: 0px;
+  justify-content: space-between;
+  width: auto;
+}
