@@ -28,22 +28,13 @@
             <h5 class="offcanvas-title" id="offcanvasRightLabel"></h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
-          <div class="offcanvas-body" style="background: darkgray;">
+          <div class="offcanvas-body">
             <% if user_signed_in? %>
-            <li>
-              <%= link_to "Home", root_path%></li>
-            </li>
-            <li>
-              <%= link_to "My pigeons", pigeons_path%>
-            </li>
-            <li>
-              <%= link_to "My messages", chats_path%>
-            </li>
-            <li>
-              <%= link_to "Create a new pigeon", new_pigeon_path%>
-            <li>
-              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete} %>
-            </li>
+           <h1> <li> <%= link_to "Home", root_path%></li> </h1>
+           <h1> <li> <%= link_to "My pigeons", pigeons_path%></li> </h1>
+           <h1> <li><%= link_to "My messages", chats_path%></li> </h1>
+           <h1><li> <%= link_to "Create a new pigeon", new_pigeon_path%></li> </h1>
+           <h1><li> <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete} %></li></h1>
           <% else %>
             <li>
               <%= link_to "Login", new_user_session_path %>
