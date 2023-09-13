@@ -11,7 +11,7 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body style="background-color: black; color:white;">
     <% if user_signed_in? %>
       <%= turbo_stream_from "user_#{current_user.id}" %>
     <%= render "shared/navbar" %>
