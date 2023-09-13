@@ -15,10 +15,8 @@
                   <% end %>
                 </ul>
                 <% if pigeon.read? %>
-                  <p>Status: read</p>
                   <%= link_to "Mark as unread", link_read_path(pigeon), data: { turbo_method: :patch }  %>
                 <% else %>
-                  <p>Status: unread</p>
                   <%= link_to "Mark as read", link_read_path(pigeon), data: { turbo_method: :patch } %>
                 <% end %>
                 <% if pigeon.favourite? %>
