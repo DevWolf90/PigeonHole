@@ -109,19 +109,19 @@
 }
 
 .dropdown {
-  background-color: grey;
+  background-color: $gray;
 }
 
 .icon .icon-tabler {
-  background-color: grey;
+  background-color: $gray;
 }
 
 .offcanvas-header{
-  background-color: darkgrey;
+  background-color: $gray;
 }
 
 .offcanvas-body {
-  background-color: darkgray;
+  background-color:$gray;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -140,6 +140,12 @@
 
 .offcanvas-body a:hover {
   color: $green;
+}
+
+.dropdown-btn button {
+  background-color: $gray;
+  border: none;
+  color: white;
 }
 
 // .offcanvas-body h1 {
