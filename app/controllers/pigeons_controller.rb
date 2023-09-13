@@ -47,7 +47,7 @@ class PigeonsController < ApplicationController
     @pigeon = Pigeon.find(params[:id])
     @pigeon.read = !@pigeon.read
     @pigeon.save
-    redirect_to pigeon_path(@pigeon)
+    redirect_to root_path
   end
 
   def mark_read # marks read after opening
