@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" data-controller="refresh">
 
 <div class="container py-3">
   <h1>Search your pigeons</h1>
@@ -6,24 +6,28 @@
   <div class="row">
     <div class="my-3">
       <div class="d-flex align-items-center">
-        <%= form_with url: pigeons_path, method: :get do %>
+        <%= form_with url: pigeons_path, method: :get, data: { refresh_target: "form" } do %>
           <div class="my-5" >
             <%= text_field_tag :query,
                   params[:query],
                   class: "form-control",
-                  placeholder: "Type a keyword"%>
+                  placeholder: "Type a keyword",
+                  data: {
+                    refresh_target: "input",
+                    action: "keyup->refresh#update"
+                  }%>
           </div>
           <div class="d-flex">
           <div class="row">
             <div class="d-flex justify-content-center">
               <% @alltags.each do |tag| %>
-                <input type="checkbox" id="<%= tag %>" name="q[tags_name_cont_any][]" value="<%= tag %>" class="checkboxaspill tag-selector" <%= params.dig(:q, :tags_name_cont_any)&.include?(tag) ? 'checked' : '' %>>
+                <input type="checkbox" id="<%= tag %>" data-refresh-target="checkbox" data-action="change->refresh#add" name="q[tags_name_cont_any][]" value="<%= tag %>" class="checkboxaspill tag-selector" <%= params.dig(:q, :tags_name_cont_any)&.include?(tag) ? 'checked' : '' %>>
                 <label for="<%= tag %>" class="tag-button"><%= tag %></label>
               <% end %>
             </div>
             <div class="d-flex justify-content-center">
               <% @mediatypes.each do |mt| %>
-                <input type="checkbox" id="<%= mt %>" name="q[media_type][]" value="<%= mt %>" class="checkboxaspill media-type-selector" <%= params.dig(:q, :media_type)&.include?(mt) ? 'checked' : '' %>>
+                <input type="checkbox" id="<%= mt %>"  data-action="change->refresh#media" name="q[media_type][]" value="<%= mt %>" class="checkboxaspill media-type-selector" <%= params.dig(:q, :media_type)&.include?(mt) ? 'checked' : '' %>>
                 <label for="<%= mt %>" class="media-type-button"><%= mt %></label>
               <% end %>
             </div>
@@ -38,56 +42,7 @@
     </div>
   </div>
 
-    <%= turbo_frame_tag :results, target: :_top, id: "searchResults"  do %>
-      <% if @pigeons == [] %>
-        <p>Oops, too specific. No pigeons satisfy this query</p>
-        <% else %>
-        <div class="pigeons-container" >
-          <% @pigeons.each do |pigeon| %>
-            <div class="border">
-              <%= link_to pigeon.title, pigeon_path(pigeon) %>
-              <p>--------------------</p>
-              <p>sent by <%#= pigeon.message.sender.nickname %> on <%= pigeon.date.strftime("%a, %-d %B %Y") %> at <%= pigeon.date.strftime("%H:%M") %></p>
-                <% @tags = pigeon.tag_names %>
-                <ul>
-                  <% @tags.each do |tag| %>
-                    <li><%= tag %></li>
-                  <% end %>
-                </ul>
-                <% if pigeon.read? %>
-                  <p>Status: read</p>
-                  <%= link_to "Mark as unread", link_read_path(pigeon), data: { turbo_method: :patch }  %>
-                <% else %>
-                  <p>Status: unread</p>
-                  <%= link_to "Mark as read", link_read_path(pigeon), data: { turbo_method: :patch } %>
-                <% end %>
-                <% if pigeon.favourite? %>
-                  <%= link_to link_favourite_path(pigeon), data: { turbo_method: :patch } do %>
-                    <p><i class="fa-solid fa-heart"></i></p>
-                  <% end %>
-                <% else %>
-                  <%= link_to link_favourite_path(pigeon), data: { turbo_method: :patch } do %>
-                    <p> <i class="fa-regular fa-heart"></i> </p>
-                  <% end %>
-                <% end %>
-              <p>Media type:
-                <% if pigeon.media_type == "video" %>
-                  <i class="fa-brands fa-youtube"></i></p>
-                <% elsif pigeon.media_type == "article" %>
-                  <i class="fa-regular fa-newspaper"></i></p>
-                <% elsif pigeon.media_type == "book" %>
-                  <i class="fa-solid fa-book"></i></p>
-                <% elsif pigeon.media_type == "podcast"%>
-                <i class="fa-solid fa-headphones"></i></p>
-                <% elsif pigeon.media_type == "audio" || "song" || "playlist"%>
-                <i class="fa-solid fa-music"></i></p>
-                <% elsif pigeon.media_type == "movie"%>
-                <i class="fa-solid fa-film"></i></p>
-                <% end %>
-              <%= link_to "Delete", pigeon_path(pigeon), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
-            </div>
-        </div>
-      <% end %>
-        <% end %>
-    <% end %>
+    <div class="pigeons-container" data-refresh-target="list" >
+      <%= render "pigeons/list" %>
+    </div>
 </div>
