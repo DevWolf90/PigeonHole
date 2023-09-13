@@ -150,11 +150,14 @@
   <div class="home-container text-center">
       <h1> Welcome to your </h1>
         <img src="https://res.cloudinary.com/dm2lbzmmn/image/upload/v1694509395/PigeonHole_Logo_full_white_two_lines_bor1gt.png" alt="Logo" class="plogo">
-      <h1> home of amazing content
-          curated <strong>for</strong> you
-          by <strong>your</strong> closest people
+      <h1 style="text-align: left;">
+          home of amazing content <br>
+          curated <span style="font-weight: 700!important;">for</span> you <br>
+          by <span>your</span> closest people
       </h1>
-    <button class="login"><%= link_to "Login", new_user_session_path, style: "color: black;" %></button>
-    <button class="signup"><%= link_to "Sign up", new_user_registration_path, style: "color: black;"%></button>
+      <div class="d-flex">
+        <button class="login"><%= link_to "Login", new_user_session_path, style: "color: black;" %></button>
+        <button class="signup"><%= link_to "Sign up", new_user_registration_path, style: "color: black;"%></button>
+      </div>
   </div>
 <% end %>
