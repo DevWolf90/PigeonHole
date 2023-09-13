@@ -1,0 +1,37 @@
+.plogo {
+  width: 250px;
+}
+
+
+.login {
+  color:black;
+  background-color: $green;
+  border:none;
+  font-size: 1rem;
+  padding: 0.4rem 0.7rem;
+  margin: 0.6rem;
+  border-radius: 8px;
+}
+
+.signup {
+  color:black;
+  background-color: $purple;
+  border:none;
+  font-size: 1rem;
+  padding: 0.4rem 0.7rem;
+  margin: 0.6rem;
+  border-radius: 8px;
+}
+
+.home-container {
+  background-color: black;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.home-container h1 {
+  color: white;
+}

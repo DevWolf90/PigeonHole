@@ -4,6 +4,8 @@
     <div style="border-radius: 50px; height: 100px; width: 100px; overflow: hidden; background: gray;">
       <% if @pigeon.user.avatar.attached? %>
         <%= cl_image_tag @pigeon.user.avatar.key, height: 100, width:100, crop: :fill %>
+        <% else %>
+        <%= image_tag("https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000", height:100, width:100) %>
       <% end %>
     </div>
 
@@ -39,16 +41,18 @@
     </div>
 
     <div class="summary">
+      <% if @pigeon.media_type == "article" || @pigeon.media_type == "book" %>
       <p class="summary-title">Summary by AI: </p>
       <p><%= @pigeon.summary %></p>
       <% time_to_read = TimeToReadService.new(@pigeon.link_to_content).call %>
       <p>
         <% if time_to_read <= 1 %>
-          This pigeon will take <%= time_to_read %> minute to look at.
+          This pigeon will take <%= time_to_read %> minute to read.
         <% else %>
-          This pigeon will take <%= time_to_read %> minutes to look at.
+          This pigeon will take <%= time_to_read %> minutes to read.
         <% end %>
       </p>
+      <% end %>
     </div>
 
     <i class='fa fa-hourglass-start' style="color:#BBC800;"></i>
@@ -79,12 +83,15 @@
       <% end %>
     </div>
 
-    <% if @pigeon.media_type == "video" %>
-      <p>Length: <%= @pigeon.length %></p>
-    <% end %>
-    <% if @pigeon.media_type == "music" %>
-      <p>Duaration: = <%= pigeon.length %></p>
-    <% end %>
+    <% if (@pigeon.media_type == "video" || @pigeon.media_type == "music") && @pigeon.link_to_content.include?("youtu") %>
+      <p>
+        <% if @pigeon.length <= 1 %>
+        Length: This pigeon will take <%= @pigeon.length %> minute to listen to.
+        <% else %>
+          Length: This pigeon will take <%= @pigeon.length %> minutes to listen to.
+        <% end %>
+      </p>
+      <% end %>
   </div>
 
   <div class="chatWindow">
