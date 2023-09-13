@@ -35,7 +35,6 @@
                     </p>
                   </div>
                 </div>
-
               <% end %>
             <% end %>
           <% end %>
@@ -47,8 +46,10 @@
     <div class="scrolling-wrapper">
       <ul class="d-flex align-items-center p-0">
         <% pigeons_fav = @pigeons.all? { |pigeon| pigeon.favourite} %>
-            <% @pigeons.each do |pigeon| %>
             <% if pigeons_fav %>
+            <p><strong>You don't have any fav pigeons yet 🥺</strong></p>
+            <% else %>
+            <% @pigeons.each do |pigeon| %>
               <%= link_to mark_read_path(pigeon), data: { turbo_method: :patch }  do%>
                 <div class="pigeon-card">
                   <div>
@@ -60,24 +61,27 @@
                   </div>
                   <div class="pigeon-card-media">
                       <% if pigeon.media_type == "video" %>
-                          <p><i class="fa-brands fa-youtube"></i>
+                          <p><i class="fa-brands fa-youtube"></i></p>
                       <% elsif pigeon.media_type == "article" %>
-                          <p><i class="fa-regular fa-newspaper"></i>
+                          <p><i class="fa-regular fa-newspaper"></i></p>
                       <% elsif pigeon.media_type == "book" %>
-                          <p><i class="fa-solid fa-book"></i>
+                          <p><i class="fa-solid fa-book"></i></p>
                       <% elsif pigeon.media_type == "podcast"%>
-                          <p><i class="fa-solid fa-headphones"></i>
+                          <p><i class="fa-solid fa-headphones"></i></p>
                       <% elsif pigeon.media_type == "audio" || "song" || "playlist"%>
-                          <p><i class="fa-solid fa-music"></i>
+                          <p><i class="fa-solid fa-music"></i></p>
                       <% elsif pigeon.media_type == "movie"%>
-                          <p><i class="fa-solid fa-film"></i>
+                          <p><i class="fa-solid fa-film"></i></p>
                       <% end %>
-                  </div>
-                  <% end %>
+                  </p>
+                </div>
+              </div>
             <% end %>
-      </ul>
           <% end %>
-    </div>
+        <% end %>
+      <% end %>
+    </ul>
+   </div>
       <ul class="reply-pigeons d-flex align-items-center p-0">
           <% @pigeons.each do |pigeon| %>
             <% if pigeon.reply_later %>
