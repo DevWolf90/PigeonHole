@@ -4,6 +4,8 @@
     <div style="border-radius: 50px; height: 100px; width: 100px; overflow: hidden; background: gray;">
       <% if @pigeon.user.avatar.attached? %>
         <%= cl_image_tag @pigeon.user.avatar.key, height: 100, width:100, crop: :fill %>
+        <% else %>
+        <%= image_tag("https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000", height:100, width:100) %>
       <% end %>
     </div>
 
