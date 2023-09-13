@@ -101,11 +101,7 @@
   <% end %>
 
     <% if @pigeon.read %>
-      <p>Status: read</p>
       <%= link_to "Mark as unread", toggle_read_path(@pigeon), data: { turbo_method: :patch }  %>
-    <% else %>
-      <p>Status: unread</p>
-      <%= link_to "Mark as read", toggle_read_path(@pigeon), data: { turbo_method: :patch } %>
     <% end %>
 
     <!-- <%= link_to "Browse all pigeons", pigeons_path %><br> -->
