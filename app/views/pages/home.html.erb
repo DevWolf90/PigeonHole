@@ -32,9 +32,9 @@
                       <% elsif pigeon.media_type == "movie"%>
                           <p><i class="fa-solid fa-film"></i></p>
                       <% end %>
-                    </p>
                   </div>
                 </div>
+
               <% end %>
             <% end %>
           <% end %>
@@ -44,12 +44,9 @@
 
    <h2>Favourite Pigeons</h2>
     <div class="scrolling-wrapper">
-      <ul class="d-flex align-items-center p-0">
-        <% pigeons_fav = @pigeons.all? { |pigeon| pigeon.favourite} %>
-            <% if pigeons_fav %>
-            <p><strong>You don't have any fav pigeons yet 🥺</strong></p>
-            <% else %>
-            <% @pigeons.each do |pigeon| %>
+      <div class="d-flex align-items-center p-0">
+          <% @pigeons.each do |pigeon| %>
+            <% if pigeon.favourite? %>
               <%= link_to mark_read_path(pigeon), data: { turbo_method: :patch }  do%>
                 <div class="pigeon-card">
                   <div>
@@ -73,15 +70,12 @@
                       <% elsif pigeon.media_type == "movie"%>
                           <p><i class="fa-solid fa-film"></i></p>
                       <% end %>
-                  </p>
+                  </div>
                 </div>
-              </div>
+                <% end %>
             <% end %>
           <% end %>
-        <% end %>
-      <% end %>
-    </ul>
-   </div>
+    </div>
       <ul class="reply-pigeons d-flex align-items-center p-0">
           <% @pigeons.each do |pigeon| %>
             <% if pigeon.reply_later %>
