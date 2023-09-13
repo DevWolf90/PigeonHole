@@ -3,6 +3,7 @@ body {
   height: 100vh;
   background-size: cover;
   background-position: center;
+  background-color: black;
 }
 
 * {
@@ -30,4 +31,8 @@ a:hover {
 header {
   position: relative;
   padding: 0 2rem;
+}
+
+.container {
+  background-color: black;
 }
