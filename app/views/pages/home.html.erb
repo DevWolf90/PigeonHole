@@ -12,12 +12,19 @@
             <% unless pigeon.read %>
               <%= link_to mark_read_path(pigeon), data: { turbo_method: :patch }  do%>
                 <div class="pigeon-card-unread">
-                  <div>
-                    <p><%= pigeon.user.nickname %></p>
-                    <p><%= pigeon.date.strftime("%a %b %e") %></p>
+                  <div class="sender-date-info">
+                    <div style="border-radius: 50px; height: 30px; width: 30px; overflow: hidden; background: gray;">
+                      <% if pigeon.user.avatar.attached? %>
+                        <%= cl_image_tag @pigeon.user.avatar.key, height: 30, width:30, crop: :fill %>
+                        <% else %>
+                        <%= image_tag("https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000", height:30, width:30) %>
+                      <% end %>
+                    </div>
+                    <p class="m-0">@<%= pigeon.user.nickname %></p>
+                    <p class="m-0"><%= pigeon.date.strftime("%a %b %e") %></p>
                   </div>
                   <div>
-                    <h3><%= pigeon.title %></h3>
+                    <h3><%= pigeon.title.truncate(30) %></h3>
                   </div>
                   <div class="pigeon-card-media">
                       <% if pigeon.media_type == "video" %>
@@ -51,11 +58,11 @@
               <%= link_to mark_read_path(pigeon), data: { turbo_method: :patch }  do%>
                 <div class="pigeon-card">
                   <div>
-                    <p><%= pigeon.user.nickname %></p>
-                    <p><%= pigeon.date.strftime("%a %b %e") %></p>
+                    <p class="m-0"><%= pigeon.user.nickname %></p>
+                    <p class="m-0"><%= pigeon.date.strftime("%a %b %e") %></p>
                   </div>
                   <div>
-                    <h3><%= pigeon.title %></h3>
+                    <h3><%= pigeon.title.truncate(17) %></h3>
                   </div>
                   <div class="pigeon-card-media">
                       <% if pigeon.media_type == "video" %>
@@ -86,11 +93,11 @@
               <%= link_to mark_read_path(pigeon), data: { turbo_method: :patch }  do%>
               <div class="pigeon-card">
                 <div>
-                  <p><%= pigeon.user.nickname %></p>
-                  <p><%= pigeon.date.strftime("%a %b %e") %></p>
+                  <p class="m-0"><%= pigeon.user.nickname %></p>
+                  <p class="m-0"><%= pigeon.date.strftime("%a %b %e") %></p>
                 </div>
                 <div>
-                  <h3><%= pigeon.title %></h3>
+                  <h3><%= pigeon.title.truncate(17) %></h3>
                 </div>
                 <div class="pigeon-card-media">
                   <% if pigeon.media_type == "video" %>
