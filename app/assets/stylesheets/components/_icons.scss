@@ -5,15 +5,9 @@
   align-items: center;
 }
 
-.icon-play {
-  background-color: $green;
-  width: 32px;
-  aspect-ratio: 1;
-  border-radius: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: black;
+.play-icon {
+  font-size: 2rem;
+  color: $green;
 }
 
 .heart {
@@ -31,6 +25,7 @@
   width: 32px;
   border-radius: 100%;
   color: black;
+
 }
 
 .reply-icon {
@@ -51,6 +46,11 @@
 }
 
 .music-icon {
+  font-size: 2rem;
+  color: $green;
+}
+
+.book-icon {
   font-size: 2rem;
   color: $green;
 }
