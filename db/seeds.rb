@@ -85,9 +85,10 @@ pig5.save
 puts "Created: #{pig5.title}"
 puts "Pigeons created"
 
-pig6 = Pigeon.new(summary: "something something", chat: chat6, length: 21, user:jode,              link_to_content: "https://open.spotify.com/episode/1cEZDjanhbQwusJPtv0ngB",
-              media_type: "podcast", date: Date.today, title: "Would You like a selfie?",
-              description: "description", recipient: yustiniya)
+pig6 = Pigeon.new(summary: "something something", chat: chat6, length: 21, user:jode,
+  link_to_content: "https://open.spotify.com/episode/1cEZDjanhbQwusJPtv0ngB",
+  media_type: "podcast", date: Date.today, title: "Would You like a selfie?",
+  description: "description", recipient: yustiniya)
 pig6.tag_names << "Funny"
 pig6.tag_names << "Comedy"
 pig6.save
