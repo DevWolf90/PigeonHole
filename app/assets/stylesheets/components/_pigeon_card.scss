@@ -25,6 +25,7 @@
   scroll-snap-align: start;
   font-family: "Inter", sans-serif!important;
   font-size: 0.6rem;
+  position: relative;
     // &:hover {
     //   height: 280px;
     //   width: 280px;
@@ -35,6 +36,13 @@
     &h3 {
       font-size:medium;
       margin: 0px;
+    }
+
+    .offset-icon {
+      position: absolute;
+      right: -5px;
+      top: -10px;
+      color: $purple;
     }
 }
 
