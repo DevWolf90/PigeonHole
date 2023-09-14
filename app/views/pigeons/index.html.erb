@@ -1,48 +1,41 @@
 <div class="container" data-controller="refresh">
-
-<div class="container py-3">
-  <h1>Search your pigeons</h1>
-
-  <div class="row">
-    <div class="my-3">
-      <div class="d-flex align-items-center">
-        <%= form_with url: pigeons_path, method: :get, data: { refresh_target: "form" } do %>
-          <div class="my-5" >
-            <%= text_field_tag :query,
-                  params[:query],
-                  class: "form-control",
-                  size:10,
-                  placeholder: "Type a keyword",
-                  data: {
-                    refresh_target: "input",
-                    action: "keyup->refresh#update"
-                  }%>
-          </div>
-          <div class="d-flex">
-          <div class="row">
-            <div class="d-flex justify-content-center">
-              <% @alltags.each do |tag| %>
-                <input type="checkbox" id="<%= tag %>" data-refresh-target="checkbox" data-action="change->refresh#add" name="q[tags_name_cont_any][]" value="<%= tag %>" class="checkboxaspill tag-selector" <%= params.dig(:q, :tags_name_cont_any)&.include?(tag) ? 'checked' : '' %>>
-                <label for="<%= tag %>" class="tag-button"><%= tag %></label>
-              <% end %>
+  <div class="search my-3">
+    <%= form_with url: pigeons_path, method: :get, data: { refresh_target: "form" } do %>
+      <div class="input-group my-4" style="position: relative;" >
+        <%= text_field_tag :query,
+              params[:query],
+              class: "searchbar",
+              size:10,
+              placeholder: "Type a keyword",
+              data: {
+                refresh_target: "input",
+                action: "keyup->refresh#update"
+              }%>
+            <div class="input-group-append">
+              <button type="submit" class="btn-search btn-dark">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
             </div>
-            <div class="d-flex justify-content-center">
-              <% @mediatypes.each do |mt| %>
-                <input type="checkbox" id="<%= mt %>"  data-action="change->refresh#media" name="q[media_type][]" value="<%= mt %>" class="checkboxaspill media-type-selector" <%= params.dig(:q, :media_type)&.include?(mt) ? 'checked' : '' %>>
-                <label for="<%= mt %>" class="media-type-button"><%= mt %></label>
-              <% end %>
-            </div>
-            <div class="d-flex justify-content-center">
-              <%= submit_tag "Refine Search", name: "", class: "btn btn-dark mt-3 px-4", style: "background-color: black; box-shadow: 1px 1px 1px 1px gray; border-radius: 5px; font-size: 1.5rem;" %>
-            </div>
-          </div>
-          <% end %>
-          <%= link_to "Clear selection", pigeons_path, data: { turbo_method: :get }  %>
-          </div>
       </div>
-    </div>
+      <div class="d-flex">
+      <div class="row">
+        <div class="d-flex justify-content-center">
+          <% @alltags.each do |tag| %>
+            <input type="checkbox" id="<%= tag %>" data-refresh-target="checkbox" data-action="change->refresh#add" name="q[tags_name_cont_any][]" value="<%= tag %>" class="checkboxaspill tag-selector" <%= params.dig(:q, :tags_name_cont_any)&.include?(tag) ? 'checked' : '' %>>
+            <label for="<%= tag %>" class="tag-button"><%= tag %></label>
+          <% end %>
+        </div>
+        <div class="d-flex justify-content-center">
+          <% @mediatypes.each do |mt| %>
+            <input type="checkbox" id="<%= mt %>"  data-action="change->refresh#media" name="q[media_type][]" value="<%= mt %>" class="checkboxaspill media-type-selector" <%= params.dig(:q, :media_type)&.include?(mt) ? 'checked' : '' %>>
+            <label for="<%= mt %>" class="media-type-button"><%= mt %></label>
+          <% end %>
+        </div>
+      </div>
+      <% end %>
+      </div>
+      <%= link_to "Clear selection", pigeons_path, data: { turbo_method: :get }  %>
   </div>
-
 
   <div class="pigeons-container" data-refresh-target="list" >
     <%= render "pigeons/list" %>

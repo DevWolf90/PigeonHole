@@ -4,7 +4,7 @@
   <% else %>
     <div class="pigeons-container" >
       <% @pigeons.each do |pigeon| %>
-        <div class="border">
+        <div class="pigeon-card">
           <%= link_to pigeon.title, mark_read_path(pigeon), data: { turbo_method: :patch } %>
           <p>sent by <%#= pigeon.message.sender.nickname %> on <%= pigeon.date.strftime("%a, %-d %B %Y") %> at <%= pigeon.date.strftime("%H:%M") %></p>
           <% @tags = pigeon.tag_names %>
