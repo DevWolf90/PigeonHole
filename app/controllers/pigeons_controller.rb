@@ -82,9 +82,9 @@ class PigeonsController < ApplicationController
 
   def add_to_reply # adds to reply later and redirects to homepage
     @pigeon = Pigeon.find(params[:id])
-    @pigeon.reply_later = true
+    @pigeon.reply_later = !@pigeon.reply_later
     @pigeon.save
-    redirect_to root_path
+    redirect_to pigeon_path(@pigeon)
   end
 
   def show
