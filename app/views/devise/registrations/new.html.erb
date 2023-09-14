@@ -8,17 +8,17 @@
       <%= f.input :email,
                   required: true,
                   autofocus: true,
-                  input_html: { autocomplete: "email" }%>
+                  input_html: { autocomplete: "email" }, placeholder:"Your eamil..."%>
       <%= f.input :password,
                   required: true,
                   hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                  input_html: { autocomplete: "new-password" } %>
+                  input_html: { autocomplete: "new-password" }, placeholder:"min. 6 characters" %>
       <%= f.input :password_confirmation,
                   required: true,
-                  input_html: { autocomplete: "new-password" } %>
+                  input_html: { autocomplete: "new-password" }, placeholder:"min. 6 characters" %>
       <%= f.input :nickname,
                   required: true,
-                  input_html: { autocomplete: "nickname" } %>
+                  input_html: { autocomplete: "nickname" }, placeholder:"Your username..."%>
         <div class="input_box">
         <%= f.input :avatar, as: :file, :label => "Profile Picture" %>
         </div>
@@ -29,5 +29,5 @@
     </div>
   <% end %>
 
-  <%= render "devise/shared/links" %>
+  <p>Already a user? <%= render "devise/shared/links" %></p>
 </div>

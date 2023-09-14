@@ -8,7 +8,7 @@ class MessagesController < ApplicationController
     @message.chat = @chat
     @message.sender = current_user
     if @message.save
-      flash[:notice] = "Message successfully sent"
+
       if current_page?(chat_path(@chat))
         redirect_to chat_path(@chat), status: :see_other
       else
