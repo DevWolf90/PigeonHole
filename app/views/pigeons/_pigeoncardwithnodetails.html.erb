@@ -2,7 +2,7 @@
   <% pigeon.id %>
   <div>
     <%= image_tag("https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000", height:35, width:35, style:"border-radius: 100px;") %>
-    <p class="mt-2">@MadeMartian</p>
+    <p class="mt-2 mb-0">@<%= pigeon.user.nickname %></p>
     <p><%= pigeon.date.strftime("%-d %B %Y") %></p>
       <!-- <%= pigeon.date.strftime("%H:%M") %> -->
   </div>
