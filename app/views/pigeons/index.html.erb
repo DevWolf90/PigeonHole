@@ -1,24 +1,23 @@
 <div class="container p-0" data-controller="refresh">
     <%= form_with url: pigeons_path, method: :get, data: { refresh_target: "form" } do %>
       <div class="d-flex mt-5 align-items-center">
-        <div class="input-group my-3 justify-content-center" style="align-items: center!important; position: absolute;" >
-          <%= text_field_tag :query,
-                params[:query],
-                class: "searchbar noSelect",
-                size:10,
-                placeholder: "Type a keyword",
-                data: {
-                  refresh_target: "input",
-                  action: "keyup->refresh#update"
-                }%>
-          <button type="submit" class="btn-search btn-dark">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </button>
-        </div>
+          <div class="input-group my-3 justify-content-center" style="align-items: center!important; position: absolute;" >
+            <%= text_field_tag :query,
+                  params[:query],
+                  class: "searchbar noSelect",
+                  size:10,
+                  placeholder: "Type a keyword",
+                  data: {
+                    refresh_target: "input",
+                    action: "keyup->refresh#update"
+                  }%>
+            <button type="submit" class="btn-search btn-dark">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </div>
       </div>
-
       <div class="row">
-        <div class="d-flex scrolling-wrapper" style="background-color:black!important; margin-top: 2.5rem; ">
+        <div class="d-flex scrolling-wrapper" style="background-color:black!important; margin-top: 2.5rem;">
           <% @alltags.each do |tag| %>
             <input type="checkbox" id="<%= tag %>" data-refresh-target="checkbox" data-action="change->refresh#add" name="q[tags_name_cont_any][]" value="<%= tag %>" class="checkboxaspill tag-selector" <%= params.dig(:q, :tags_name_cont_any)&.include?(tag) ? 'checked' : '' %>>
             <label for="<%= tag %>" class="tag-button"><%= tag %></label>
@@ -32,10 +31,9 @@
         </div>
       </div>
     <% end %>
-  <div class="clearbtn d-flex justify-content-center">
-    <%= link_to "Clear selection", pigeons_path, data: { turbo_method: :get }, class:"clear mb-3" %>
-  </div>
-
+    <div class="clearbtn d-flex justify-content-center">
+      <%= link_to "Clear selection", pigeons_path, data: { turbo_method: :get }, class:"clear mb-3" %>
+    </div>
   <div class="pigeons-container" data-refresh-target="list" >
     <%= render "pigeons/list" %>
   </div>
