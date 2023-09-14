@@ -5,8 +5,8 @@
     <div class="d-flex" style="background-color: #1E1E1E; width: 100vw;">
       <div class="pigeons-container px-2">
           <% @pigeons.each do |pigeon| %>
-            <div class="pigeon-card-with-details justify-content-center">
-              <div class="d-flex">
+            <div class="pigeon-card-with-details my-0" >
+              <div class="d-flex justify-content-between w-100">
                 <div class="sender-date-info">
                   <div style="border-radius: 50px; height: 30px; width: 30px; overflow: hidden; background: gray;">
                     <% if pigeon.user.avatar.attached? %>
@@ -20,7 +20,7 @@
                 </div>
                 <div>
                   <%= link_to pigeon_path(pigeon), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
-                    <i class="fa fa-times delete-cross"></i>
+                    <i class="fa fa-times delete-cross" ></i>
                   <% end %>
                 </div>
               </div>
@@ -33,7 +33,7 @@
                 </ul>
               </div>
               <h3><%= pigeon.title.truncate(23) %></h3>
-              <div class="d-flex align-items-center justify-content-between">
+              <div class="d-flex align-items-center justify-space-between w-100" style="position: relative;">
                 <div>
                   <% if pigeon.favourite? %>
                     <%= link_to link_favourite_path(pigeon), data: { turbo_method: :patch } do %>
