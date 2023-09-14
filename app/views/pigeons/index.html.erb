@@ -17,24 +17,24 @@
               </button>
             </div>
       </div>
-      <div class="d-flex">
+
       <div class="row">
-        <div class="d-flex justify-content-center scrolling-wrapper" style="background-color:black!important;">
+        <div class="d-flex justify-content-center scrolling-wrapper" style="background-color:black!important; margin-top: 0!important">
           <% @alltags.each do |tag| %>
             <input type="checkbox" id="<%= tag %>" data-refresh-target="checkbox" data-action="change->refresh#add" name="q[tags_name_cont_any][]" value="<%= tag %>" class="checkboxaspill tag-selector" <%= params.dig(:q, :tags_name_cont_any)&.include?(tag) ? 'checked' : '' %>>
             <label for="<%= tag %>" class="tag-button"><%= tag %></label>
           <% end %>
         </div>
-        <div class="d-flex justify-content-center scrolling-wrapper" style="background-color:black!important; margin-top: 0!important; margin-bottom: 0.5rem!important;">
+        <div class="d-flex scrolling-wrapper pb-2" style="background-color:black!important; margin-top: 0!important; margin-bottom: 0.5rem!important;">
           <% @mediatypes.each do |mt| %>
             <input type="checkbox" id="<%= mt %>"  data-action="change->refresh#media" name="q[media_type][]" value="<%= mt %>" class="checkboxaspill media-type-selector" <%= params.dig(:q, :media_type)&.include?(mt) ? 'checked' : '' %>>
             <label for="<%= mt %>" class="media-type-button"><%= mt %></label>
           <% end %>
         </div>
-      </div>
+
       <% end %>
       </div>
-      <div class="clearbtn d-flex justify-content-center mt-3">
+      <div class="clearbtn d-flex justify-content-center">
         <%= link_to "Clear selection", pigeons_path, data: { turbo_method: :get }, class:"clear" %>
       </div>
   </div>
