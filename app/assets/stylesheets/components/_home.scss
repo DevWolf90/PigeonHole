@@ -48,3 +48,22 @@
 h2 {
   font-weight: 100;
 }
+
+.new-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  padding: 5px;
+  font-size: 31px;
+  height: 60px;
+  width: 60px;
+  box-shadow: 0 2px 4px darkslategray;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: #BBC800;
+  position: fixed;
+  bottom: 15px;
+  right: 8px;
+}
+
