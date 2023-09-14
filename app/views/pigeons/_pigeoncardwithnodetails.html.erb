@@ -1,9 +1,9 @@
 <div class="container pigeon-card">
   <% pigeon.id %>
   <p class="py-2"><strong>Pigeon details</strong></p>
-    <p>Title: <%= pigeon.title %></p>
-    <p>Date: <%= pigeon.date.strftime("%a, %-d %B %Y") %> at <%= pigeon.date.strftime("%H:%M") %></p>
-    <p>Media type:
+    <p><%= pigeon.title %></p>
+    <p><%= pigeon.date.strftime("%a, %-d %B %Y") %> at <%= pigeon.date.strftime("%H:%M") %></p>
+    <p>
       <% if pigeon.media_type == "video" %>
         <i class="fa-brands fa-youtube"></i></p>
       <% elsif pigeon.media_type == "article" %>
@@ -13,6 +13,6 @@
       <% elsif pigeon.media_type == "podcast" || "audio" || "song" || "playlist"%>
         <i class="fa-solid fa-headphones"></i></p>
       <% end %>
-    <p>Length: <%= pigeon.length %></p>
+    <p><%= pigeon.length %></p>
     <%= link_to "Link", pigeon.link_to_content, target: "_blank", class: "pb-2" %>
 </div>

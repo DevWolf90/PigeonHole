@@ -19,7 +19,7 @@
  <%# need to fix next line so it says who we're chatting with  %>
  <%# raise %>
     <% @chat.messages.each do |message| %>
-        <% if message.sender == current_user %>
+      <% if message.sender == current_user %>
         <div class="message-card-sent">
           <div class="sender-info">
                 <strong><%= message.sender.nickname %></strong>
@@ -27,7 +27,7 @@
           </div>
           <%= message.content %>
         </div>
-        <% else %>
+      <% else %>
         <div class="message-card-received">
           <div class="sender-info">
               <strong><%= message.sender.nickname %></strong>
@@ -35,12 +35,16 @@
           </div>
               <%= message.content %>
         </div>
-        <% end %>
+      <% end %>
+
+      <div>
         <% @pigeons.each do |pigeon| %>
           <% if pigeon.description == message.content && pigeon.present?%>
-          <%= render "pigeons/pigeoncardwithnodetails", pigeon: pigeon %>
+            <%= render "pigeons/pigeoncardwithnodetails", pigeon: pigeon %>
           <% end %>
-      <% end %>
+        <% end %>
+      </div>
+
     <% end %>
   <%= simple_form_for [@chat, @message],
   html: {class: "container d-flex pt-3 fixed-bottom"} do |f| %>
