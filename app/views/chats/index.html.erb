@@ -11,7 +11,7 @@
       <%= link_to chat_path(chat), class:"chat-card text-dark" do %>
         <div class="sender-info d-flex justify-content-start align-items-center">
           <% if @chatting_partner.avatar.attached? %>
-            <%= cl_image_tag @pigeon.user.avatar.key, height: 30, width:30, crop: :fill %>
+            <%= cl_image_tag@chatting_partner.avatar.key, height: 30, width:30, crop: :fill, class:"rounded-circle me-2" %>
           <% else %>
             <%= image_tag("https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000", height:30, width:30, class:"rounded-circle me-2") %>
           <% end %>
