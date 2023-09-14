@@ -59,3 +59,37 @@
   margin: 0.6rem;
   border-radius: 8px;
 }
+
+.btn-search {
+  background-color: black;
+  color: $light-gray;
+  padding: 6px;
+  border-radius: 50%;
+  border: none;
+  height: 30px;
+  width: 30px;
+  box-shadow: 1px 1px 1px 1px $medium-gray;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin-right: 15px;
+  margin-top: 5px;
+  overflow: hidden;
+}
+
+.clear {
+  color:black;
+  background-color: $green;
+  border:none;
+  font-size: 1rem;
+  padding: 0.4rem 0.7rem;
+  margin: 0.6rem;
+  border-radius: 12px;
+  margin-top: 2px;
+  align-self: center;
+  &:hover {
+    color:white;
+    background-color: $purple;
+  }
+}
