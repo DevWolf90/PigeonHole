@@ -41,6 +41,9 @@ class PigeonsController < ApplicationController
       format.html
       format.text { render partial: "pigeons/list", locals: { pigeons: @pigeons }, formats: [:html] }
     end
+
+    @pigeons = Pigeon.where(recipient: current_user).sort_by { |pigeon| pigeon.title.downcase }
+
   end
 
   def toggle_read #toggle read on show page
