@@ -1,6 +1,5 @@
 .pigeons-container {
   display: grid;
-  width: 100vw;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem;
+  gap: 0.5rem;
 }

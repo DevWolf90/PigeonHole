@@ -2,7 +2,7 @@
   <% if @pigeons.empty? %>
     <p>Oops, too specific. No pigeons satisfy this query</p>
   <% else %>
-    <div class="d-flex" style="background-color: #1E1E1E;">
+    <div class="d-flex" style="background-color: #1E1E1E; width: 100vw;">
       <div class="pigeons-container px-2">
           <% @pigeons.each do |pigeon| %>
             <div class="pigeon-card-with-details justify-content-center">
@@ -10,7 +10,7 @@
                 <div class="sender-date-info">
                   <div style="border-radius: 50px; height: 30px; width: 30px; overflow: hidden; background: gray;">
                     <% if pigeon.user.avatar.attached? %>
-                      <%= cl_image_tag @pigeon.user.avatar.key, height: 30, width: 30, crop: :fill %>
+                      <%= cl_image_tag pigeon.user.avatar.key, height: 30, width: 30, crop: :fill %>
                     <% else %>
                       <%= image_tag("https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000", height: 30, width: 30) %>
                     <% end %>

@@ -107,15 +107,7 @@
       <% end %>
     </div>
 
-    <% if (@pigeon.media_type == "video" || @pigeon.media_type == "music") && @pigeon.link_to_content.include?("youtu") %>
-      <p>
-        <% if @pigeon.length <= 1 %>
-        Length: This pigeon will take <%= @pigeon.length %> minute to listen to.
-        <% else %>
-          Length: This pigeon will take <%= @pigeon.length %> minutes to listen to.
-        <% end %>
-      </p>
-      <% end %>
+    
   </div>
     <!-- <%= link_to "Browse all pigeons", pigeons_path %><br> -->
 
