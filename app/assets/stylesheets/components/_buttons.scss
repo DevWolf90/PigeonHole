@@ -77,3 +77,18 @@
   margin-top: 5px;
   overflow: hidden;
 }
+
+.clear {
+  color:black;
+  background-color: $green;
+  border:none;
+  font-size: 1rem;
+  padding: 0.4rem 0.7rem;
+  margin: 0.6rem;
+  border-radius: 12px;
+  margin-top: 3px;
+  &:hover {
+    color:white;
+    background-color: $purple;
+  }
+}
