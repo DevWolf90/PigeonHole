@@ -1,18 +1,26 @@
 <div class="container pigeon-card">
   <% pigeon.id %>
-  <p class="py-2"><strong>Pigeon details</strong></p>
-    <p>Title: <%= pigeon.title %></p>
-    <p>Date: <%= pigeon.date.strftime("%a, %-d %B %Y") %> at <%= pigeon.date.strftime("%H:%M") %></p>
-    <p>Media type:
-      <% if pigeon.media_type == "video" %>
-        <i class="fa-brands fa-youtube"></i></p>
-      <% elsif pigeon.media_type == "article" %>
-        <i class="fa-regular fa-newspaper"></i></p>
-      <% elsif pigeon.media_type == "book" %>
-        <i class="fa-solid fa-book"></i></p>
-      <% elsif pigeon.media_type == "podcast" || "audio" || "song" || "playlist"%>
-        <i class="fa-solid fa-headphones"></i></p>
+  <div>
+    <%= image_tag("https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000", height:35, width:35, style:"border-radius: 100px;") %>
+    <p class="mt-2">@MadeMartian</p>
+    <p><%= pigeon.date.strftime("%-d %B %Y") %></p>
+      <!-- <%= pigeon.date.strftime("%H:%M") %> -->
+  </div>
+    <h6 class="mt-3"><%= pigeon.title %></h6>
+    <div class="d-flex justify-content-end w-100">
+      <%= link_to pigeon.link_to_content, target: "_blank", class: "pb-2" do %>
+        <% if pigeon.media_type == "video" %>
+          <i class="fa-brands fa-youtube play-icon-chat"></i>
+        <% elsif pigeon.media_type == "article" %>
+          <i class="fa-regular fa-newspaper article-icon-chat"></i>
+        <% elsif pigeon.media_type == "book" %>
+          <i class="fa-solid fa-book book-icon-chat"></i>
+        <% elsif pigeon.media_type == "podcast" || "audio" || "song" || "playlist"%>
+          <i class="fa-solid fa-headphones music-icon-chat"></i>
+        <% end %>
       <% end %>
-    <p>Length: <%= pigeon.length %></p>
-    <%= link_to "Link", pigeon.link_to_content, target: "_blank", class: "pb-2" %>
+    </div>
+
+    <p><%= pigeon.length %></p>
+
 </div>
