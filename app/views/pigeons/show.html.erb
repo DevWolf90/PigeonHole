@@ -79,9 +79,13 @@
     </div>
 
     <div class="mt-5 card-icons">
-      <% unless @pigeon.reply_later %>
+      <% if @pigeon.reply_later? %>
         <%= link_to add_to_reply_path(@pigeon), data: { turbo_method: :patch } do %>
-        <i class="fa-regular fa-clock reply-icon"></i>
+          <i class="fa-solid fa-clock reply-icon offset-icon" style="color: #4c19b9;"></i>
+        <% end %>
+      <% else %>
+        <%= link_to add_to_reply_path(@pigeon), data: { turbo_method: :patch } do %>
+          <i class="fa-regular fa-clock reply-icon"></i>
         <% end %>
       <% end %>
       <% if @pigeon.favourite? %>
