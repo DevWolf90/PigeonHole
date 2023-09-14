@@ -5,15 +5,9 @@
   align-items: center;
 }
 
-.icon-play {
-  background-color: $green;
-  width: 32px;
-  aspect-ratio: 1;
-  border-radius: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: black;
+.play-icon {
+  font-size: 2rem;
+  color: $green;
 }
 
 .heart {
@@ -25,15 +19,47 @@
   color: $green;
 }
 
-.back-icon {
+.reply-icon {
   font-size: 2rem;
   background-color: $green;
-  width: 32px;
+  width: 31px;
   border-radius: 100%;
+  color: black;
+}
+
+
+.article-icon {
+  font-size: 1rem;
+  color: $green;
 }
 
 .reply-icon {
   font-size: 2.2rem;
   width: 35px;
   border-radius: 100%;
+}
+
+
+.sand-clock {
+  font-size: 1.5rem;
+}
+
+.music-icon {
+  font-size: 2rem;
+  color: $green;
+}
+
+.book-icon {
+  font-size: 2rem;
+  color: $green;
+}
+
+.send-icon {
+  font-size: 1rem;
+  color: black;
+}
+
+.unread-icon {
+  font-size: 2rem;
+  color: $green;
 }
