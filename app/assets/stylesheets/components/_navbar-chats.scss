@@ -25,3 +25,11 @@
   cursor: pointer;
   display: none;
 }
+
+.offcanvas-body a {
+font-size: 30px;
+&:hover {
+  color: #BBC800 ;
+  transition: 0.3s;
+}
+}
