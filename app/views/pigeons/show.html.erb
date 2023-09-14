@@ -15,8 +15,8 @@
       <% else %>
         <% @sender = @pigeon.chat.sender %>
       <% end %>
-        <p>@<%= @sender.nickname %></p>
-    <% end %>
+          <p>@<%= @sender.nickname %></p>
+      <% end %>
 
     <p><%= @pigeon.date.strftime("%a, %-d %B %Y") %> at <%= @pigeon.date.strftime("%H:%M") %></p>
 
@@ -42,16 +42,31 @@
       </div>
     <% end %>
 
+  <div>
+      <% if (@pigeon.media_type == "video" || @pigeon.media_type == "music") && @pigeon.link_to_content.include?("youtu") %>
+        <i class='fa fa-hourglass-start sand-clock mt-3' style="color:#BBC800;"></i>
+        <p>
+      <% if @pigeon.length <= 1 %>
+        <%= @pigeon.length %> minute to listen to.
+      <% else %>
+        <%= @pigeon.length %> minutes to listen to.
+      <% end %>
+        </p>
+      <% end %>
+  </div>
+
     <div>
+      <% if @pigeon.media_type == "article" || @pigeon.media_type == "book" %>
       <i class='fa fa-hourglass-start sand-clock mt-3' style="color:#BBC800;"></i>
       <% time_to_read = TimeToReadService.new(@pigeon.link_to_content).call %>
       <p>
         <% if time_to_read <= 1 %>
-          <%= time_to_read %> minute
+          <%= time_to_read %> minute to read
         <% else %>
-          <%= time_to_read %> minutes
+          <%= time_to_read %> minutes to read
         <% end %>
       </p>
+      <% end %>
     </div>
 
     <div class="d-flex justify-content-between">
@@ -106,10 +121,7 @@
         <i class="fa fa-times delete-cross"></i>
       <% end %>
     </div>
-
-    
   </div>
     <!-- <%= link_to "Browse all pigeons", pigeons_path %><br> -->
-
   </div>
 </div>
