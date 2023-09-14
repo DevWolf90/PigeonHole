@@ -4,7 +4,7 @@
       <div class="input-group my-4" style="position: relative;" >
         <%= text_field_tag :query,
               params[:query],
-              class: "searchbar",
+              class: "searchbar noSelect",
               size:10,
               placeholder: "Type a keyword",
               data: {
@@ -40,5 +40,4 @@
   <div class="pigeons-container" data-refresh-target="list" >
     <%= render "pigeons/list" %>
   </div>
-
 </div>
