@@ -1,7 +1,7 @@
 <div class="container" data-controller="refresh">
   <div class="search my-3">
     <%= form_with url: pigeons_path, method: :get, data: { refresh_target: "form" } do %>
-      <div class="input-group my-4" style="position: relative;" >
+      <div class="input-group my-3" style="position: relative;" >
         <%= text_field_tag :query,
               params[:query],
               class: "searchbar noSelect",
@@ -19,7 +19,7 @@
       </div>
 
       <div class="row">
-        <div class="d-flex justify-content-center scrolling-wrapper" style="background-color:black!important; margin-top: 0!important">
+        <div class="d-flex scrolling-wrapper" style="background-color:black!important; margin-top: 0!important ">
           <% @alltags.each do |tag| %>
             <input type="checkbox" id="<%= tag %>" data-refresh-target="checkbox" data-action="change->refresh#add" name="q[tags_name_cont_any][]" value="<%= tag %>" class="checkboxaspill tag-selector" <%= params.dig(:q, :tags_name_cont_any)&.include?(tag) ? 'checked' : '' %>>
             <label for="<%= tag %>" class="tag-button"><%= tag %></label>

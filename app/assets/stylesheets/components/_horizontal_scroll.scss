@@ -6,3 +6,12 @@
   scroll-snap-type: x mandatory;
   scroll-padding-left: 16px;
 }
+
+.scrolling-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.scrolling-wrapper {
+  -ms-overflow-style: none; 
+  scrollbar-width: none;
+}
