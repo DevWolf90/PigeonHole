@@ -1,17 +1,31 @@
-<h1>All chats</h1>
+<div class="chat-index-container">
 
-<% @chats.each do |chat| %>
-<div>
-    <% if chat.sender == current_user %>
-  <%= link_to chat.recipient.nickname, chat_path(chat)%>
-  <%=  %>
-    <% else %>
-  <%= link_to chat.recipient.nickname, chat_path(chat) %>
+  <h1>All chats</h1>
+  <% @chats.each do |chat| %>
+    <% if chat.sender == current_user  %>
+      <%@chatting_partner = chat.recipient%>
+    <% else  %>
+      <%@chatting_partner = chat.sender%>
     <% end %>
-  <% if chat.messages.present? %>
-    <%= chat.messages.last.content%>
-  <% else %>
-    <p>No messages yet</p>
+    <%if chat.sender != chat.recipient %>
+      <%= link_to chat_path(chat), class:"chat-card text-dark" do %>
+        <div class="sender-info d-flex justify-content-start align-items-center">
+          <% if @chatting_partner.avatar.attached? %>
+            <%= cl_image_tag @pigeon.user.avatar.key, height: 30, width:30, crop: :fill %>
+          <% else %>
+            <%= image_tag("https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000", height:30, width:30, class:"rounded-circle me-2") %>
+          <% end %>
+          <strong>
+            @<%=@chatting_partner.nickname%>
+          </strong>
+        </div>
+        <div class= "fon d-flex justify-content-between">
+          <div class = "message-crop">
+            <%= chat.messages.last.content%>
+          </div>
+          <i><%= chat.messages.last.created_at.strftime("%b %e") %></i>
+        </div>
+      <% end %>
+    <% end %>
   <% end %>
 </div>
-<% end %>

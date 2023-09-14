@@ -3,3 +3,35 @@
     color: white;
   }
 }
+
+.fon {
+  font-size: smaller;
+  color: $medium-gray;
+
+}
+
+.message-crop {
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  width:80%;
+}
+
+
+
+.chat-card {
+  margin: 10px;
+  padding: 10px;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: white;
+}
+
+.chat-index-container {
+  h1 {
+    margin: 10px;
+  padding: 10px;
+  }
+}

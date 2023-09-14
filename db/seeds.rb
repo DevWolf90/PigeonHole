@@ -38,6 +38,8 @@ Message.create(content: "Hey there", date: Date.today, chat: chat4, sender: sara
 message4 = Message.create(content: "Check out this amazing podcast episode from JRE", date: Date.today, chat: chat4, sender: sara)
 Message.create(content: "Whats Up?", date: Date.today, chat: chat5, sender: jode)
 message5 = Message.create(content: "this Netflix movie blew my mind", date: Date.today, chat: chat5, sender: jode)
+Message.create(content: "Whats Up?", date: Date.today, chat: chat6, sender: duarte)
+Message.create(content: "Whats Up?", date: Date.today, chat: chat7, sender: jode)
 
 puts "Messages created"
 
