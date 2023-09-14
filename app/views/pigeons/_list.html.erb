@@ -5,6 +5,7 @@
     <div class="d-flex" style="background-color: #1E1E1E";>
         <div class="pigeons-container px-2" >
           <div style="display: grid;">
+            <% @pigeons = Pigeon.where(recipient: current_user).sort_by {|pigeon| pigeon.created_at} %>
                   <% @pigeons.each do |pigeon| %>
                       <%#= link_to pigeon.title, mark_read_path(pigeon), data: { turbo_method: :patch } %>
                       <%# <i class="fa-solid fa-heart heart offset-icon"></i> %>
