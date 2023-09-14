@@ -34,7 +34,9 @@
       </div>
       <% end %>
       </div>
-      <%= link_to "Clear selection", pigeons_path, data: { turbo_method: :get }, class:"clear" %>
+      <div class="clearbtn d-flex">
+        <%= link_to "Clear selection", pigeons_path, data: { turbo_method: :get }, class:"clear" %>
+      </div>
   </div>
 
   <div class="pigeons-container" data-refresh-target="list" >
