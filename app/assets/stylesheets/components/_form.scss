@@ -3,13 +3,71 @@
   width: 75%;
   color:white;
   padding: 10px;
+
   h2 {
     margin-top: 5rem;
     margin-bottom: 2rem;
   }
   form {
     margin-bottom: 2rem;
+
+  }
+  .form-inputs {
+
+    input {margin-left: 0;
+    background-color: white;
+    border-radius: 10px;
+    }
+
+    input:focus {
+      background-color: white;
+    }
+    textarea {
+      background-color: white;
+      border-radius: 10px;
+    }
+    select {
+
+      background-color: white;
+      border-radius: 10px;
+    }
+    div:first-child {
+      background-color: black;
+      div:first-child {
+        background-color: white;
+      }
+
+    }
+
   }
 
-  input {margin-left: 0;}
+  .ts-wrapper {
+    background-color: white;
+    border-radius: 10px;
+
+  }
+  .ts-control {
+    border: none;
+  }
+  a {
+    color: $green;
+    font-size: small;
+  }
+  .submit {
+    margin-left: 0px;
+  }
+
+  .submit:hover {
+    background-color: $purple;
+  }
+
+  .form-check {
+    padding: 0rem;
+    input{
+      background-color: black;
+    }
+    input:focus {
+      background-color: black;
+    }
+  }
 }
