@@ -51,7 +51,59 @@
     }
 }
 
+
+
 .pigeon-card-unread {
+  list-style: none;
+  // background-color: grey;
+  // color: white;
+  // font-weight: bold;
+  // text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  background-color: $purple;
+  padding: 0.8rem 0.8rem 0;
+  color: white;
+  background-size: cover;
+  background-position: center;
+  width: 40vw;
+  height: 30vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: start;
+  border-radius: 20px;
+  line-height: 0.8rem;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  margin-left: 0rem;
+  margin-right: 1rem;
+  margin-top: 1rem;
+  text-align: left;
+  scroll-snap-align: start;
+  font-family: "Inter", sans-serif!important;
+  font-size: 0.6rem;
+  position: relative;
+    // &:hover {
+    //   height: 280px;
+    //   width: 280px;
+    //   transition: 0.5s;
+    //   background-color: black;
+    //   color: white;
+    // }
+  h3 {
+    // font-size: x-large;
+    margin-bottom: 0px;
+    margin-top: 0.5rem;
+  }
+
+  p {
+    margin-bottom: 0px;
+    margin-top: 3rem;
+  }
+  .pigeon-card-media {
+    bottom: 0.5rem;
+  }
+}
+
+.pigeon-card-unread-in-chat {
   list-style: none;
   // background-color: grey;
   // color: white;
@@ -149,6 +201,8 @@
     bottom: 0.5rem;
   }
 }
+
+
 
 a {
   text-decoration:none;

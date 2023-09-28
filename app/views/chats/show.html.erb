@@ -39,8 +39,10 @@
 
       <div>
         <% @pigeons.each do |pigeon| %>
-          <% if pigeon.description == message.content && pigeon.present?%>
+          <% if pigeon.description == message.content && pigeon.present? && pigeon.read == true %>
             <%= render "pigeons/pigeoncardwithnodetails", pigeon: pigeon %>
+          <% elsif pigeon.description == message.content && pigeon.present? && pigeon.read == false %>
+            <%= render "pigeons/pigeoncardunreadinchat", pigeon: pigeon %>
           <% end %>
         <% end %>
       </div>
