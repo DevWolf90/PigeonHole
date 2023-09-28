@@ -23,7 +23,7 @@
                     <p class="mt-2 mb-0">@<%= pigeon.user.nickname %></p>
                     <p class="m-0"><%= pigeon.date.strftime("%a %b %e") %></p>
                   </div>
-                  <div>
+                  <div class = "pigeon-description">
                     <h3 class="mt-1"><%= pigeon.title.truncate(45) %></h3>
                     <div class="pigeon-card-bottom">
                         <% if pigeon.media_type == "video" %>
@@ -68,8 +68,8 @@
                     <p class="mt-2">@<%= pigeon.user.nickname %></p>
                     <p class="m-0"><%= pigeon.date.strftime("%a %b %e") %></p>
                   </div>
-                  <div>
-                    <h3><%= pigeon.title.truncate(23) %></h3>
+                  <div class = "pigeon-description">
+                    <h3><%= pigeon.title.truncate(30) %></h3>
                     <div class="pigeon-card-bottom">
                         <% if pigeon.media_type == "video" %>
                             <p><i class="fa-brands fa-youtube pigeon-card-media"></i></p>
@@ -111,8 +111,8 @@
                     <p class="mt-2">@<%= pigeon.user.nickname %></p>
                     <p class="m-0"><%= pigeon.date.strftime("%a %b %e") %></p>
                 </div>
-                <div>
-                  <h3><%= pigeon.title.truncate(17) %></h3>
+                <div class = "pigeon-description">
+                  <h3><%= pigeon.title.truncate(30) %></h3>
                   <div class="pigeon-card-bottom">
                     <% if pigeon.media_type == "video" %>
                         <p><i class="fa-brands fa-youtube pigeon-card-media"></i></p>

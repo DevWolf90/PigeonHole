@@ -49,6 +49,11 @@
       top: -10px;
       color: $purple;
     }
+
+    .pigeon-description {
+      margin-bottom: auto;
+      margin-top: 1rem;
+    }
 }
 
 
@@ -101,6 +106,10 @@
   .pigeon-card-media {
     bottom: 0.5rem;
   }
+  .pigeon-description {
+    margin-bottom: auto;
+    margin-top: 3rem;
+  }
 }
 
 .pigeon-card-unread-in-chat {
@@ -110,12 +119,12 @@
   // font-weight: bold;
   // text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
   background-color: $purple;
-  padding: 0.8rem 0.8rem 0;
+  padding: 0.8rem;
   color: white;
   background-size: cover;
   background-position: center;
   width: 40vw;
-  height: 30vh;
+  height: 20vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -146,10 +155,13 @@
 
   p {
     margin-bottom: 0px;
-    margin-top: 3rem;
   }
   .pigeon-card-media {
     bottom: 0.5rem;
+  }
+  .pigeon-description {
+    margin-bottom: auto;
+    margin-top: 1rem;
   }
 }
 
@@ -199,6 +211,10 @@
   }
   .pigeon-card-media {
     bottom: 0.5rem;
+  }
+  .pigeon-description {
+    margin-bottom: auto;
+    margin-top: 1rem;
   }
 }
 
