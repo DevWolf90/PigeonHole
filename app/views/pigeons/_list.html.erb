@@ -3,10 +3,10 @@
     <p>Oops, too specific. No pigeons satisfy this query</p>
   <% else %>
     <div class="d-flex" style="background-color: #1E1E1E; width: 100vw;">
-      <div class="pigeons-container px-2">
+      <div class="pigeons-container ps-3 pt-3">
         <% @pigeons.each do |pigeon| %>
-          <%#= link_to pigeon_path(pigeon), style:"text-decoration: none; color: inherit;"  do %>
-            <div class="pigeon-card-with-details my-0">
+          <div class="pigeon-card with-details my-0">
+            <%= link_to pigeon_path(pigeon), style: "color: inherit; font-size: x-small;" do %>
               <div class="d-flex justify-content-between w-100">
                 <div class="sender-date-info">
                   <div style="border-radius: 50px; height: 30px; width: 30px; overflow: hidden; background: gray;">
@@ -21,19 +21,19 @@
                 </div>
                 <div>
                   <%= link_to pigeon_path(pigeon), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
-                    <i class="fa fa-times delete-cross" ></i>
+                    <i class="fa fa-times delete-cross offset-cross" ></i>
                   <% end %>
                 </div>
               </div>
-              <div class="mt-3">
+              <div class="mt-2 mb-0">
                 <% @tags = pigeon.tag_names %>
                 <ul style="padding-left: 0px;">
                   <% @tags.each do |tag| %>
-                    <li><%= tag %></li>
+                    <li style="font-weight: bold;"><%= tag %></li>
                   <% end %>
                 </ul>
               </div>
-              <h3><%= link_to pigeon.title.truncate(23), pigeon_path(pigeon), style:"text-decoration: none; color: inherit;" %></h3>
+              <h3 style="margin-bottom: auto;"><%= link_to pigeon.title.truncate(30), pigeon_path(pigeon), style:"text-decoration: none; color: inherit;" %></h3>
               <div class="d-flex align-items-center justify-space-between w-100" style="position: relative;">
                 <div>
                   <% if pigeon.favourite? %>
@@ -46,7 +46,7 @@
                     <% end %>
                   <% end %>
                 </div>
-                <div>
+                <div style="margin-left: 1rem;">
                   <% if pigeon.read? %>
                     <%= link_to link_read_path(pigeon), data: { turbo_method: :patch } do %>
                       <i class="fa-solid fa-folder"></i>
@@ -57,7 +57,7 @@
                     <% end %>
                   <% end %>
                 </div>
-                <div>
+                <div class="pigeon-card-bottom">
                   <% case pigeon.media_type %>
                     <% when "video" %>
                       <p><i class="fa-brands fa-youtube pigeon-card-media"></i></p>
@@ -74,8 +74,8 @@
                   <% end %>
                 </div>
               </div>
-            </div>
-          <%# end %>
+            <% end %>
+          </div>
         <% end %>
       </div>
     </div>
