@@ -6,12 +6,12 @@
       <ul class="d-flex align-items-center p-0">
         <% pigeons_read = @pigeons.all? { |pigeon| pigeon.read} %>
         <% if pigeons_read %>
-          <p><strong>You are up to date! 🎉</strong></p>
+          <h3 class="mt-3"><strong>You are up to date! 🎉</strong></h3>
         <% else %>
           <% @pigeons.each do |pigeon| %>
             <% unless pigeon.read %>
               <%= link_to mark_read_path(pigeon), data: { turbo_method: :patch }  do%>
-                <div class="pigeon-card-unread">
+                <div class="pigeon-card unread">
                   <div class="sender-date-info">
                     <div style="border-radius: 50px; height: 30px; width: 30px; overflow: hidden; background: gray;">
                       <% if pigeon.user.avatar.attached? %>

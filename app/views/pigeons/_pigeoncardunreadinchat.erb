@@ -1,6 +1,6 @@
 <% unless pigeon.read %>
   <%= link_to mark_read_path(pigeon), data: { turbo_method: :patch } do %>
-  <div class="container pigeon-card-unread-in-chat">
+  <div class="container pigeon-card unread in-chat">
     <% pigeon.id %>
     <div>
       <% if @chatting_partner.avatar.attached? %>
