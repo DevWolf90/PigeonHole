@@ -70,8 +70,8 @@
     </div>
 
     <div class="d-flex justify-content-between">
-      <button class="link-button">
         <%= link_to @pigeon.link_to_content, target: "_blank", class: "icon-play" do %>
+      <button class="link-button">
           <% if @pigeon.media_type == "video" %>
           <i class="fa-brands fa-youtube play-icon"></i>
         <% elsif @pigeon.media_type == "article" %>
@@ -81,16 +81,16 @@
         <% elsif @pigeon.media_type == "podcast" || "audio" || "song" || "playlist"%>
           <i class="fa-solid fa-headphones music-icon"></i>
         <% end %>
-        <% end %>
         <div class="ms-2">Go to link</div>
       </button>
+        <% end %>
 
-      <button class="reply-chat">
         <%= link_to (chat_path(@pigeon.chat)) do %>
+      <button class="reply-chat p-3">
           <i class="fa-solid fa-paper-plane send-icon"></i>
-          <% end %>
         <div class="ms-2">Reply in chat</div>
       </button>
+          <% end %>
     </div>
 
     <div class="mt-5 card-icons">

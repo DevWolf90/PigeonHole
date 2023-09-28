@@ -4,8 +4,9 @@
   <% else %>
     <div class="d-flex" style="background-color: #1E1E1E; width: 100vw;">
       <div class="pigeons-container px-2">
-          <% @pigeons.each do |pigeon| %>
-            <div class="pigeon-card-with-details my-0" >
+        <% @pigeons.each do |pigeon| %>
+          <%#= link_to pigeon_path(pigeon), style:"text-decoration: none; color: inherit;"  do %>
+            <div class="pigeon-card-with-details my-0">
               <div class="d-flex justify-content-between w-100">
                 <div class="sender-date-info">
                   <div style="border-radius: 50px; height: 30px; width: 30px; overflow: hidden; background: gray;">
@@ -32,7 +33,7 @@
                   <% end %>
                 </ul>
               </div>
-              <h3><%= pigeon.title.truncate(23) %></h3>
+              <h3><%= link_to pigeon.title.truncate(23), pigeon_path(pigeon), style:"text-decoration: none; color: inherit;" %></h3>
               <div class="d-flex align-items-center justify-space-between w-100" style="position: relative;">
                 <div>
                   <% if pigeon.favourite? %>
@@ -74,7 +75,8 @@
                 </div>
               </div>
             </div>
-          <% end %>
+          <%# end %>
+        <% end %>
       </div>
     </div>
   <% end %>
