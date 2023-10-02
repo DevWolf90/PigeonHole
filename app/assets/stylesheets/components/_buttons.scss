@@ -98,3 +98,24 @@
 .input-group > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
   border-radius: 50%;
 }
+
+.btn-send {
+  background-color:$green;
+  // display: inline !important;
+  color: black;
+  align-items: center;
+  padding: 6px;
+  border-radius: 10px;
+  border: none;
+  height: 30px;
+  width: 60px;
+  box-shadow: 1px 1px 1px 1px $medium-gray;
+  position: relative;
+  top: 0;
+  right: 2.2rem;
+  bottom: 0.4rem;
+  // margin-right: 15px;
+  // margin-top: 5px;
+  overflow: hidden;
+  // align-self: end;
+}

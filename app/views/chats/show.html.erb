@@ -54,14 +54,17 @@
 
     <% end %>
   <%= simple_form_for [@chat, @message],
-  html: {class: "container d-flex pt-3 fixed-bottom"} do |f| %>
-  <%= f.input :content,
-    as: :string,
-    label: false,
-    placeholder: "Type here",
-    wrapper_html: {class: "flex-grow-1"}
-  %>
-  <%= f.submit "Send", class: "btn btn-primary mb-3" %>
+  html: {class: "container pt-3 pos d-flex mb-3"} do |f| %>
+    <%= f.input :content,
+      as: :string,
+      label: false,
+      placeholder: "Type here...",
+      wrapper_html: {class: "flex-grow-1"},
+      input_html: {class: "send"}
+    %>
+    <button type="submit" class="btn-send btn-dark">
+      <i class="fa-solid fa-paper-plane"></i>
+    </button>
   <% end %>
   <% else %>
   <h1>Get your nosy ass outta here!</h1>
