@@ -37,12 +37,13 @@ class PigeonsController < ApplicationController
       @pigeons = @pigeons.joins(chat: :sender).joins(chat: :recipient).where(sql_subquery, query: "%#{params[:query]}%")
     end
 
+    @pigeons = Pigeon.where(recipient: current_user).sort_by { |pigeon| [-pigeon.date.to_time.to_i, pigeon.title.downcase] }
+    # @pigeons = Pigeon.where(recipient: current_user).sort_by { |pigeon| pigeon.title.downcase }
+
     respond_to do |format|
       format.html
       format.text { render partial: "pigeons/list", locals: { pigeons: @pigeons }, formats: [:html] }
     end
-
-    @pigeons = Pigeon.where(recipient: current_user).sort_by { |pigeon| pigeon.title.downcase }
 
   end
 

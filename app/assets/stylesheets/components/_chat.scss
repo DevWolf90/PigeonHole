@@ -55,3 +55,19 @@
   color: $green;
   font-size: 1.8rem;
 }
+
+.send {
+  background-color: $light-gray;
+  border-radius: 10px;
+  width: 100%;
+  border: none;
+  display: flex;
+  // position: absolute;
+  // padding-right: 0;
+}
+
+.pos {
+  position: sticky;
+  bottom: 0;
+  z-index: 1030;
+}
