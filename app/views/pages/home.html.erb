@@ -12,7 +12,7 @@
             <% unless pigeon.read %>
               <%= link_to mark_read_path(pigeon), data: { turbo_method: :patch }  do%>
                 <% pigeon_state = pigeon_card_variables(pigeon)  %>
-                <%= render 'pigeons/pigeoncard', pigeon: pigeon, card_class: pigeon_state[:card_class], pigeon_avatar: pigeon_state[:pigeon_avatar], media_icon: pigeon_state[:media_icon], particular: pigeon_state[:particular]  %>
+                <%= render 'pigeons/pigeon_card', pigeon: pigeon, card_class: pigeon_state[:card_class], pigeon_avatar: pigeon_state[:pigeon_avatar], media_icon: pigeon_state[:media_icon], particular: pigeon_state[:particular]  %>
               <% end %>
             <% end %>
           <% end %>
@@ -27,7 +27,7 @@
             <% if pigeon.favourite? %>
               <%= link_to mark_read_path(pigeon), data: { turbo_method: :patch }  do%>
                 <% pigeon_state = pigeon_card_variables(pigeon)  %>
-                <%= render 'pigeons/pigeoncard', pigeon: pigeon, card_class: pigeon_state[:card_class], pigeon_avatar: pigeon_state[:pigeon_avatar], media_icon: pigeon_state[:media_icon], particular: pigeon_state[:particular]  %>
+                <%= render 'pigeons/pigeon_card', pigeon: pigeon, card_class: pigeon_state[:card_class], pigeon_avatar: pigeon_state[:pigeon_avatar], media_icon: pigeon_state[:media_icon], particular: pigeon_state[:particular]  %>
               <% end %>
             <% end %>
           <% end %>
@@ -40,7 +40,7 @@
             <% if pigeon.reply_later? %>
               <%= link_to mark_read_path(pigeon), data: { turbo_method: :patch }  do%>
                 <% pigeon_state = pigeon_card_variables(pigeon)  %>
-                <%= render 'pigeons/pigeoncard', pigeon: pigeon, card_class: pigeon_state[:card_class], pigeon_avatar: pigeon_state[:pigeon_avatar], media_icon: pigeon_state[:media_icon], particular: pigeon_state[:particular]  %>
+                <%= render 'pigeons/pigeon_card', pigeon: pigeon, card_class: pigeon_state[:card_class], pigeon_avatar: pigeon_state[:pigeon_avatar], media_icon: pigeon_state[:media_icon], particular: pigeon_state[:particular]  %>
               <% end %>
             <% end %>
         <% end %>
