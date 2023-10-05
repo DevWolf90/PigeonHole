@@ -1,5 +1,5 @@
 <% pigeons.each do |pigeon| %>
   <% if card_filter.call(pigeon) %>
-    <%= render 'pigeons/pigeon_card', locals: { pigeon: pigeon, card_class: card_class, pigeon_avatar: pigeon_avatar, media_icon: media_icon, particular: particular } %>
+    <%= render 'pigeons/pigeon_card', locals: { pigeon: pigeon, card_class: card_class, pigeon_avatar: pigeon_avatar, media_icon: media_icon, favourite: favourite, reply_later: reply_later, both: both } %>
   <% end %>
 <% end %>

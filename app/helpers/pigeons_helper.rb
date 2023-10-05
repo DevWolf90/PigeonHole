@@ -1,14 +1,32 @@
 module PigeonsHelper
   def pigeon_card_variables(pigeon)
     card_class = pigeon.read ? "read" : "unread"
-    particular =
+
+    both = ""
     if pigeon.favourite? && pigeon.reply_later
-      content_tag(:i, "", class: "fa-solid fa-star heart offset-icon")
-    elsif pigeon.favourite?
+      both.concat(content_tag(:i, "", class: "fa-solid fa-heart heart secondary-icon"))
+      both.concat(content_tag(:i, "", class: "fa-solid fa-clock reply-icon offset-icon"))
+    end
+
+    favourite =
+    if pigeon.favourite?
       content_tag(:i, "", class: "fa-solid fa-heart heart offset-icon")
-    elsif pigeon.reply_later?
+    end
+
+    reply_later =
+    if pigeon.reply_later?
       content_tag(:i, "", class: "fa-solid fa-clock reply-icon offset-icon")
     end
+
+
+    # particular =
+    # if pigeon.favourite? && pigeon.reply_later
+    #   content_tag(:i, "", class: "fa-solid fa-star heart offset-icon")
+    # elsif pigeon.favourite?
+    #   content_tag(:i, "", class: "fa-solid fa-heart heart offset-icon")
+    # elsif pigeon.reply_later?
+    #   content_tag(:i, "", class: "fa-solid fa-clock reply-icon offset-icon")
+    # end
 
     reply_later_status = pigeon.reply_later ? "reply_later" : "dont-reply-later"
     media_icon =
@@ -40,7 +58,9 @@ module PigeonsHelper
       card_class: card_class,
       pigeon_avatar: pigeon_avatar,
       media_icon: media_icon,
-      particular: particular
+      favourite: favourite,
+      reply_later: reply_later,
+      both: both
     }
 
     pigeon_state

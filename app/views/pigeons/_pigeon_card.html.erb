@@ -5,7 +5,13 @@
     <p class="m-0"><%= pigeon.date.strftime("%a %b %e") %></p>
   </div>
   <div class="pigeon-action">
-    <%= particular %>
+    <% if pigeon.favourite? && pigeon.reply_later %>
+      <%= both.html_safe %>
+    <% elsif pigeon.favourite? %>
+      <%= favourite %>
+    <% elsif pigeon.reply_later %>
+      <%= reply_later %>
+    <% end %>
   </div>
   <div class = "pigeon-description">
     <h3 class="mt-1">
