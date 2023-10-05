@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  include PigeonsHelper
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:avatar, :nickname])
     devise_parameter_sanitizer.permit(:account_update, keys: [:avatar, :nickname])

@@ -1,0 +1,13 @@
+<div class="<%= card_class %>">
+  <div class="sender-date-info">
+    <%= pigeon.user.avatar %>
+    <p class="mt-2 mb-0">@<%= pigeon.user.nickname %></p>
+    <p class="m-0"><%= pigeon.date.strftime("%a %b %e") %></p>
+  </div>
+  <div class = "pigeon-description">
+    <h3 class="mt-1"><%= pigeon.title.truncate(45) %></h3>
+    <div class="pigeon-card-bottom">
+      <%= pigeon.media_type %>
+    </div>
+  </div>
+</div>
