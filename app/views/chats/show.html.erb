@@ -39,15 +39,9 @@
 
       <div>
         <% @pigeons.each do |pigeon| %>
-          <% if pigeon.description == message.content && pigeon.present? && pigeon.read == true %>
-            <%= render "pigeons/pigeoncardwithnodetails", pigeon: pigeon %>
-          <% elsif pigeon.description == message.content && pigeon.present? && pigeon.read == false %>
-            <%= render "pigeons/pigeoncardunreadinchat", pigeon: pigeon %>
-          <% end %>
-          <% if pigeon.favourite? %>
-            <%= link_to mark_read_path(pigeon), data: { turbo_method: :patch }  do%>
-            <i class="fa-solid fa-heart heart offset-icon"></i>
-            <% end %>
+          <%= link_to mark_read_path(pigeon), data: { turbo_method: :patch }  do%>
+          <% pigeon_state = pigeon_card_variables(pigeon)  %>
+          <%= render 'pigeons/pigeon_card', pigeon: pigeon, card_class: pigeon_state[:card_class], pigeon_avatar: pigeon_state[:pigeon_avatar], media_icon: pigeon_state[:media_icon], favourite: pigeon_state[:favourite], reply_later: pigeon_state[:reply_later], both: pigeon_state[:both]  %>
           <% end %>
         <% end %>
       </div>
