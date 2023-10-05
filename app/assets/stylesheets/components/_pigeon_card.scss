@@ -1,9 +1,6 @@
 .pigeon-card {
   list-style: none;
-  // background-color: grey;
-  // color: white;
-  // font-weight: bold;
-  // text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  background-color: grey;
   background-color: $medium-gray;
   padding: 0.8rem;
   color: white;
@@ -43,11 +40,10 @@
       margin-top: 1rem;
     }
 
-}
-
-.pigeon-card.unread {
-  background-color: $purple;
-  height: 25vh;
+    &.unread {
+      background-color: $purple;
+      height: 25vh;
+    }
 }
 
 
@@ -66,11 +62,11 @@
   margin-top: 1rem;
 }
 
-.pigeon-card-bottom {
-  text-align: right;
-  margin: 0px;
-  padding: 0px;
-}
+// .pigeon-card-bottom {
+//   text-align: right;
+//   margin: 0px;
+//   padding: 0px;
+// }
 
 .offset-icon {
   position: absolute;
@@ -92,13 +88,13 @@ a {
 .pigeon-card-media {
   font-size: x-large;
   color: black;
-  background-color: $green;
-  padding: 0.5rem;
-  border-radius: 50%;
-  position: absolute;
-  bottom: 0.3rem;
-  right: 0.4rem;
-  margin-bottom: 0px;
+  // //
+  // border-radius: 50%;
+  // // padding: 0.5rem;
+
+  // margin-bottom: 0px;
+  // height: 2rem;
+  // width: 2rem;
 }
 
 .sender-date-info {
@@ -110,4 +106,28 @@ a {
 .toggle-in-index {
   display: flex;
   justify-content: space-between;
+}
+
+.avatar-image {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.media-circle {
+  color: $green;
+  margin: 0;
+}
+
+.media-type {
+  color: black;
+  margin: 0;
+}
+
+.media-stack {
+  position: absolute;
+  bottom: 0.3rem;
+  right: 0rem;
+  margin: 0;
 }

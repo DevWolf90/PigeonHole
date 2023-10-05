@@ -12,7 +12,7 @@
             <% unless pigeon.read %>
               <%= link_to mark_read_path(pigeon), data: { turbo_method: :patch }  do%>
                 <% pigeon_state = pigeon_card_variables(pigeon)  %>
-                <%= render 'pigeons/pigeoncard', pigeon: pigeon, card_class: pigeon_state[:card_class], pigeon_avatar: pigeon_state[:pigeon_avatar], media_icon: pigeon_state[:media_icon], favorite: pigeon_state[:favorite], reply_later: pigeon_state[:reply_later]  %>
+                <%= render 'pigeons/pigeoncard', pigeon: pigeon, card_class: pigeon_state[:card_class], pigeon_avatar: pigeon_state[:pigeon_avatar], media_icon: pigeon_state[:media_icon], particular: pigeon_state[:particular]  %>
               <% end %>
             <% end %>
           <% end %>
@@ -26,38 +26,8 @@
           <% @pigeons.each do |pigeon| %>
             <% if pigeon.favourite? %>
               <%= link_to mark_read_path(pigeon), data: { turbo_method: :patch }  do%>
-                <div class="pigeon-card">
-                  <i class="fa-solid fa-heart heart offset-icon"></i>
-                  <div class="sender-date-info">
-                    <div style="border-radius: 50px; height: 30px; width: 30px; overflow: hidden; background: gray;">
-                      <% if pigeon.user.avatar.attached? %>
-                        <%= cl_image_tag pigeon.user.avatar.key, height: 30, width:30, crop: :fill %>
-                        <% else %>
-                        <%= image_tag("https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000", height:30, width:30) %>
-                      <% end %>
-                    </div>
-                    <p class="mt-2">@<%= pigeon.user.nickname %></p>
-                    <p class="m-0"><%= pigeon.date.strftime("%a %b %e") %></p>
-                  </div>
-                  <div class = "pigeon-description">
-                    <h3><%= pigeon.title.truncate(30) %></h3>
-                    <div class="pigeon-card-bottom">
-                        <% if pigeon.media_type == "video" %>
-                            <p><i class="fa-brands fa-youtube pigeon-card-media"></i></p>
-                        <% elsif pigeon.media_type == "article" %>
-                            <p><i class="fa-regular fa-newspaper pigeon-card-media"></i></p>
-                        <% elsif pigeon.media_type == "book" %>
-                            <p><i class="fa-solid fa-book pigeon-card-media"></i></p>
-                        <% elsif pigeon.media_type == "podcast"%>
-                            <p><i class="fa-solid fa-headphones pigeon-card-media"></i></p>
-                        <% elsif pigeon.media_type == "audio" || "song" || "playlist"%>
-                            <p><i class="fa-solid fa-music pigeon-card-media"></i></p>
-                        <% elsif pigeon.media_type == "movie"%>
-                            <p><i class="fa-solid fa-film pigeon-card-media"></i></p>
-                        <% end %>
-                    </div>
-                  </div>
-                </div>
+                <% pigeon_state = pigeon_card_variables(pigeon)  %>
+                <%= render 'pigeons/pigeoncard', pigeon: pigeon, card_class: pigeon_state[:card_class], pigeon_avatar: pigeon_state[:pigeon_avatar], media_icon: pigeon_state[:media_icon], particular: pigeon_state[:particular]  %>
               <% end %>
             <% end %>
           <% end %>
@@ -69,38 +39,8 @@
           <% @pigeons.each do |pigeon| %>
             <% if pigeon.reply_later? %>
               <%= link_to mark_read_path(pigeon), data: { turbo_method: :patch }  do%>
-              <div class="pigeon-card">
-                <i class="fa-solid fa-clock reply-icon offset-icon" style="color: #4c19b9;"></i>
-                <div class="sender-date-info">
-                    <div style="border-radius: 50px; height: 30px; width: 30px; overflow: hidden; background: gray;">
-                      <% if pigeon.user.avatar.attached? %>
-                        <%= cl_image_tag pigeon.user.avatar.key, height: 30, width:30, crop: :fill %>
-                        <% else %>
-                        <%= image_tag("https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000", height:30, width:30) %>
-                      <% end %>
-                    </div>
-                    <p class="mt-2">@<%= pigeon.user.nickname %></p>
-                    <p class="m-0"><%= pigeon.date.strftime("%a %b %e") %></p>
-                </div>
-                <div class = "pigeon-description">
-                  <h3><%= pigeon.title.truncate(30) %></h3>
-                  <div class="pigeon-card-bottom">
-                    <% if pigeon.media_type == "video" %>
-                        <p><i class="fa-brands fa-youtube pigeon-card-media"></i></p>
-                    <% elsif pigeon.media_type == "article" %>
-                        <p><i class="fa-regular fa-newspaper pigeon-card-media"></i></p>
-                    <% elsif pigeon.media_type == "book" %>
-                        <p><i class="fa-solid fa-book pigeon-card-media"></i></p>
-                    <% elsif pigeon.media_type == "podcast"%>
-                        <p><i class="fa-solid fa-headphones pigeon-card-media"></i></p>
-                    <% elsif pigeon.media_type == "audio" || "song" || "playlist"%>
-                        <p><i class="fa-solid fa-music pigeon-card-media"></i></p>
-                    <% elsif pigeon.media_type == "movie"%>
-                        <p><i class="fa-solid fa-film pigeon-card-media"></i></p>
-                    <% end %>
-                  </div>
-                </div>
-              </div>
+                <% pigeon_state = pigeon_card_variables(pigeon)  %>
+                <%= render 'pigeons/pigeoncard', pigeon: pigeon, card_class: pigeon_state[:card_class], pigeon_avatar: pigeon_state[:pigeon_avatar], media_icon: pigeon_state[:media_icon], particular: pigeon_state[:particular]  %>
               <% end %>
             <% end %>
         <% end %>
