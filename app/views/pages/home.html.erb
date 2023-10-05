@@ -23,11 +23,16 @@
    <h2 class="mt-3 ms-3">favourite pigeons</h2>
     <div class="scrolling-wrapper pb-3">
       <div class="d-flex align-items-center p-0">
-          <% @pigeons.each do |pigeon| %>
-            <% if pigeon.favourite? %>
-              <%= link_to mark_read_path(pigeon), data: { turbo_method: :patch }  do%>
-                <% pigeon_state = pigeon_card_variables(pigeon)  %>
-                <%= render 'pigeons/pigeon_card', pigeon: pigeon, card_class: pigeon_state[:card_class], pigeon_avatar: pigeon_state[:pigeon_avatar], media_icon: pigeon_state[:media_icon], particular: pigeon_state[:particular]  %>
+          <% pigeons_favourite = @pigeons.all? { |pigeon| pigeon.favourite} %>
+          <% if pigeons_favourite = nil %>
+            <h3 class="mt-3"><strong>No favourite pigeons yet 😢 </strong></h3>
+          <% else %>
+            <% @pigeons.each do |pigeon| %>
+              <% if pigeon.favourite? && pigeon.read%>
+                <%= link_to mark_read_path(pigeon), data: { turbo_method: :patch }  do%>
+                  <% pigeon_state = pigeon_card_variables(pigeon)  %>
+                  <%= render 'pigeons/pigeon_card', pigeon: pigeon, card_class: pigeon_state[:card_class], pigeon_avatar: pigeon_state[:pigeon_avatar], media_icon: pigeon_state[:media_icon], particular: pigeon_state[:particular]  %>
+                <% end %>
               <% end %>
             <% end %>
           <% end %>
@@ -36,14 +41,19 @@
     <h2 class="mt-3 ms-3">don't forget to reply</h2>
     <div class="scrolling-wrapper pb-3">
       <div class="reply-pigeons d-flex align-items-center p-0">
-          <% @pigeons.each do |pigeon| %>
-            <% if pigeon.reply_later? %>
-              <%= link_to mark_read_path(pigeon), data: { turbo_method: :patch }  do%>
-                <% pigeon_state = pigeon_card_variables(pigeon)  %>
-                <%= render 'pigeons/pigeon_card', pigeon: pigeon, card_class: pigeon_state[:card_class], pigeon_avatar: pigeon_state[:pigeon_avatar], media_icon: pigeon_state[:media_icon], particular: pigeon_state[:particular]  %>
+          <% pigeons_reply = @pigeons.all? { |pigeon| pigeon.reply_later} %>
+          <% if pigeons_reply = nil %>
+          <h3 class="mt-3"><strong>No pigeons to reply-to later 🎉</strong></h3>
+          <% else %>
+            <% @pigeons.each do |pigeon| %>
+              <% if pigeon.reply_later? && pigeon.read %>
+                <%= link_to mark_read_path(pigeon), data: { turbo_method: :patch }  do%>
+                  <% pigeon_state = pigeon_card_variables(pigeon)  %>
+                  <%= render 'pigeons/pigeon_card', pigeon: pigeon, card_class: pigeon_state[:card_class], pigeon_avatar: pigeon_state[:pigeon_avatar], media_icon: pigeon_state[:media_icon], particular: pigeon_state[:particular]  %>
+                <% end %>
               <% end %>
             <% end %>
-        <% end %>
+          <% end %>
       </div>
   </div>
 
