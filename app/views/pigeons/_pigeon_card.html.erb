@@ -1,0 +1,31 @@
+<div class="pigeon-card <%= card_class %>">
+  <div class="sender-date-info">
+      <%= pigeon_avatar%>
+    <p class="mt-2 mb-0">@<%= pigeon.user.nickname %></p>
+    <p class="m-0"><%= pigeon.date.strftime("%a %b %e") %></p>
+  </div>
+  <div class="pigeon-action">
+    <% if pigeon.favourite? && pigeon.reply_later %>
+      <%= both.html_safe %>
+    <% elsif pigeon.favourite? %>
+      <%= favourite %>
+    <% elsif pigeon.reply_later %>
+      <%= reply_later %>
+    <% end %>
+  </div>
+  <div class = "pigeon-description">
+    <h3 class="mt-1">
+    <% if pigeon.read %>
+      <%= pigeon.title.truncate(45) %>
+    <% else %>
+      <%= pigeon.title.truncate(55) %>
+    <% end %>
+    </h3>
+    <div class="pigeon-card-bottom">
+      <span class="fa-stack fa-2x media-stack">
+        <i class="fa-solid fa-circle fa-stack-2x media-circle" style="vertical-align: top;"></i>
+        <%= media_icon %>
+      </span>
+    </div>
+  </div>
+</div>
