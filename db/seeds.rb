@@ -136,10 +136,10 @@ pig10.save
 puts "Created: #{pig10.title}"
 
 pig11 = Pigeon.new(summary: "something something", chat:chat1, length: 3, user:jode,
-  link_to_content: "https://www.youtube.com/watch?v=OAM1qPeYyM4&list=RDOAM1qPeYyM4&start_radio=1",
-  media_type: "video", date: Date.today, title: "Chillout Lounge",
-  description: "description", recipient: yustiniya)
-pig11.tag_names << "Ukhouse"
+  link_to_content: "https://www.youtube.com/watch?v=5X-Mrc2l1d0",
+  media_type: "video", date: Date.today, title: "Micheal Jackson - Rock With You",
+  description: "Hey, have this heard this song? I love it so much, it reminds me of you. I CANNOT STOP LISTENING 🔂 The music video is a masterpiece", recipient: yustiniya)
+pig11.tag_names << "music"
 pig11.tag_names << "Chill"
 pig11.save
 puts "Created: #{pig11.title}"

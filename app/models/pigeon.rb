@@ -5,6 +5,11 @@ class Pigeon < ApplicationRecord
   belongs_to :user
   has_many :taggings, as: :taggable, class_name: 'Gutentag::Tagging'
   has_many :tags, through: :taggings, class_name: 'Gutentag::Tag'
+  validates :link_to_content, presence: { message: "Paste your link here 🔗" }
+  validates :title, presence: { message: "Give your pigeon a name 😄" }
+  validates :description, presence: { message: "Add your message here! 📝" }
+  validates :media_type, presence: { message: "Please select media type" }
+  validates :tags, presence: { message: "Please select tag/tags" }
   before_save :summarize_url, if: :link_to_content_changed?
   attr_accessor :custom_tags
 
@@ -21,6 +26,18 @@ class Pigeon < ApplicationRecord
   def summarize_url
     self.summary = OpenaiService.new(link_to_content, 2).call
   end
+
+  # def summarize_url
+  #   THIS REMOVES LINKS FROM TEXT
+  #   content_without_links = link_to_content.gsub(/https?:\/\/[^\s]+/, '')
+
+  #   # Call the OpenAI service to generate the summary
+  #   self.summary = OpenaiService.new(content_without_links, 2).call
+
+  #   # Limit the summary to 180 characters, WE CAN CHANGE LIMIT. IM JUST NOT SURE WHAT LIMIT WE WANT
+  #   self.summary = self.summary[0, 180] if self.summary.length > 180
+  # end
+
 
   def fetch_video_duration
     return unless link_to_content.match?('youtube.com')

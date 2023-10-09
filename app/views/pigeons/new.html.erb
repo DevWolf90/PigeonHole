@@ -6,13 +6,13 @@
                       "Type a nickname or email...", collection: User.all, label_method: :nickname,
                       input_html: {data: {controller: "search-users"}}%>
 
-      <%= f.input :link_to_content, type: :string%>
+      <%= f.input :link_to_content, type: :string %>
       <%= f.input :title, type: :string %>
       <%= f.input :description, type: :string, label: 'Write your message here' %>
       <%= f.input :media_type, collection: ["article", "book", "movie", "playlist", "podcast", "song", "video", "other"] %>
       <%= f.input :tags, as: :check_boxes, collection: @alltags, label: "Select category" %>
         <div id="custom-tags">
-      <%= f.input :custom_tags, as: :string, input_html: { placeholder: "Enter new tags, separate with a ',' :)" }, label: "Add a new tag" %>
+      <%= f.input :custom_tags, as: :string, input_html: { placeholder: "Enter new tags, separate with a ',' :)" }, label: "Add a new tag (Optional)" %>
         </div>
     </div>
     <%= f.submit "Send Pigeon", class: "submit"%>

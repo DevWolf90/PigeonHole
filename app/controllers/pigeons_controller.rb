@@ -154,9 +154,20 @@ class PigeonsController < ApplicationController
     @pigeon.save
     @message = Message.new(sender: current_user, chat: @chat)
     @message.content = @pigeon.description
-    @message.save
 
-    redirect_to pigeons_path(@pigeons)
+    if @pigeon.description.present?
+      if @message.save
+        redirect_to pigeons_path(@pigeons)
+      else
+        # Handle validation errors and render a new page
+        render :new
+      end
+    else
+      # Handle the case when @pigeon.description is not present
+      flash[:error] = 'Pigeon description is required.'
+      render :new
+    end
+
     # if @pigeon.link_to_content.include?("youtu")
 
     #   url = "https://www.googleapis.com/youtube/v3/videos?id=#{get_yt_id(@pigeon.link_to_content)}=#{ENV["GOOGLE_API_KEY"]}

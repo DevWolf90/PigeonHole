@@ -8,7 +8,7 @@
       <%= f.input :email,
                   required: true,
                   autofocus: true,
-                  input_html: { autocomplete: "email" }, placeholder:"Your eamil..."%>
+                  input_html: { autocomplete: "email" }, placeholder:"Your email..."%>
       <%= f.input :password,
                   required: true,
                   hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
@@ -20,7 +20,7 @@
                   required: true,
                   input_html: { autocomplete: "nickname" }, placeholder:"Your username..."%>
         <div class="input_box">
-        <%= f.input :avatar, as: :file, :label => "Profile Picture" %>
+        <%= f.input :avatar, as: :file, :label => "Profile Picture (Optional)" %>
         </div>
     </div>
 
