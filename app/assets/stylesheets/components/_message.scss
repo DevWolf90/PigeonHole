@@ -15,7 +15,7 @@
   --r: 25px; /* the radius */
   --t: 30px; /* the size of the tail */
 
-  max-width: 300px;
+  max-width: 100vw;
   padding: calc(2*var(--r)/3);
   -webkit-mask:
     radial-gradient(var(--t) at var(--_d) 0,#0000 98%,#000 102%)
@@ -48,7 +48,7 @@
   --r: 25px; /* the radius */
   --t: 30px; /* the size of the tail */
 
-  max-width: 300px;
+  max-width: 100vw;
   -webkit-mask:
     radial-gradient(var(--t) at var(--_d) 0,#0000 98%,#000 102%)
       var(--_d) 100%/calc(100% - var(--r)) var(--t) no-repeat,

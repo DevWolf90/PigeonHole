@@ -5,6 +5,7 @@ class ChatsController < ApplicationController
     @pigeons = Pigeon.where(chat_id: @chat)
     @chats = Chat.where(sender: current_user).or(Chat.where(recipient: current_user))
     @current_user = current_user
+    @chatting_partner = @chat.recipient
   end
 
   def new

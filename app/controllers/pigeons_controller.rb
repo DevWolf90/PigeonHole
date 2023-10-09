@@ -42,8 +42,8 @@ class PigeonsController < ApplicationController
       format.text { render partial: "pigeons/list", locals: { pigeons: @pigeons }, formats: [:html] }
     end
 
-    @pigeons = Pigeon.where(recipient: current_user).sort_by { |pigeon| pigeon.title.downcase }
-
+    @pigeons = Pigeon.where(recipient: current_user).sort_by { |pigeon| [-pigeon.date.to_time.to_i, pigeon.title.downcase] }
+    # @pigeons = Pigeon.where(recipient: current_user).sort_by { |pigeon| pigeon.title.downcase }
   end
 
   def toggle_read #toggle read on show page
