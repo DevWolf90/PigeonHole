@@ -17,5 +17,7 @@ Rails.application.routes.draw do
     resources :messages, only: %i[ create]
   end
 
+  resources :content_categories, only: %i[index]
+
   resources :users, only: [:index]
 end
