@@ -1,5 +1,13 @@
-<h1>Categories</h1>
+<div class="container">
+  <h1>Categories</h1>
 
-<% @contentcategories.each do |category|%>
-  <%= category.name %>
-<% end %>
+  <% @content_categories.each do |category|%>
+    <%= category.name %>
+  <% end %>
+
+  <h2>Create new category</h2>
+  <%= simple_form_for @content_category do |f|%>
+  <%= f.input :name, type: :string, label: "Category name" %>
+  <%= f.submit "Save category", class: "submit"%>
+  <% end %>
+</div>
