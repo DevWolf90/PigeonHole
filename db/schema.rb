@@ -61,26 +61,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_16_093255) do
     t.index ["owner_id"], name: "index_content_categories_on_owner_id"
   end
 
-  create_table "gutentag_taggings", force: :cascade do |t|
-    t.integer "tag_id", null: false
-    t.integer "taggable_id", null: false
-    t.string "taggable_type", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["tag_id"], name: "index_gutentag_taggings_on_tag_id"
-    t.index ["taggable_type", "taggable_id", "tag_id"], name: "unique_taggings", unique: true
-    t.index ["taggable_type", "taggable_id"], name: "index_gutentag_taggings_on_taggable_type_and_taggable_id"
-  end
-
-  create_table "gutentag_tags", force: :cascade do |t|
-    t.string "name", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "taggings_count", default: 0, null: false
-    t.index ["name"], name: "index_gutentag_tags_on_name", unique: true
-    t.index ["taggings_count"], name: "index_gutentag_tags_on_taggings_count"
-  end
-
   create_table "labels", force: :cascade do |t|
     t.bigint "pigeon_id", null: false
     t.bigint "content_category_id", null: false

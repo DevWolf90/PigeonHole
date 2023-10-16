@@ -28,9 +28,9 @@
     </div>
 
     <div class="category">
-      <% @tags = @pigeon.tag_names %>
-      <% @tags.each do |tag| %>
-        <button class="tag-button"><%= tag %></button>
+      <% @content_categories = @pigeon.content_categories %>
+      <% @content_categories.each do |cc| %>
+        <button class="tag-button"><%= cc.name %></button>
       <% end %>
     </div>
 
