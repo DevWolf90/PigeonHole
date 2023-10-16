@@ -26,10 +26,10 @@
                 </div>
               </div>
               <div class="mt-2 mb-0">
-                <% @tags = pigeon.tag_names %>
+                <% @content_categories = pigeon.content_categories %>
                 <ul style="padding-left: 0px;">
-                  <% @tags.each do |tag| %>
-                    <li style="font-weight: bold;"><%= tag %></li>
+                  <% @content_categories.each do |cc| %>
+                    <li style="font-weight: bold;"><%= cc %></li>
                   <% end %>
                 </ul>
               </div>

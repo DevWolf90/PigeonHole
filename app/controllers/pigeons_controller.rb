@@ -92,7 +92,7 @@ class PigeonsController < ApplicationController
   def new
     @user = User.new
     @pigeon = Pigeon.new
-    @alltags = Gutentag::Tag.names_for_scope(Pigeon)
+    @content_categories = ContentCategory.where("owner_id = ? OR creator_id = ?", current_user.id, current_user.id)
   end
 
   # def edit
@@ -111,6 +111,7 @@ class PigeonsController < ApplicationController
   def create
     # @pigeons = Pigeon.all
     @pigeon = Pigeon.new(pigeon_params)
+    @content_categories = ContentCategory.where("owner_id = ? OR creator_id = ?", current_user.id, current_user.id)
 
     recipient_id = params[:pigeon][:recipient]
     @pigeon.recipient = User.find_by_id(recipient_id)
@@ -123,22 +124,22 @@ class PigeonsController < ApplicationController
       @chat = Chat.create(sender: current_user, recipient: @pigeon.recipient)
     end
     @pigeon.chat = @chat
-    selected_tags = params[:pigeon][:tags]
-    unless selected_tags.nil?
-    selected_tags.each do |tag_name|
-      tag = Gutentag::Tag.find_by(name: tag_name)
-      @pigeon.tag_names << tag_name if tag.present? && !tag_name.empty?
-      end
+    selected_content_categories = params[:pigeon][:content_categories]
+    unless selected_content_categories.nil?
+      selected_content_categories.each do |category_id|
+        category = ContentCategory.find_by(id: category_id)
+        @pigeon.content_categories << category if category.present?
+        end
     end
 
-    custom_tags = params[:pigeon][:custom_tags]
-    unless custom_tags.nil?
-      if custom_tags.include?(",")
-        custom_tags.split(",").each do |tag|
-        @pigeon.tag_names << tag.strip.downcase unless tag.strip.empty?
+    custom_categories = params[:pigeon][:new_content_categories]
+    unless custom_categories.nil?
+      if custom_categories.include?(",")
+        custom_ctegories.split(",").each do |cc|
+        @pigeon.content_categories << cc.strip.downcase unless cc.strip.empty?
         end
       else
-        @pigeon.tag_names << custom_tags.strip.downcase unless custom_tags.strip.empty?
+        @pigeon.content_categories << custom_categories.strip.downcase unless custom_categories.strip.empty?
       end
     end
 

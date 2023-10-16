@@ -10,9 +10,9 @@
       <%= f.input :title, type: :string %>
       <%= f.input :description, type: :string, label: 'Write your message here' %>
       <%= f.input :media_type, collection: ["article", "book", "movie", "playlist", "podcast", "song", "video", "other"] %>
-      <%= f.input :tags, as: :check_boxes, collection: @alltags, label: "Select category" %>
+      <%= f.input :content_categories, as: :check_boxes, collection: @content_categories, label: "Select category" %>
         <div id="custom-tags">
-      <%= f.input :custom_tags, as: :string, input_html: { placeholder: "Enter new tags, separate with a ',' :)" }, label: "Add a new tag" %>
+      <%#= f.input :new_content_categories, as: :string, input_html: { placeholder: "Enter new tags, separate with a ',' :)" }, label: "Add a new tag" %>
         </div>
     </div>
     <%= f.submit "Send Pigeon", class: "submit"%>
