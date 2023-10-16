@@ -36,22 +36,22 @@ export default class extends Controller {
       })
   }
 
-  // media(event) {
-  //   console.log(event.target.checked)
-  //   let url = `${document.location.href}?query=${this.inputTarget.value}`
-  //   if (event.target.checked) {
-  //     url = `${document.location.href}?query=${this.inputTarget.value}&q%5Btags_name_cont_any%5D%5B%5D=${event.target.value}&q%5Bmedia_type%5D%5B%5D=${event.target.value}`
-  //   }
-  //   fetch(url, {
-  //     method: 'GET',
-  //     headers: { "Accept": "text/plain" },
-  //   })
-  //   .then(response => response.text())
-  //     .then((data) => {
-  //       console.log(data)
-  //       this.listTarget.outerHTML = data
-  //     })
-  // }
+  media(event) {
+    console.log(event.target.checked)
+    let url = `${document.location.href}?query=${this.inputTarget.value}`
+    if (event.target.checked) {
+      url = `${document.location.href}?query=${this.inputTarget.value}&q%5Btags_name_cont_any%5D%5B%5D=${event.target.value}&q%5Bmedia_type%5D%5B%5D=${event.target.value}`
+    }
+    fetch(url, {
+      method: 'GET',
+      headers: { "Accept": "text/plain" },
+    })
+    .then(response => response.text())
+      .then((data) => {
+        console.log(data)
+        this.listTarget.outerHTML = data
+      })
+  }
   }
 
   // http://localhost:3000/pigeons?query=&q%5Bmedia_type%5D%5B%5D=playlist

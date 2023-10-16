@@ -5,44 +5,37 @@ class PigeonsController < ApplicationController
   def index
     @alltags = Gutentag::Tag.names_for_scope(Pigeon.where(recipient: current_user))
     @mediatypes = ["article", "book", "movie", "playlist", "podcast", "song", "video", "other"]
-
+    @pigeons = Pigeon.where(recipient: current_user)
 
     if params[:q].present? && params[:q][:tags_name_cont_any].present?
       selected_tags = params[:q][:tags_name_cont_any]
-      @foundpigeons = Pigeon.tagged_with(:names => selected_tags, match: :all)
-
+      pigeons_with_selected_tags = nil
       selected_tags.each do |tag|
-        @pigeons = @pigeons.tagged_with(names: tag)
+        tagged_pigeons = Pigeon.tagged_with(names: tag)
+        pigeons_with_selected_tags = pigeons_with_selected_tags.nil? ? tagged_pigeons : pigeons_with_selected_tags && tagged_pigeons
       end
-
+      @pigeons = pigeons_with_selected_tags
     end
 
     if params[:q].present? && params[:q][:media_type].present?
       selected_media_types = params[:q][:media_type]
-      # @foundpigeons = @pigeons.where(media_type: selected_media_types)
-      selected_media_types.each do |mt|
-        @pigeons = @pigeons.where(media_type: mt)
-      end
-
+      @pigeons = @pigeons.where(media_type: selected_media_types)
     end
 
     if params[:query].present?
-      sql_subquery = "
-        pigeons.title ILIKE :query
-        OR pigeons.description ILIKE :query
-        OR pigeons.summary ILIKE :query
-        OR chats.sender_id IN (SELECT id FROM users WHERE nickname ILIKE :query)
-        OR chats.recipient_id IN (SELECT id FROM users WHERE nickname ILIKE :query)
-        "
-      @pigeons = @pigeons.joins(chat: :sender).joins(chat: :recipient).where(sql_subquery, query: "%#{params[:query]}%")
+      query = "%#{params[:query]}%"
+      @pigeons = @pigeons.joins(chat: [:sender, :recipient]).where(
+        "pigeons.title ILIKE :query OR pigeons.description ILIKE :query OR pigeons.summary ILIKE :query OR users.nickname ILIKE :query",
+        query: query
+      )
     end
 
+    @pigeons = @pigeons.sort_by { |pigeon| [-pigeon.date.to_time.to_i, pigeon.title.downcase] }
     respond_to do |format|
       format.html
       format.text { render partial: "pigeons/list", locals: { pigeons: @pigeons }, formats: [:html] }
     end
 
-    @pigeons = Pigeon.where(recipient: current_user).sort_by { |pigeon| [-pigeon.date.to_time.to_i, pigeon.title.downcase] }
     # @pigeons = Pigeon.where(recipient: current_user).sort_by { |pigeon| pigeon.title.downcase }
   end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_12_124430) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_16_093255) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -55,6 +55,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_12_124430) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "owner_id"
+    t.bigint "creator_id"
+    t.index ["creator_id"], name: "index_content_categories_on_creator_id"
+    t.index ["owner_id"], name: "index_content_categories_on_owner_id"
   end
 
   create_table "gutentag_taggings", force: :cascade do |t|
@@ -135,6 +139,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_12_124430) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "chats", "users", column: "recipient_id"
   add_foreign_key "chats", "users", column: "sender_id"
+  add_foreign_key "content_categories", "users", column: "creator_id"
+  add_foreign_key "content_categories", "users", column: "owner_id"
   add_foreign_key "labels", "content_categories"
   add_foreign_key "labels", "pigeons"
   add_foreign_key "messages", "chats"
