@@ -29,7 +29,7 @@
                 <% @content_categories = pigeon.content_categories %>
                 <ul style="padding-left: 0px;">
                   <% @content_categories.each do |cc| %>
-                    <li style="font-weight: bold;"><%= cc %></li>
+                    <li style="font-weight: bold;"><%= cc.name %></li>
                   <% end %>
                 </ul>
               </div>
