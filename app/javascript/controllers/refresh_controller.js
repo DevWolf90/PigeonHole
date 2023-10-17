@@ -24,6 +24,15 @@ export default class extends Controller {
     let url = `${document.location.href}?query=${this.inputTarget.value}`
     if (event.target.checked) {
       url = `${document.location.href}?query=${this.inputTarget.value}&q%5Btags_name_cont_any%5D%5B%5D=${event.target.value}`
+    } else {
+      const tagIndex = url.indexOf("&q%5Btags_name_cont_any%5D%5B%5D=")
+      if (tagIndex !== -1) {
+        const prefix = url.substring(0, tagIndex)
+        let suffix = url.substring(tagIndex)
+        const suffixEndIndex = suffix.indexOf("&")
+        suffix = suffixEndIndex !== -1 ? suffix.substring(suffixEndIndex + 1) : ''
+        url = `${prefix}${suffix}`
+      }
     }
     fetch(url, {
       method: 'GET',

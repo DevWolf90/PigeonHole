@@ -33,7 +33,7 @@ class PigeonsController < ApplicationController
     if params[:query].present?
       query = "%#{params[:query]}%"
       pigeons_query = []
-      pigeons_query = @pigeons.joins(chat: [:sender, :recipient]).where(
+      pigeons_query = Pigeon.joins(chat: [:sender, :recipient]).where(
         "pigeons.title ILIKE :query OR pigeons.description ILIKE :query OR pigeons.summary ILIKE :query OR users.nickname ILIKE :query",
         query: query
       )
