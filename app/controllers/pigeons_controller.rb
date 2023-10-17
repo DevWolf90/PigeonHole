@@ -8,18 +8,26 @@ class PigeonsController < ApplicationController
     @pigeons = Pigeon.where(recipient: current_user)
 
     if params[:q].present? && params[:q][:tags_name_cont_any].present?
-      selected_tags = params[:q][:tags_name_cont_any]
-      pigeons_with_selected_tags = nil
-      selected_tags.each do |tag|
-        tagged_pigeons = Pigeon.tagged_with(names: tag)
-        pigeons_with_selected_tags = pigeons_with_selected_tags.nil? ? tagged_pigeons : pigeons_with_selected_tags && tagged_pigeons
+      selected_content_categories = params[:q][:tags_name_cont_any]
+      pigeons_with_selected_content_categories = []
+      selected_content_categories.each do |cc|
+        content_category_id = ContentCategory.find_by(name: cc).id
+        pigeons_with_selected_content_categories << @pigeons.joins(:labels).where(labels: {content_category_id: content_category_id})
       end
-      @pigeons = pigeons_with_selected_tags
     end
 
     if params[:q].present? && params[:q][:media_type].present?
+      pigeons_with_selected_media_types = []
       selected_media_types = params[:q][:media_type]
-      @pigeons = @pigeons.where(media_type: selected_media_types)
+      pigeons_with_selected_media_types = @pigeons.where(media_type: selected_media_types)
+    end
+
+    if pigeons_with_selected_content_categories && pigeons_with_selected_media_types
+      @pigeons = pigeons_with_selected_content_categories & pigeons_with_selected_media_types
+    elsif pigeons_with_selected_content_categories
+      @pigeons = pigeons_with_selected_content_categories
+    elsif pigeons_with_selected_media_types
+      @pigeons = pigeons_with_selected_media_types
     end
 
     if params[:query].present?
@@ -30,13 +38,14 @@ class PigeonsController < ApplicationController
       )
     end
 
+    @pigeons = @pigeons.first
     @pigeons = @pigeons.sort_by { |pigeon| [-pigeon.date.to_time.to_i, pigeon.title.downcase] }
     respond_to do |format|
       format.html
       format.text { render partial: "pigeons/list", locals: { pigeons: @pigeons }, formats: [:html] }
     end
 
-    # @pigeons = Pigeon.where(recipient: current_user).sort_by { |pigeon| pigeon.title.downcase }
+    @pigeons = Pigeon.where(recipient: current_user).sort_by { |pigeon| pigeon.title.downcase }
   end
 
   def toggle_read #toggle read on show page
@@ -173,7 +182,7 @@ class PigeonsController < ApplicationController
   private
 
   def pigeon_params
-    params.require(:pigeon).permit(:link_to_content, :title, :description, :media_type, :tags, :custom_tags)
+    params.require(:pigeon).permit(:link_to_content, :title, :description, :media_type, q: [:tags_name_cont_any])
   end
 
   def set_pigeons

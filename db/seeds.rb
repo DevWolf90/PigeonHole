@@ -44,17 +44,17 @@ Message.create(content: "Whats Up?", date: Date.today, chat: chat7, sender: jode
 puts "Messages created"
 
 puts "Creating content categories"
-cat1 = ContentCategory.new(name: "music_test", creator_id: yustiniya.id)
+cat1 = ContentCategory.new(name: "music", creator_id: yustiniya.id)
 cat1.save
-cat2 = ContentCategory.new(name: "politics_test", creator_id: yustiniya.id)
+cat2 = ContentCategory.new(name: "politics", creator_id: yustiniya.id)
 cat2.save
-cat3 = ContentCategory.new(name: "art_test", creator_id: yustiniya.id)
+cat3 = ContentCategory.new(name: "art", creator_id: yustiniya.id)
 cat3.save
-cat4 = ContentCategory.new(name: "football_test", creator_id: jode.id)
+cat4 = ContentCategory.new(name: "football", creator_id: jode.id)
 cat4.save
-cat5 = ContentCategory.new(name: "programming_test", creator_id: jode.id)
+cat5 = ContentCategory.new(name: "programming", creator_id: jode.id)
 cat5.save
-cat6 = ContentCategory.new(name: "movies_test", creator_id: jode.id)
+cat6 = ContentCategory.new(name: "movies", creator_id: jode.id)
 cat6.save
 
 puts "Created content categories"
