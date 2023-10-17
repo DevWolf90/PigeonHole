@@ -12,7 +12,7 @@ class PigeonsController < ApplicationController
       pigeons_with_selected_content_categories = []
       selected_content_categories.each do |cc|
         content_category_id = ContentCategory.find_by(name: cc).id
-        pigeons_with_selected_content_categories << @pigeons.joins(:labels).where(labels: {content_category_id: content_category_id})
+        pigeons_with_selected_content_categories += @pigeons.joins(:labels).where(labels: {content_category_id: content_category_id})
       end
     end
 
@@ -23,7 +23,7 @@ class PigeonsController < ApplicationController
     end
 
     if pigeons_with_selected_content_categories && pigeons_with_selected_media_types
-      @pigeons = pigeons_with_selected_content_categories & pigeons_with_selected_media_types
+      @pigeons = pigeons_with_selected_content_categories + pigeons_with_selected_media_types
     elsif pigeons_with_selected_content_categories
       @pigeons = pigeons_with_selected_content_categories
     elsif pigeons_with_selected_media_types
@@ -32,20 +32,25 @@ class PigeonsController < ApplicationController
 
     if params[:query].present?
       query = "%#{params[:query]}%"
-      @pigeons = @pigeons.joins(chat: [:sender, :recipient]).where(
+      pigeons_query = []
+      pigeons_query = @pigeons.joins(chat: [:sender, :recipient]).where(
         "pigeons.title ILIKE :query OR pigeons.description ILIKE :query OR pigeons.summary ILIKE :query OR users.nickname ILIKE :query",
         query: query
       )
+      @pigeons += pigeons_query
     end
 
-    @pigeons = @pigeons.first
+    @pigeons = @pigeons.to_a
+
+    # @pigeons = @pigeons.first
     @pigeons = @pigeons.sort_by { |pigeon| [-pigeon.date.to_time.to_i, pigeon.title.downcase] }
     respond_to do |format|
       format.html
-      format.text { render partial: "pigeons/list", locals: { pigeons: @pigeons }, formats: [:html] }
+      format.text {
+        render partial: "pigeons/list", locals: { pigeons: @pigeons }, formats: [:html] }
     end
 
-    @pigeons = Pigeon.where(recipient: current_user).sort_by { |pigeon| pigeon.title.downcase }
+    # @pigeons = Pigeon.where(recipient: current_user).sort_by { |pigeon| pigeon.title.downcase }
   end
 
   def toggle_read #toggle read on show page
