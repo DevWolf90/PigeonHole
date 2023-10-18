@@ -9,17 +9,21 @@ class PigeonsController < ApplicationController
 
     if params[:q].present? && params[:q][:tags_name_cont_any].present?
       selected_content_categories = params[:q][:tags_name_cont_any]
-      pigeons_with_selected_content_categories = []
+      pigeons_with_selected_content_categories = @pigeons.joins(:labels)
+      # pigeons_with_selected_content_categories = []
       selected_content_categories.each do |cc|
         content_category_id = ContentCategory.find_by(name: cc).id
-        pigeons_with_selected_content_categories += @pigeons.joins(:labels).where(labels: {content_category_id: content_category_id})
+        pigeons_with_selected_content_categories = pigeons_with_selected_content_categories.where(labels: { content_category_id: content_category_id })
+        # pigeons_with_selected_content_categories += @pigeons.joins(:labels).where(labels: {content_category_id: content_category_id})
       end
+      raise
     end
 
     if params[:q].present? && params[:q][:media_type].present?
-      pigeons_with_selected_media_types = []
       selected_media_types = params[:q][:media_type]
-      pigeons_with_selected_media_types = @pigeons.where(media_type: selected_media_types)
+      pigeons_with_selected_media_types = []
+      pigeons_with_selected_media_types = @pigeons.where(media_type: selected_media_types).to_a
+
     end
 
     if pigeons_with_selected_content_categories && pigeons_with_selected_media_types
@@ -39,8 +43,6 @@ class PigeonsController < ApplicationController
       )
       @pigeons += pigeons_query
     end
-
-    @pigeons = @pigeons.to_a
 
     # @pigeons = @pigeons.first
     @pigeons = @pigeons.sort_by { |pigeon| [-pigeon.date.to_time.to_i, pigeon.title.downcase] }
@@ -106,7 +108,8 @@ class PigeonsController < ApplicationController
   def new
     @user = User.new
     @pigeon = Pigeon.new
-    @content_categories = ContentCategory.where("owner_id = ? OR creator_id = ?", current_user.id, current_user.id)
+    @content_categories = ContentCategory.all
+    # @content_categories = ContentCategory.where("owner_id = ? OR creator_id = ?", current_user.id, current_user.id)
   end
 
   # def edit
@@ -126,6 +129,7 @@ class PigeonsController < ApplicationController
     # @pigeons = Pigeon.all
     @pigeon = Pigeon.new(pigeon_params)
     @content_categories = ContentCategory.where("owner_id = ? OR creator_id = ?", current_user.id, current_user.id)
+    new_content_categories = params[:pigeon][:new_content_categories]
 
     recipient_id = params[:pigeon][:recipient]
     @pigeon.recipient = User.find_by_id(recipient_id)
@@ -138,7 +142,7 @@ class PigeonsController < ApplicationController
       @chat = Chat.create(sender: current_user, recipient: @pigeon.recipient)
     end
     @pigeon.chat = @chat
-    selected_content_categories = params[:pigeon][:content_categories]
+    selected_content_categories = params[:pigeon][:new_content_categories]
     unless selected_content_categories.nil?
       selected_content_categories.each do |category_id|
         category = ContentCategory.find_by(id: category_id)
@@ -146,14 +150,16 @@ class PigeonsController < ApplicationController
         end
     end
 
-    custom_categories = params[:pigeon][:new_content_categories]
+    custom_categories = params[:pigeon][:content_categories]
     unless custom_categories.nil?
-      if custom_categories.include?(",")
-        custom_ctegories.split(",").each do |cc|
-        @pigeon.content_categories << cc.strip.downcase unless cc.strip.empty?
+      custom_categories.each do |cc|
+        if cc.include?(",")
+          cc.split(",").each do |category|
+            @pigeon.content_categories << category.strip.downcase unless category.strip.empty?
+          end
+        else
+          @pigeon.content_categories << cc.strip.downcase unless cc.strip.empty?
         end
-      else
-        @pigeon.content_categories << custom_categories.strip.downcase unless custom_categories.strip.empty?
       end
     end
 
@@ -187,7 +193,8 @@ class PigeonsController < ApplicationController
   private
 
   def pigeon_params
-    params.require(:pigeon).permit(:link_to_content, :title, :description, :media_type, q: [:tags_name_cont_any])
+    params.require(:pigeon).permit(:link_to_content, :title, :description, :media_type, :new_content_categories, [:tags_name_cont_any])
+
   end
 
   def set_pigeons
