@@ -9,7 +9,7 @@ class Pigeon < ApplicationRecord
   validates :title, presence: { message: "Give your pigeon a name 😄" }
   validates :description, presence: { message: "Add your message here! 📝" }
   validates :media_type, presence: { message: "Please select media type" }
-  validates :tags, presence: { message: "Please select tag/tags" }
+  # validates :tags, presence: { message: "Please select tag/tags" }
   before_save :summarize_url, if: :link_to_content_changed?
   attr_accessor :custom_tags
 

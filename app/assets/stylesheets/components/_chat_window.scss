@@ -3,3 +3,10 @@
     overflow:hidden;
     overflow-y:scroll;
   }
+
+  form#new_message {
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  }

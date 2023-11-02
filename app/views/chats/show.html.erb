@@ -47,6 +47,8 @@
       </div>
 
     <% end %>
+</div>
+<div>
   <%= simple_form_for [@chat, @message],
   html: {class: "container pt-3 pos d-flex mb-3"} do |f| %>
     <%= f.input :content,
@@ -63,7 +65,4 @@
   <% else %>
   <h1>Get your nosy ass outta here!</h1>
   <% end %>
-
-  </div>
-
 </div>
