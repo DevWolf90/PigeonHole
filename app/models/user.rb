@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :chats
   has_many :messages
   has_many :pigeons
+  has_many :content_categories
   has_one_attached :avatar
 
   # validates :email, presence: true
