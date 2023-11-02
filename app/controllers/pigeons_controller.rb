@@ -142,7 +142,7 @@ class PigeonsController < ApplicationController
       @chat = Chat.create(sender: current_user, recipient: @pigeon.recipient)
     end
     @pigeon.chat = @chat
-    selected_content_categories = params[:pigeon][:new_content_categories]
+    selected_content_categories = params[:pigeon][:content_categories]
     unless selected_content_categories.nil?
       selected_content_categories.each do |category_id|
         category = ContentCategory.find_by(id: category_id)
@@ -150,7 +150,7 @@ class PigeonsController < ApplicationController
         end
     end
 
-    custom_categories = params[:pigeon][:content_categories]
+    custom_categories = params[:pigeon][:new_content_categories]
     unless custom_categories.nil?
       custom_categories.each do |cc|
         if cc.include?(",")
