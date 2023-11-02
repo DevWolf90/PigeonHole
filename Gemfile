@@ -59,7 +59,7 @@ gem "autoprefixer-rails"
 gem "font-awesome-sass", "~> 6.1"
 gem "simple_form", github: "heartcombo/simple_form"
 
-gem 'gutentag', '~> 2.6'
+# gem 'gutentag', '~> 2.6'
 gem 'google-apis-youtube_v3'
 gem 'open-uri'
 gem 'json'

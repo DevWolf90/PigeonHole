@@ -3,46 +3,53 @@ class PigeonsController < ApplicationController
   before_action :set_pigeons, only: %i[index show]
 
   def index
-    @alltags = Gutentag::Tag.names_for_scope(Pigeon.where(recipient: current_user))
+    @content_categories = ContentCategory.where("owner_id = ? OR creator_id = ?", current_user.id, current_user.id)
     @mediatypes = ["article", "book", "movie", "playlist", "podcast", "song", "video", "other"]
-
+    @pigeons = Pigeon.where(recipient: current_user)
 
     if params[:q].present? && params[:q][:tags_name_cont_any].present?
-      selected_tags = params[:q][:tags_name_cont_any]
-      @foundpigeons = Pigeon.tagged_with(:names => selected_tags, match: :all)
-
-      selected_tags.each do |tag|
-        @pigeons = @pigeons.tagged_with(names: tag)
+      selected_content_categories = params[:q][:tags_name_cont_any]
+      pigeons_with_selected_content_categories = @pigeons.joins(:labels)
+      # pigeons_with_selected_content_categories = []
+      selected_content_categories.each do |cc|
+        content_category_id = ContentCategory.find_by(name: cc).id
+        pigeons_with_selected_content_categories = pigeons_with_selected_content_categories.where(labels: { content_category_id: content_category_id })
+        # pigeons_with_selected_content_categories += @pigeons.joins(:labels).where(labels: {content_category_id: content_category_id})
       end
-
     end
 
     if params[:q].present? && params[:q][:media_type].present?
       selected_media_types = params[:q][:media_type]
-      # @foundpigeons = @pigeons.where(media_type: selected_media_types)
-      selected_media_types.each do |mt|
-        @pigeons = @pigeons.where(media_type: mt)
-      end
+      pigeons_with_selected_media_types = []
+      pigeons_with_selected_media_types = @pigeons.where(media_type: selected_media_types).to_a
+    end
 
+    if pigeons_with_selected_content_categories && pigeons_with_selected_media_types
+      @pigeons = pigeons_with_selected_content_categories + pigeons_with_selected_media_types
+    elsif pigeons_with_selected_content_categories
+      @pigeons = pigeons_with_selected_content_categories
+    elsif pigeons_with_selected_media_types
+      @pigeons = pigeons_with_selected_media_types
     end
 
     if params[:query].present?
-      sql_subquery = "
-        pigeons.title ILIKE :query
-        OR pigeons.description ILIKE :query
-        OR pigeons.summary ILIKE :query
-        OR chats.sender_id IN (SELECT id FROM users WHERE nickname ILIKE :query)
-        OR chats.recipient_id IN (SELECT id FROM users WHERE nickname ILIKE :query)
-        "
-      @pigeons = @pigeons.joins(chat: :sender).joins(chat: :recipient).where(sql_subquery, query: "%#{params[:query]}%")
+      query = "%#{params[:query]}%"
+      pigeons_query = []
+      pigeons_query = Pigeon.joins(chat: [:sender, :recipient]).where(
+        "pigeons.title ILIKE :query OR pigeons.description ILIKE :query OR pigeons.summary ILIKE :query OR users.nickname ILIKE :query",
+        query: query
+      )
+      @pigeons += pigeons_query
     end
 
+    # @pigeons = @pigeons.first
+    @pigeons = @pigeons.sort_by { |pigeon| [-pigeon.date.to_time.to_i, pigeon.title.downcase] }
     respond_to do |format|
       format.html
-      format.text { render partial: "pigeons/list", locals: { pigeons: @pigeons }, formats: [:html] }
+      format.text {
+        render partial: "pigeons/list", locals: { pigeons: @pigeons }, formats: [:html] }
     end
 
-    @pigeons = Pigeon.where(recipient: current_user).sort_by { |pigeon| [-pigeon.date.to_time.to_i, pigeon.title.downcase] }
     # @pigeons = Pigeon.where(recipient: current_user).sort_by { |pigeon| pigeon.title.downcase }
   end
 
@@ -99,7 +106,8 @@ class PigeonsController < ApplicationController
   def new
     @user = User.new
     @pigeon = Pigeon.new
-    @alltags = Gutentag::Tag.names_for_scope(Pigeon)
+    @content_categories = ContentCategory.all
+    # @content_categories = ContentCategory.where("owner_id = ? OR creator_id = ?", current_user.id, current_user.id)
   end
 
   # def edit
@@ -118,10 +126,10 @@ class PigeonsController < ApplicationController
   def create
     # @pigeons = Pigeon.all
     @pigeon = Pigeon.new(pigeon_params)
+    @content_categories = ContentCategory.where("owner_id = ? OR creator_id = ?", current_user.id, current_user.id)
 
     recipient_id = params[:pigeon][:recipient]
     @pigeon.recipient = User.find_by_id(recipient_id)
-    # custom_tags = []
     @chat = Chat.find_by(sender: current_user, recipient: @pigeon.recipient)
     if @chat.nil?
       @chat = Chat.find_by(sender: @pigeon.recipient, recipient: current_user)
@@ -130,22 +138,21 @@ class PigeonsController < ApplicationController
       @chat = Chat.create(sender: current_user, recipient: @pigeon.recipient)
     end
     @pigeon.chat = @chat
-    selected_tags = params[:pigeon][:tags]
-    unless selected_tags.nil?
-    selected_tags.each do |tag_name|
-      tag = Gutentag::Tag.find_by(name: tag_name)
-      @pigeon.tag_names << tag_name if tag.present? && !tag_name.empty?
+    selected_content_categories = params[:pigeon][:content_categories]
+    unless selected_content_categories.nil?
+      selected_content_categories.each do |category_id|
+        category = ContentCategory.find_by(id: category_id)
+        @pigeon.content_categories << category if category.present?
       end
     end
 
-    custom_tags = params[:pigeon][:custom_tags]
-    unless custom_tags.nil?
-      if custom_tags.include?(",")
-        custom_tags.split(",").each do |tag|
-        @pigeon.tag_names << tag.strip.downcase unless tag.strip.empty?
-        end
-      else
-        @pigeon.tag_names << custom_tags.strip.downcase unless custom_tags.strip.empty?
+    new_categories = params[:pigeon][:new_content_categories]
+    new_categories = new_categories[:name].split(",")
+    unless new_categories.nil?
+      new_categories.each do |cc|
+        @new_category = ContentCategory.new(name: cc.strip.downcase, creator_id: current_user.id, owner_id: @chat.recipient.id)
+        @new_category.save
+        @pigeon.content_categories << @new_category if @new_category.persisted?
       end
     end
 
@@ -155,18 +162,8 @@ class PigeonsController < ApplicationController
     @message = Message.new(sender: current_user, chat: @chat)
     @message.content = @pigeon.description
 
-    if @pigeon.description.present?
-      if @message.save
-        redirect_to pigeons_path(@pigeons)
-      else
-        # Handle validation errors and render a new page
-        render :new
-      end
-    else
-      # Handle the case when @pigeon.description is not present
-      flash[:error] = 'Pigeon description is required.'
-      render :new
-    end
+    redirect_to pigeons_path(@pigeons)
+  end
 
     # if @pigeon.link_to_content.include?("youtu")
 
@@ -179,7 +176,6 @@ class PigeonsController < ApplicationController
     #   @pigeon.summary = "api"
     #   @pigeon.length = "api"
     # end
-  end
 
   def destroy
     @pigeon = Pigeon.find(params[:id])
@@ -190,10 +186,15 @@ class PigeonsController < ApplicationController
   private
 
   def pigeon_params
-    params.require(:pigeon).permit(:link_to_content, :title, :description, :media_type, :tags, :custom_tags)
+    params.require(:pigeon).permit(:link_to_content, :title, :description, :media_type, :new_content_categories)
   end
 
   def set_pigeons
     @pigeons = Pigeon.where(recipient: current_user)
   end
+
+  def category_params
+    params.require(:content_category).permit(name: cc, creator_id: current_user.id, owner_id: @chat.recipient)
+  end
+
 end
