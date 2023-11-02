@@ -16,14 +16,12 @@ class PigeonsController < ApplicationController
         pigeons_with_selected_content_categories = pigeons_with_selected_content_categories.where(labels: { content_category_id: content_category_id })
         # pigeons_with_selected_content_categories += @pigeons.joins(:labels).where(labels: {content_category_id: content_category_id})
       end
-      raise
     end
 
     if params[:q].present? && params[:q][:media_type].present?
       selected_media_types = params[:q][:media_type]
       pigeons_with_selected_media_types = []
       pigeons_with_selected_media_types = @pigeons.where(media_type: selected_media_types).to_a
-
     end
 
     if pigeons_with_selected_content_categories && pigeons_with_selected_media_types

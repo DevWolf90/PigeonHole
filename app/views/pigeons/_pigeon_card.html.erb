@@ -21,6 +21,10 @@
       <%= pigeon.title.truncate(55) %>
     <% end %>
     </h3>
+    <p> <% pigeon.content_categories.each do |cc|%>
+    <%= cc.name %>
+    <% end %>
+    </p>
     <div class="pigeon-card-bottom">
       <span class="fa-stack fa-2x media-stack">
         <i class="fa-solid fa-circle fa-stack-2x media-circle" style="vertical-align: top;"></i>
