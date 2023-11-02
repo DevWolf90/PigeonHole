@@ -12,9 +12,9 @@
       <%= f.input :media_type, collection: ["article", "book", "movie", "playlist", "podcast", "song", "video", "other"] %>
       <%= f.collection_check_boxes :content_categories, @content_categories, :id, :name, label: "Select category" %>
         <div id="custom-tags">
-          <%#= f.fields_for :new_content_categories do |new_category_fields| %>
-            <%#= new_category_fields.text_field :name, placeholder: 'New Category Name' %>
-          <%# end %>
+          <%= f.fields_for :new_content_categories do |new_category_fields| %>
+            <%= new_category_fields.text_field :name, placeholder: 'New Category Name' %>
+          <% end %>
         </div>
     <%= f.submit "Send Pigeon", class: "submit"%>
     <% end %>

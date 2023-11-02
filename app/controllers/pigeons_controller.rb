@@ -129,11 +129,9 @@ class PigeonsController < ApplicationController
     # @pigeons = Pigeon.all
     @pigeon = Pigeon.new(pigeon_params)
     @content_categories = ContentCategory.where("owner_id = ? OR creator_id = ?", current_user.id, current_user.id)
-    new_content_categories = params[:pigeon][:new_content_categories]
 
     recipient_id = params[:pigeon][:recipient]
     @pigeon.recipient = User.find_by_id(recipient_id)
-    # custom_tags = []
     @chat = Chat.find_by(sender: current_user, recipient: @pigeon.recipient)
     if @chat.nil?
       @chat = Chat.find_by(sender: @pigeon.recipient, recipient: current_user)
@@ -147,19 +145,16 @@ class PigeonsController < ApplicationController
       selected_content_categories.each do |category_id|
         category = ContentCategory.find_by(id: category_id)
         @pigeon.content_categories << category if category.present?
-        end
+      end
     end
 
-    custom_categories = params[:pigeon][:new_content_categories]
-    unless custom_categories.nil?
-      custom_categories.each do |cc|
-        if cc.include?(",")
-          cc.split(",").each do |category|
-            @pigeon.content_categories << category.strip.downcase unless category.strip.empty?
-          end
-        else
-          @pigeon.content_categories << cc.strip.downcase unless cc.strip.empty?
-        end
+    new_categories = params[:pigeon][:new_content_categories]
+    new_categories = new_categories[:name].split(",")
+    unless new_categories.nil?
+      new_categories.each do |cc|
+        @new_category = ContentCategory.new(name: cc.strip.downcase, creator_id: current_user.id, owner_id: @chat.recipient.id)
+        @new_category.save
+        @pigeon.content_categories << @new_category if @new_category.persisted?
       end
     end
 
@@ -171,6 +166,8 @@ class PigeonsController < ApplicationController
     @message.save
 
     redirect_to pigeons_path(@pigeons)
+  end
+
     # if @pigeon.link_to_content.include?("youtu")
 
     #   url = "https://www.googleapis.com/youtube/v3/videos?id=#{get_yt_id(@pigeon.link_to_content)}=#{ENV["GOOGLE_API_KEY"]}
@@ -182,7 +179,6 @@ class PigeonsController < ApplicationController
     #   @pigeon.summary = "api"
     #   @pigeon.length = "api"
     # end
-  end
 
   def destroy
     @pigeon = Pigeon.find(params[:id])
@@ -193,11 +189,15 @@ class PigeonsController < ApplicationController
   private
 
   def pigeon_params
-    params.require(:pigeon).permit(:link_to_content, :title, :description, :media_type, :new_content_categories, [:tags_name_cont_any])
-
+    params.require(:pigeon).permit(:link_to_content, :title, :description, :media_type, :new_content_categories)
   end
 
   def set_pigeons
     @pigeons = Pigeon.where(recipient: current_user)
   end
+
+  def category_params
+    params.require(:content_category).permit(name: cc, creator_id: current_user.id, owner_id: @chat.recipient)
+  end
+
 end
