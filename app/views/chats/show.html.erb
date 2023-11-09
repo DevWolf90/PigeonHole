@@ -5,12 +5,12 @@
 <% if current_user == sender || current_user == recipient %>
 <% chatting_partner = [sender, recipient].reject{ |n| n == current_user } %>
 <div class="container d-flex justify-content-between">
-  <div>
+  <div class="mt-3">
     <%= link_to chats_path(@chats) do %>
-    <i class="fa-solid fa-arrow-left" style="font-size: larger;"></i>
+    <i class="fa-solid fa-arrow-left fa-2xl hover-green"></i>
     <% end %>
   </div>
-  <p>
+  <p  class="mt-3">
     You're chatting with @<%=chatting_partner[0].nickname%></p>
   <p>
 </div>
