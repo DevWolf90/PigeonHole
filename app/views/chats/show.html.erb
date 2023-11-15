@@ -16,9 +16,8 @@
 </div>
 
 <div class="container chat d-flex flex-column">
- <%# need to fix next line so it says who we're chatting with  %>
- <%# raise %>
     <% @chat.messages.each do |message| %>
+      <% @pigeons_in_chat = @pigeons.where(chat_id: @chat.id, description: message.content) %>
       <% if message.sender == current_user %>
         <div class="message-card-sent">
           <div class="sender-info">
@@ -35,34 +34,35 @@
           </div>
               <%= message.content %>
         </div>
+
       <% end %>
+        <div>
 
-      <div>
-        <% @pigeons.each do |pigeon| %>
-          <%= link_to mark_read_path(pigeon), data: { turbo_method: :patch }  do%>
-          <% pigeon_state = pigeon_card_variables(pigeon)  %>
-          <%= render 'pigeons/pigeon_card', pigeon: pigeon, card_class: pigeon_state[:card_class], pigeon_avatar: pigeon_state[:pigeon_avatar], media_icon: pigeon_state[:media_icon], favourite: pigeon_state[:favourite], reply_later: pigeon_state[:reply_later], both: pigeon_state[:both]  %>
+          <% @pigeons_in_chat.each do |pigeon| %>
+            <%= link_to mark_read_path(pigeon), data: { turbo_method: :patch }  do%>
+            <% pigeon_state = pigeon_card_variables(pigeon)  %>
+            <%= render 'pigeons/pigeon_card', pigeon: pigeon, card_class: pigeon_state[:card_class], pigeon_avatar: pigeon_state[:pigeon_avatar], media_icon: pigeon_state[:media_icon], favourite: pigeon_state[:favourite], reply_later: pigeon_state[:reply_later], both: pigeon_state[:both]  %>
+            <% end %>
           <% end %>
-        <% end %>
-      </div>
 
+        </div>
     <% end %>
-</div>
-<div>
-  <%= simple_form_for [@chat, @message],
-  html: {class: "container pt-3 pos d-flex mb-3", style: "align-self: end;"} do |f| %>
-    <%= f.input :content,
-      as: :string,
-      label: false,
-      placeholder: "Type here...",
-      wrapper_html: {class: "flex-grow-1"},
-      input_html: {class: "send"}
-    %>
-    <button type="submit" class="btn-send btn-dark">
-      <i class="fa-solid fa-paper-plane"></i>
-    </button>
-  <% end %>
-  <% else %>
-  <h1>Get your nosy ass outta here!</h1>
-  <% end %>
+  <div>
+    <%= simple_form_for [@chat, @message],
+    html: {class: "container pt-3 pos d-flex mb-3", style: "width: 100%;"} do |f| %>
+      <%= f.input :content,
+        as: :string,
+        label: false,
+        placeholder: "Type here...",
+        wrapper_html: {class: "flex-grow-1", style: "width: 100%;"},
+        input_html: {class: "send"}
+      %>
+      <button type="submit" class="btn-send btn-dark">
+        <i class="fa-solid fa-paper-plane"></i>
+      </button>
+    <% end %>
+    <% else %>
+    <h1>Get your nosy ass outta here!</h1>
+    <% end %>
+  </div>
 </div>
