@@ -23,6 +23,6 @@ class ChatsController < ApplicationController
   end
 
   def index
-    @chats = Chat.where(sender: current_user).or(Chat.where(recipient: current_user))
+    @chats = Chat.where(sender: current_user).or(Chat.where(recipient: current_user)).order(created_at: :desc)
   end
 end
