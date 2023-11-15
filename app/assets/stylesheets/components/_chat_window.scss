@@ -4,6 +4,12 @@
     overflow-y:scroll;
   }
 
+.hover-green {
+  color: white;
+    &:hover {
+    color: $green;
+    }
+}
   form#new_message {
   position: sticky;
   bottom: 0;
