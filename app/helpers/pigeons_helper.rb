@@ -1,6 +1,15 @@
 module PigeonsHelper
   def pigeon_card_variables(pigeon)
-    card_class = pigeon.read ? "read" : "unread"
+    card_class =
+    if pigeon.read && pigeon.recipient != current_user
+      "read sent"
+    elsif pigeon.read && pigeon.recipient == current_user
+      "read received"
+    elsif !pigeon.read && pigeon.recipient != current_user
+      "unread sent"
+    elsif !pigeon.read && pigeon.recipient != current_user
+      "unread received"
+    end
 
     both = ""
     if pigeon.favourite? && pigeon.reply_later

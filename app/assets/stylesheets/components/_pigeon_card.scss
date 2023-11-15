@@ -64,6 +64,16 @@
   height: 20vh;
 }
 
+.pigeon-card.sent {
+  align-self: end;
+  margin-left: auto;
+}
+
+.pigeon-card.received {
+  align-self: start;
+  margin-right: auto;
+}
+
 .pigeon-card.with-details {
   height: 25vh;
   width: auto;
