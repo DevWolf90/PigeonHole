@@ -12,7 +12,7 @@
             <% unless pigeon.read %>
               <%= link_to mark_read_path(pigeon), data: { turbo_method: :patch }  do%>
                 <% pigeon_state = pigeon_card_variables(pigeon)  %>
-                <%= render 'pigeons/pigeon_card', pigeon: pigeon, card_class: pigeon_state[:card_class], pigeon_avatar: pigeon_state[:pigeon_avatar], media_icon: pigeon_state[:media_icon], favourite: pigeon_state[:favourite], reply_later: pigeon_state[:reply_later], both: pigeon_state[:both]  %>
+                <%= render 'pigeons/pigeon_card', pigeon: pigeon, card_class: "unread", pigeon_avatar: pigeon_state[:pigeon_avatar], media_icon: pigeon_state[:media_icon], favourite: pigeon_state[:favourite], reply_later: pigeon_state[:reply_later], both: pigeon_state[:both]  %>
               <% end %>
             <% end %>
           <% end %>

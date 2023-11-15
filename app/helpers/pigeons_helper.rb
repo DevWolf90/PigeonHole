@@ -7,7 +7,7 @@ module PigeonsHelper
       "read received"
     elsif !pigeon.read && pigeon.recipient != current_user
       "unread sent"
-    elsif !pigeon.read && pigeon.recipient != current_user
+    elsif !pigeon.read && pigeon.recipient == current_user
       "unread received"
     end
 
