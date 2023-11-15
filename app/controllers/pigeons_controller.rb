@@ -161,7 +161,6 @@ class PigeonsController < ApplicationController
     @pigeon.save
     @message = Message.new(sender: current_user, chat: @chat)
     @message.content = @pigeon.description
-    @message.save
 
     redirect_to pigeons_path(@pigeons)
   end

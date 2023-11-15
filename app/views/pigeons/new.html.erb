@@ -6,7 +6,7 @@
                       "Type a nickname or email...", collection: User.all, label_method: :nickname,
                       input_html: {data: {controller: "search-users"}}%>
 
-      <%= f.input :link_to_content, type: :string%>
+      <%= f.input :link_to_content, type: :string %>
       <%= f.input :title, type: :string %>
       <%= f.input :description, type: :string, label: 'Write your message here' %>
       <%= f.input :media_type, collection: ["article", "book", "movie", "playlist", "podcast", "song", "video", "other"] %>

@@ -32,11 +32,11 @@
 }
 
 .message-card-received {
-  // -moz-box-shadow: -4px 9px 5px 0px rgba(0,0,0,0.16);
-  // box-shadow: -4px 9px 5px 0px rgba(0,0,0,0.16);
+  -moz-box-shadow: -4px 9px 5px 0px rgba(0,0,0,0.16);
+  box-shadow: -4px 9px 5px 0px rgba(0,0,0,0.16);
   margin: 10px;
-  padding: 10px;
-  width: 60%;
+  padding: 16px;
+  max-width: 90%;
   border-radius: 15px;
   display: flex;
   flex-direction: column;
@@ -58,11 +58,13 @@
       0 0/var(--r) var(--r) space padding-box;
   background: white border-box;
   --_d: 0%;
-  border-left: var(--t) solid #0000;
+  border-left: var(--t) solid transparent;
   margin-right: var(--t);
   place-self: start;
-
+  white-space: normal;
+  word-wrap: break-word;
 }
+
 
 // &.sent {
 //   -moz-box-shadow: -4px 9px 5px 0px rgba(0,0,0,0.16);

@@ -23,6 +23,18 @@ class Pigeon < ApplicationRecord
     self.summary = OpenaiService.new(link_to_content, 2).call
   end
 
+  # def summarize_url
+  #   THIS REMOVES LINKS FROM TEXT
+  #   content_without_links = link_to_content.gsub(/https?:\/\/[^\s]+/, '')
+
+  #   # Call the OpenAI service to generate the summary
+  #   self.summary = OpenaiService.new(content_without_links, 2).call
+
+  #   # Limit the summary to 180 characters, WE CAN CHANGE LIMIT. IM JUST NOT SURE WHAT LIMIT WE WANT
+  #   self.summary = self.summary[0, 180] if self.summary.length > 180
+  # end
+
+
   def fetch_video_duration
     return unless link_to_content.match?('youtube.com')
     video_id = extract_video_id

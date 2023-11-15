@@ -36,24 +36,25 @@
 
     <% if @pigeon.media_type == "article" || @pigeon.media_type == "book" %>
       <div class="summary">
-
         <p class="summary-title">Summary by AI: </p>
-        <p><%= @pigeon.summary %></p>
+        <p><%= truncate(strip_tags(@pigeon.summary.gsub(/https?:\/\/\S+/, '')), length: 250) %></p>
       </div>
     <% end %>
 
+
   <div>
-      <% if (@pigeon.media_type == "video" || @pigeon.media_type == "music") && @pigeon.link_to_content.include?("youtu") %>
-        <i class='fa fa-hourglass-start sand-clock mt-3' style="color:#BBC800;"></i>
-        <p>
-      <% if @pigeon.length <= 1 %>
+  <% if @pigeon.media_type == "video" || (@pigeon.media_type == "music" && @pigeon.link_to_content.include?("youtu")) %>
+    <i class='fa fa-hourglass-start sand-clock mt-3' style="color:#BBC800;"></i>
+    <p>
+      <% if @pigeon.length.present? && @pigeon.length <= 1 %>
         <%= @pigeon.length %> minute to listen to.
-      <% else %>
+      <% elsif @pigeon.length.present? %>
         <%= @pigeon.length %> minutes to listen to.
       <% end %>
-        </p>
-      <% end %>
-  </div>
+    </p>
+  <% end %>
+</div>
+
 
     <div>
       <% if @pigeon.media_type == "article" || @pigeon.media_type == "book" %>
