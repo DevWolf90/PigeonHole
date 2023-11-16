@@ -53,7 +53,7 @@ module PigeonsHelper
       when "movie"
         content_tag(:i, "", "fa-solid fa-film fa-stack-1x media-type")
       else
-        ""
+        {}
       end
 
     pigeon_avatar =
