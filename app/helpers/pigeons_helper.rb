@@ -38,6 +38,7 @@ module PigeonsHelper
     # end
 
     reply_later_status = pigeon.reply_later ? "reply_later" : "dont-reply-later"
+
     media_icon =
       case pigeon.media_type
       when "video"
@@ -51,9 +52,9 @@ module PigeonsHelper
       when "audio", "song", "playlist"
         content_tag(:i, "", class: "fa-solid fa-music fa-stack-1x media-type")
       when "movie"
-        content_tag(:i, "", "fa-solid fa-film fa-stack-1x media-type")
+        content_tag(:i, "", class: "fa-solid fa-film fa-stack-1x media-type")
       else
-        {}
+        ""
       end
 
     pigeon_avatar =
