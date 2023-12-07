@@ -106,7 +106,7 @@ class PigeonsController < ApplicationController
   def new
     @user = User.new
     @pigeon = Pigeon.new
-    @content_categories = ContentCategory.all
+    @content_categories = []
     # @content_categories = ContentCategory.where("owner_id = ? OR creator_id = ?", current_user.id, current_user.id)
   end
 
@@ -126,10 +126,10 @@ class PigeonsController < ApplicationController
   def create
     # @pigeons = Pigeon.all
     @pigeon = Pigeon.new(pigeon_params)
-    @content_categories = ContentCategory.where("owner_id = ? OR creator_id = ?", current_user.id, current_user.id)
-
     recipient_id = params[:pigeon][:recipient]
     @pigeon.recipient = User.find_by_id(recipient_id)
+    @content_categories = []
+
     @chat = Chat.find_by(sender: current_user, recipient: @pigeon.recipient)
     if @chat.nil?
       @chat = Chat.find_by(sender: @pigeon.recipient, recipient: current_user)
