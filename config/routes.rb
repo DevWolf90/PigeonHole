@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   end
 
   resources :content_categories, only: %i[index new create destroy]
+  get '/content_categories/:recipient_id', to: 'content_categories#index', as: 'content_categories_by_recipient'
 
   resources :users, only: [:index]
 end

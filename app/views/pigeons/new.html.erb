@@ -4,18 +4,64 @@
     <div class="form-inputs">
       <%= f.input :recipient, placeholder:
                       "Type a nickname or email...", collection: User.all, label_method: :nickname,
-                      input_html: {data: {controller: "search-users"}}%>
+                      input_html: {data: {controller: "search-users"}, id: "recipient-select"}%>
 
       <%= f.input :link_to_content, type: :string %>
       <%= f.input :title, type: :string %>
       <%= f.input :description, type: :string, label: 'Write your message here' %>
       <%= f.input :media_type, collection: ["article", "book", "movie", "playlist", "podcast", "song", "video", "other"] %>
-      <%= f.collection_check_boxes :content_categories, @content_categories, :id, :name, label: "Select category" %>
-        <div id="custom-tags">
-          <%= f.fields_for :new_content_categories do |new_category_fields| %>
-            <%= new_category_fields.text_field :name, placeholder: 'New Category Name' %>
-          <% end %>
-        </div>
+      <%= f.label "Select category" %>
+      <div id="pigeon_content_categories">
+        <%= f.collection_check_boxes :content_categories, @content_categories, :id, :name %>
+      </div>
+      <div id="custom-tags">
+            <%= f.fields_for :new_content_categories do |new_category_fields| %>
+              <%= new_category_fields.text_field :name, placeholder: 'New Category Name' %>
+            <% end %>
+          </div>
     <%= f.submit "Send Pigeon", class: "submit"%>
     <% end %>
 </div>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const recipientSelect = document.getElementById('recipient-select');
+    const categoriesDiv = document.getElementById('pigeon_content_categories');
+
+    //AJAXing content categories for the user selected
+    recipientSelect.addEventListener('change', function() {
+      console.log("Recipient changed");
+      const recipientId = this.value;
+
+      fetch(`/content_categories/${recipientId}`)
+        .then(response => {
+          return response.json();
+        })
+        .then(data => {
+          console.log('Data:', data);
+          updateCheckboxes(categoriesDiv, data);
+        });
+
+        function updateCheckboxes(checkboxesDiv, newOptions) {
+          checkboxesDiv.innerHTML = "";
+
+          newOptions.forEach(category => {
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.name = "pigeon[content_categories][]"
+            checkbox.value = category.id;
+            checkbox.id = `category_${category.id}`;
+
+            const label = document.createElement("label");
+            label.htmlFor = `category_${category.id}`;
+            label.appendChild(document.createTextNode(category.name));
+
+            checkboxesDiv.appendChild(checkbox);
+            checkboxesDiv.appendChild(label);
+            checkboxesDiv.appendChild(document.createElement("br"))
+          });
+        }
+  });
+  });
+</script>
